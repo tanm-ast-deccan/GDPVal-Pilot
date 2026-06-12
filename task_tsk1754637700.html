@@ -1,0 +1,482 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsk_1754637700 · Lane Optimization Board Recommendation</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head>
+<body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip active" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+      </nav></div></header>
+    <section class="taskhead"><div class="wrap">
+      <div class="crumb"><a href="index.html">Overview</a> &nbsp;/&nbsp; tsk_1754637700</div>
+      <div class="idline">
+        <span class="ptype">SCP · Structural Compliance</span>
+        <span class="pill med">Medium</span>
+        <span class="tag">Cost Optimization</span>
+        <span class="tag"><b>28</b> verifiers</span>
+        <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
+      </div>
+      <h1>Lane Optimization Board Recommendation</h1>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">65.0%</div><div class="meta">19/26 verifiers · raw 73%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">92.4%</div><div class="meta">22/26 verifiers · raw 85%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">69.3%</div><div class="meta">16/26 verifiers · raw 62%</div></div><div class="scard mean"><div class="rl">Mean · Medium</div><div class="big">75.6%</div><div class="meta">DAG-weighted · best-of-3 92%</div></div></div>
+    </div></section>
+
+    <div class="wrap">
+      <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-prompt',this)">Prompt</button><button class="tabbtn" onclick="showTab('tab-sanity',this)">Sanity check</button><button class="tabbtn" onclick="showTab('tab-traj',this)">Trajectory &amp; deliverable</button><button class="tabbtn" onclick="showTab('tab-ver',this)">Scored verifiers</button><button class="tabbtn" onclick="showTab('tab-graph',this)">Dependency graph</button><button class="tabbtn" onclick="showTab('tab-files',this)">Files</button></div>
+      <div class="tabpane active" id="tab-prompt">
+      <a class="flink" href="https://drive.google.com/drive/folders/1hWuSoOAwWKnRsgqhBB7U8IMOtOhYmbkW?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a>
+      <div class="grid g3" style="margin:14px 0 4px"><div class='note'><h4>Output Artifact</h4><p>Structured text: decision line + 7-row bridge table + 5-row compliance table. NO narrative, NO Word document.</p></div><div class='note'><h4>Tools Required</h4><p>Python (pandas for CSV/XLSX processing), web browser (FRED PPI lookup), PDF reader (policy memo)</p></div><div class='note'><h4>Corpus Discipline</h4><p>Semi-closed: internal files + one mandated external source (FRED PPI series PCU484121484121)</p></div><div class='note'><h4>Estimated Completion Time</h4><p>[SME to confirm — must be timed on actual task completion]</p></div><div class='note'><h4>O*NET Occupation</h4><p>13-1111.00 — Management Analysts (verified via O*NET OnLine)</p></div></div>
+      <p class='kicker' style='margin-top:22px'>Reference files (inputs shown to the model)</p><table><tbody><tr><td class='vid'>01_TMS_ShipmentLog_2024.csv</td><td style='color:var(--muted)'>Shipment-level data: lane, carrier, costs (Linehaul/Accessorial/Fuel Surcharge), On_Time_Flag, Notes. TRAP: Contains &#x27;Pilot&#x27; and &#x27;Noise: test invoice&#x27; rows that must be excluded.</td></tr><tr><td class='vid'>02_Transportation_Policy_Memo.pdf</td><td style='color:var(--muted)'>Policy constraints: PC1 index discipline (FRED PPI), PC2 service guardrail (≥94.5%), PC3 carrier concentration (≤70% on Top-3), PC4 PHX1→LAX TL exception, PC5 dual-source minimum.</td></tr><tr><td class='vid'>03_Lane_Optimization_Model.xlsx</td><td style='color:var(--muted)'>Lever definitions (L1-L4), parameters (Target_RunRate_Savings_USD=$180,000, Service_Min_OnTime_pct=94.5%, OneTime=$220,000), PPI reference (Dec 2024=176.402). TRAP: PPI_Dec2025_PLACEHOLDER=999.9 and NOISE-tagged rows.</td></tr></tbody></table>
+      <p class="kicker" style="margin-top:22px">Task prompt — delivered verbatim to the model</p>
+      <div class="blockq">CONTEXT:
+
+• Client: SkyRoute Logistics operates 3 cross-dock sites (PHX1, DFW2, ATL3).
+
+• Situation: CFO needs a board-ready APPROVE vs DO NOT APPROVE decision for a FY2025 lane optimization lever package.
+
+• Inputs: (1) FY2024 TMS shipment log, (2) internal transportation policy memo, (3) lane optimization workbook defining levers.
+
+TASK:
+
+Using the attached internal files AND one required external datapoint:
+
+1) Build the FY2024 baseline from the TMS log (exclude Pilot and Noise rows).
+
+2) Normalize baseline to FY2025 using the required PPI index (see Constraints).
+
+3) Quantify FY2025 run-rate impacts for levers L1-L4 exactly as specified in the workbook (ignore NOISE-tag rows).
+
+4) Provide a definitive BOARD RECOMMENDATION: APPROVE vs DO NOT APPROVE.
+
+DECISION RULES (no hedging):
+
+• APPROVE only if BOTH: (i) Total run-rate savings from L1+L2+L3 &gt;= Target_RunRate_Savings_USD, (ii) Overall on-time % (excluding Pilot and Noise) &gt;= Service_Min_OnTime_pct, AND all compliance checks PC1-PC5 are PASS per policy memo.
+
+• Otherwise DO NOT APPROVE.
+
+• First line must be: DECISION: APPROVE OR DECISION: DO NOT APPROVE
+
+CONSTRAINTS:
+
+• Retrieve PPI Dec 2025 from FRED table data for series PCU484121484121 and cite the exact URL used.
+
+• Do NOT use PPI_Dec2025_PLACEHOLDER in workbook.
+
+• Use 01_TMS_ShipmentLog_2024.csv only; exclude Notes==&#x27;Pilot&#x27; and any Notes containing &#x27;Noise&#x27;.
+
+• Use only L1-L4 from workbook; ignore Noise_Tag==&#x27;NOISE&#x27;.
+
+OUTPUT FORMAT (NO OTHER TEXT):
+
+1) Decision line (single line)
+
+2) Bridge Table (7 rows exactly; columns: Step_Order | Bridge_Item | USD_2025 | Sign | Notes)
+
+   Row6 = Row1 - (Row2+Row3+Row4+Row5); Row7 is one-time and not netted into Row6
+
+3) Compliance Table (5 rows exactly; columns: Check_ID | Check_Name | PASS_FAIL | Evidence)</div></div><div class="tabpane" id="tab-sanity"><p class="kicker">Embedded cognitive trap · not shown to the model</p>
+      <div class="blockq">Why this task is difficult (what it tests):
+- Hybrid web discipline: the FY2025 normalization MUST use FRED table data for PCU484121484121 (Dec 2025). The workbook contains a decoy placeholder (PPI_Dec2025_PLACEHOLDER=999.900). Using the placeholder will inflate the baseline materially and break the bridge.
+- Multi-layer constraints: the solver must reconcile (a) raw shipment-level costs, (b) strict row exclusions (Pilot + Noise rows), (c) lever applicability definitions, and (d) policy guardrails (service level + carrier concentration + operationally critical exception).
+- Structural brittleness: output requires (1) a single-line decision, (2) a 7-row bridge that ties mathematically, and (3) a 5-row compliance table with PASS/FAIL plus evidence. Any drift is non-compliant.
+- CSV trap: rows where Notes==&#x27;Pilot&#x27; must be excluded everywhere.
+- CSV noise: rows where Notes contains &#x27;Noise&#x27; (e.g., &#x27;Noise: test invoice&#x27;) must be excluded everywhere.
+- Workbook trap: PPI_Dec2025_PLACEHOLDER is intentionally wrong.
+- Workbook noise: Lever_Assumptions includes rows tagged Noise_Tag==&#x27;NOISE&#x27; that must be ignored.
+
+Lazy AI must fail (minimum expected failure modes):
+1) Uses workbook placeholder PPI or cites no URL → baseline normalization is wrong and the bridge will not match golden ranges.
+2) Applies levers on unfiltered data (includes Pilot/Noise) → savings + on-time % drift.
+3) Outputs narrative text or changes row counts/column order → automatic non-compliance.
+
+Expert must pass:
+- If the solver (a) retrieves Dec 2025 PPI from FRED and cites the exact table-data URL, (b) applies Pilot+Noise exclusions consistently, (c) applies L1-L4 exactly as defined, and (d) enforces the decision rule without hedging, then the resulting baseline, savings, and decision are deterministic within the stated ranges.</div></div><div class="tabpane" id="tab-traj"><p class="kicker">Golden trajectory · expert-authored deterministic reasoning path</p>
+      <p class="sub">6 subtasks, 12 steps. Multi-layer constraint reconciliation where data filtering, PPI normalization, lever calculation, and structural formatting must all be correct simultaneously.</p>
+      <div class="st"><div class="st-h"><span class="st-n">ST1</span>
+          <span class="st-t">Data Filtering (Steps 1–2)</span></div>
+          <div class="st-body"><p class="purpose">Build a clean baseline by excluding Pilot and Noise rows from the TMS shipment log.</p><div class="step"><span class="step-b">Step 1</span><div class="step-x">**Load 01_TMS_ShipmentLog_2024.csv. Exclude rows where Notes==&#x27;Pilot&#x27; OR Notes contains &#x27;Noise&#x27; (e.g., &#x27;Noise: test invoice&#x27;). **</div></div><div class="step"><span class="step-b">Step 2</span><div class="step-x">**On filtered data: FY2024 baseline cost = sum(Total_Cost_USD) = $235,572.29 ±$100. On-time % = mean(On_Time_Flag)×100 = 96.13% ±0.10.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">TMS CSV</span></span><span><span class="lab">Feeds</span> <span class="val">V6, V7, V8, DI1, TRAP2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST2</span>
+          <span class="st-t">PPI Retrieval &amp; Normalization (Steps 3–5)</span></div>
+          <div class="st-body"><p class="purpose">Retrieve the external PPI index and normalize FY2024 baseline to FY2025 dollars.</p><div class="step"><span class="step-b">Step 3</span><div class="step-x">**Retrieve Dec 2025 PPI from FRED series PCU484121484121. Value = 181.077. Cite exact URL: https://fred.stlouisfed.org/data/PCU484121484121. Do NOT use the workbook placeholder (999.9). **</div></div><div class="step"><span class="step-b">Step 4</span><div class="step-x">**Get PPI Dec 2024 reference from workbook PPI_Reference = 176.402. Compute inflation factor = 181.077/176.402 = 1.02650 ±0.001. **</div></div><div class="step"><span class="step-b">Step 5</span><div class="step-x">**FY2025 normalized baseline = sum(Linehaul_USD + Accessorial_USD + Fuel_Surcharge_USD × inflation_factor) = $236,486.38 ±$150.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">FRED + workbook PPI_Reference + TMS filtered data</span></span><span><span class="lab">Feeds</span> <span class="val">V1–V5, DI2, TRAP1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST3</span>
+          <span class="st-t">Lever Analysis (Steps 6–8)</span></div>
+          <div class="st-body"><p class="purpose">Compute run-rate savings for each lever using workbook definitions, ignoring NOISE-tagged rows.</p><div class="step"><span class="step-b">Step 6</span><div class="step-x">**Identify Top-3 lanes by FY2024 spend. Rank lanes (Origin_Site → Dest_Site) by sum(Total_Cost_USD). **</div></div><div class="step"><span class="step-b">Step 7</span><div class="step-x">**Compute lever impacts (ignore Noise_Tag==&#x27;NOISE&#x27; in Lever_Assumptions): L1 = 5.0% of Linehaul on eligible TL Top-3 = $3,552.01 ±$75. L2 = 6% of shifted short-haul LTL subset = $81.45 ±$75. L3 = 30% reduction of Accessorial_USD where &gt;0 = $751.50 ±$75. **</div></div><div class="step"><span class="step-b">Step 8</span><div class="step-x">**Total savings = L1+L2+L3 = $4,384.97 ±$150. L4 (index normalization) is already embedded in FY2025 baseline — NOT counted as separate savings.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">workbook Lever_Assumptions + TMS filtered</span></span><span><span class="lab">Feeds</span> <span class="val">V9, V10, EP1, EP2, TRAP3</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST4</span>
+          <span class="st-t">Decision Logic (Steps 9–10)</span></div>
+          <div class="st-body"><p class="purpose">Apply the decision rule and determine APPROVE vs DO NOT APPROVE.</p><div class="step"><span class="step-b">Step 9</span><div class="step-x">**Check: Total savings ($4,385) vs Target_RunRate_Savings_USD ($180,000). $4,385 &lt; $180,000 → FAIL condition (i). **</div></div><div class="step"><span class="step-b">Step 10</span><div class="step-x">**Even though on-time (96.13%) ≥ 94.5% PASSES, condition (i) fails → DECISION: DO NOT APPROVE.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Steps 2, 8 + workbook parameters</span></span><span><span class="lab">Feeds</span> <span class="val">V11, V12, V16</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST5</span>
+          <span class="st-t">Structural Compliance (Steps 11–12)</span></div>
+          <div class="st-body"><p class="purpose">Produce the exact output format required — no additional text.</p><div class="step"><span class="step-b">Step 11</span><div class="step-x">**Build 7-row bridge table: (1) FY2025 Baseline, (2) L1 savings, (3) L2 savings, (4) L3 savings, (5) L4 index note, (6) New Run-Rate = Row1−(Row2+Row3+Row4+Row5), (7) One-Time Implementation (not netted). Verify Row6 reconciliation arithmetic. **</div></div><div class="step"><span class="step-b">Step 12</span><div class="step-x">**Build 5-row compliance table: PC1 index discipline (PASS with FRED URL), PC2 service ≥94.5% (PASS), PC3 carrier ≤70% (PASS/FAIL with evidence), PC4 PHX1→LAX TL exception (PASS with 80% cap evidence), PC5 dual-source (PASS/FAIL with evidence).</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">All preceding steps</span></span><span><span class="lab">Feeds</span> <span class="val">V13–V15, EP3, FD1–FD3</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST6</span>
+          <span class="st-t">Source Discipline</span></div>
+          <div class="st-body"><p class="purpose"></p><div class="step"><span class="step-b">·</span><div class="step-x">**Continuous: **Meta-check: All data from TMS log + policy memo + workbook + FRED PPI only.</div></div><div class="srcrow"><span><span class="lab">Feeds</span> <span class="val">RF1</span></span></div></div></div>
+      <div style="height:1px;background:var(--line);margin:26px 0 22px"></div>
+      <p class="kicker">Golden deliverable · the expert-level output that follows the trajectory</p>
+      <div class="blockq"><p>Structured text output (NOT a Word document). Must contain exactly three components, no additional text:</p><p>Line 1: DECISION: DO NOT APPROVE</p><p>Bridge Table: 7 rows: (1) FY2025 Normalized Baseline = $236,486 | + | PPI-adjusted from FY2024. (2) L1 TL Rate Optimization = $3,552 | − | 5% Linehaul on Top-3 TL lanes. (3) L2 Mode Shift = $81 | − | LTL→ground shift. (4) L3 Accessorial Reduction = $752 | − | 30% accessorial cut. (5) L4 Index Normalization = $0 | n/a | Already in baseline. (6) New Run-Rate = $232,101 | = | Row1−(Row2+Row3+Row4+Row5). (7) One-Time Implementation = $220,000 | one-time | Not netted into run-rate.</p><p>Compliance Table: 5 rows: PC1 = PASS (FRED PCU484121484121 cited). PC2 = PASS (96.13% ≥ 94.5%). PC3 = [PASS/FAIL with Top-3 lane carrier concentration evidence]. PC4 = PASS (PHX1→LAX TL 80% cap with evidence). PC5 = [PASS/FAIL with dual-source evidence on Top-3].</p><p>Decision rationale: Key validation: Total savings ($4,385) falls far short of target ($180,000). The decision is DO NOT APPROVE despite the service level passing. This tests whether the agent applies the decision rule mechanically rather than hedging.</p></div></div><div class="tabpane" id="tab-ver"><p class="kicker">Scored verifiers · grouped by subtask, in trajectory order</p>
+      <p class="sub"><b>Depends on</b> lists the parent verifiers whose result this one builds on
+      (<span class="dep"><span class="root">root</span></span> = sourced directly, no parents). <b>DAG</b> is the verifier's weight.
+      Hover a result mark for the SME's justification.</p>
+      <div class="vg"><div class="vg-h"><span class="st-n">ST1</span>
+          <h4>ST1: Data Filtering</h4><span class="agg">8.0% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V6">
+              <td class="vid">V6</td>
+              <td class="crit">Baseline + on-time calculations exclude Notes==&#x27;Pilot&#x27; AND any Notes containing &#x27;Noise&#x27;</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response explicitly excludes 13 Pilot rows and 12 Noise rows and states that all baseline and lever calculations were performed on the remaining 155 rows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response explicitly excludes 13 Pilot rows and 12 Noise rows and uses 155 clean shipments for all calculations.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The response states Noise rows were excluded but does not demonstrate exclusion of both Pilot and Noise rows across all baseline and on-time calculations.">✗</span></td></tr><tr id="v-V7">
+              <td class="vid">V7</td>
+              <td class="crit">FY2024 baseline total cost = sum(Total_Cost_USD) on filtered rows</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1" title="FY2024 baseline is calculated from filtered shipment data and reported as $235,572.29.">✓</span></td><td class="rcell"><span class="dotp p1" title="FY2024 baseline is correctly reconstructed from filtered rows and reported as $235,572.29.">✓</span></td><td class="rcell"><span class="dotp p1" title="FY2024 baseline is reported as $235,572.29.">✓</span></td></tr><tr id="v-V8">
+              <td class="vid">V8</td>
+              <td class="crit">FY2024 on-time % = mean(On_Time_Flag)×100 on filtered rows, must meet 94.5% threshold</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1" title="On-time performance is calculated as 149/155 = 96.13%, exceeding the 94.5% threshold.">✓</span></td><td class="rcell"><span class="dotp p1" title="On-time performance is correctly calculated as 96.13%, exceeding the 94.5% service threshold.">✓</span></td><td class="rcell"><span class="dotp p1" title="On-time performance is reported as 96.13%, exceeding the threshold.">✓</span></td></tr><tr id="v-DI1">
+              <td class="vid">DI1</td>
+              <td class="crit">FY2024 baseline total cost = $235,572.29 ±$100</td>
+              <td class="dep"><a href="#v-V6">V6</a><a href="#v-V7">V7</a></td>
+              <td class="dagcell">2.4%</td><td class="rcell"><span class="dotp p1" title="The reported FY2024 baseline cost exactly matches the expected value of $235,572.29.">✓</span></td><td class="rcell"><span class="dotp p1" title="The baseline cost exactly matches the expected value of $235,572.29.">✓</span></td><td class="rcell"><span class="dotp p1" title="Baseline value matches the expected solution.">✓</span></td></tr><tr id="v-TRAP2">
+              <td class="vid">TRAP2</td>
+              <td class="crit">Excludes BOTH &#x27;Pilot&#x27; exact match AND &#x27;Noise&#x27; substring match from ALL calculations</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+          <h4>ST2: PPI &amp; Normalization</h4><span class="agg">16.2% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V1">
+              <td class="vid">V1</td>
+              <td class="crit">PPI series = PCU484121484121, Dec 2025 value sourced from FRED with cited URL</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response uses FRED series PCU484121484121 and cites the FRED URL as evidence.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response uses the correct FRED series PCU484121484121 and cites the FRED source URL.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Although the correct FRED series is referenced, the response uses an incorrect Dec-2025 value and cites the series page rather than the required table-data source.">✗</span></td></tr><tr id="v-V2">
+              <td class="vid">V2</td>
+              <td class="crit">PPI_Dec2025_PLACEHOLDER=999.9 NOT used</td>
+              <td class="dep"><a href="#v-V1">V1</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1" title="Response explicitly states that the workbook placeholder value 999.9 was not used.">✓</span></td><td class="rcell"><span class="dotp p1" title="The workbook placeholder value of 999.9 is explicitly identified and excluded.">✓</span></td><td class="rcell"><span class="dotp p1" title="The placeholder value 999.9 is not used.">✓</span></td></tr><tr id="v-V3">
+              <td class="vid">V3</td>
+              <td class="crit">PPI Dec 2025 = 181.077</td>
+              <td class="dep"><a href="#v-V1">V1</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1" title="Dec 2025 PPI is correctly reported as 181.077.">✓</span></td><td class="rcell"><span class="dotp p1" title="Dec 2025 PPI is correctly reported as 181.077.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Response uses Dec-2025 PPI = 182.5 instead of 181.077.  [oai_citation:0‡board_decision.md.docx](sediment://file_00000000e13872098d0f2af0aa21e944)">✗</span></td></tr><tr id="v-V4">
+              <td class="vid">V4</td>
+              <td class="crit">PPI Dec 2024 reference = 176.402 from workbook</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Dec 2024 reference value is correctly reported as 176.402.">✓</span></td><td class="rcell"><span class="dotp p1" title="Dec 2024 reference value of 176.402 is correctly used from the workbook.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly uses Dec-2024 reference value 176.402.">✓</span></td></tr><tr id="v-V5">
+              <td class="vid">V5</td>
+              <td class="crit">Inflation factor = 181.077/176.402 = 1.02650 ±0.001</td>
+              <td class="dep"><a href="#v-V3">V3</a><a href="#v-V4">V4</a></td>
+              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp p1" title="Inflation factor is correctly calculated as approximately 1.02650.">✓</span></td><td class="rcell"><span class="dotp p1" title="Inflation factor is correctly calculated as approximately 1.02650.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Inflation factor is calculated from the incorrect PPI value (1.0346 instead of 1.02650).  [oai_citation:1‡board_decision.md.docx](sediment://file_00000000e13872098d0f2af0aa21e944)">✗</span></td></tr><tr id="v-DI2">
+              <td class="vid">DI2</td>
+              <td class="crit">FY2025 normalized baseline = $236,486.38 ±$150</td>
+              <td class="dep"><a href="#v-V5">V5</a><a href="#v-V7">V7</a></td>
+              <td class="dagcell">5.7%</td><td class="rcell"><span class="dotp p0" title="FAIL. The response keeps the baseline as FY2024 cost ($235,572.29) and treats PPI inflation as a bridge adjustment. The required FY2025 normalized baseline should be approximately $236,486.38.">✗</span></td><td class="rcell"><span class="dotp p1" title="FY2025 normalized baseline is correctly reported as $236,486.38.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. FY2025 normalized baseline is not reconstructed as $236,486.38.">✗</span></td></tr><tr id="v-TRAP1">
+              <td class="vid">TRAP1</td>
+              <td class="crit">Does not use PPI_Dec2025_PLACEHOLDER=999.9; retrieves actual value from FRED</td>
+              <td class="dep"><a href="#v-V1">V1</a><a href="#v-V3">V3</a></td>
+              <td class="dagcell">2.4%</td><td class="rcell"><span class="dotp p0" title="FAIL. L4 is effectively included as a separate bridge adjustment, creating a double-counting issue relative to the required logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. By carrying L4 as a separate bridge component after normalization, the response effectively double-counts the normalization logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. L4 is carried as a separate adjustment after normalization, effectively double-counting the inflation logic.">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST3</span>
+          <h4>ST3: Lever Analysis</h4><span class="agg">22.7% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V9">
+              <td class="vid">V9</td>
+              <td class="crit">Only L1-L4 used; Lever_Assumptions rows with Noise_Tag==&#x27;NOISE&#x27; ignored</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1" title="Lever calculations are based only on L1-L4 and no evidence suggests Noise-tagged workbook assumptions were included.">✓</span></td><td class="rcell"><span class="dotp p1" title="Lever calculations are limited to L1-L4 and there is no evidence that Noise-tagged assumptions were used.">✓</span></td><td class="rcell"><span class="dotp p1" title="Only L1-L4 appear in the bridge and no evidence suggests Noise-tag assumptions were used.">✓</span></td></tr><tr id="v-V10">
+              <td class="vid">V10</td>
+              <td class="crit">Total savings = L1+L2+L3 only; L4 NOT counted as separate savings</td>
+              <td class="dep"><a href="#v-V9">V9</a></td>
+              <td class="dagcell">2.4%</td><td class="rcell"><span class="dotp p0" title="FAIL. The response treats L4 as a bridge line item affecting the run-rate calculation rather than as an embedded normalization factor that should not be counted separately.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. L4 is still included as a separate bridge line item and affects the Row6 calculation, whereas the solution requires L4 to be embedded within the normalized baseline and not treated as separate savings or adjustment.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. L4 is treated as a separate bridge adjustment.">✗</span></td></tr><tr id="v-EP1">
+              <td class="vid">EP1</td>
+              <td class="crit">L1=$3,552.01±$75, L2=$81.45±$75, L3=$751.50±$75</td>
+              <td class="dep"><a href="#v-V9">V9</a><a href="#v-DI2">DI2</a></td>
+              <td class="dagcell">7.3%</td><td class="rcell"><span class="dotp p1" title="Lever values for L1, L2, and L3 match the expected solution values.">✓</span></td><td class="rcell"><span class="dotp p1" title="Lever values for L1, L2, and L3 match the expected values.">✓</span></td><td class="rcell"><span class="dotp p1" title="L1, L2 and L3 values match the expected savings values.">✓</span></td></tr><tr id="v-EP2">
+              <td class="vid">EP2</td>
+              <td class="crit">Total run-rate savings = $4,384.97 ±$150</td>
+              <td class="dep"><a href="#v-EP1">EP1</a></td>
+              <td class="dagcell">8.1%</td><td class="rcell"><span class="dotp p1" title="Total savings from L1+L2+L3 equal $4,384.97, matching the solution.">✓</span></td><td class="rcell"><span class="dotp p1" title="Total savings of $4,384.97 match the required result.">✓</span></td><td class="rcell"><span class="dotp p1" title="Total L1+L2+L3 savings equal the expected total.">✓</span></td></tr><tr id="v-TRAP3">
+              <td class="vid">TRAP3</td>
+              <td class="crit">Does not double-count L4 as separate savings (index normalization already in baseline)</td>
+              <td class="dep"><a href="#v-V9">V9</a><a href="#v-V10">V10</a></td>
+              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+          <h4>ST4: Decision Logic</h4><span class="agg">13.2% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V11">
+              <td class="vid">V11</td>
+              <td class="crit">Target_RunRate_Savings_USD=$180,000 applied to decision threshold</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response correctly compares total savings against the $180,000 target threshold.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response correctly evaluates savings against the $180,000 target threshold.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The response reaches the correct decision but does not explicitly evaluate against the $180,000 threshold within the required decision framework.">✗</span></td></tr><tr id="v-V12">
+              <td class="vid">V12</td>
+              <td class="crit">OneTime_Implementation_Cost_USD=$220,000 treated as one-time, not netted into Row6</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="The $220,000 implementation cost is shown as a one-time item and explicitly excluded from Row6.">✓</span></td><td class="rcell"><span class="dotp p1" title="One-time implementation cost is correctly shown separately and not netted into Row6.">✓</span></td><td class="rcell"><span class="dotp p1" title="One-time implementation cost is shown separately and not netted into Row6.">✓</span></td></tr><tr id="v-V16">
+              <td class="vid">V16</td>
+              <td class="crit">Decision = DO NOT APPROVE (savings $4,385 &lt; target $180,000 even though service passes)</td>
+              <td class="dep"><a href="#v-EP2">EP2</a><a href="#v-V8">V8</a><a href="#v-V11">V11</a><a href="#v-V13">V13</a></td>
+              <td class="dagcell">11.6%</td><td class="rcell"><span class="dotp p1" title="The recommendation is DO NOT APPROVE because savings are well below the target despite service performance passing.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response correctly concludes DO NOT APPROVE because savings are far below the required threshold despite service compliance.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly concludes DO NOT APPROVE.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST5</span>
+          <h4>ST5: Structural Compliance</h4><span class="agg">39.1% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V13">
+              <td class="vid">V13</td>
+              <td class="crit">Compliance table: PC1-PC5 only, each PASS/FAIL with evidence</td>
+              <td class="dep"><a href="#v-V8">V8</a></td>
+              <td class="dagcell">2.4%</td><td class="rcell"><span class="dotp p1" title="Compliance table contains exactly PC1-PC5 with PASS/FAIL and supporting evidence.">✓</span></td><td class="rcell"><span class="dotp p1" title="Compliance table contains exactly PC1-PC5 with supporting evidence.">✓</span></td><td class="rcell"><span class="dotp p1" title="Compliance table contains PC1-PC5 with evidence.">✓</span></td></tr><tr id="v-V14">
+              <td class="vid">V14</td>
+              <td class="crit">Output = decision line + bridge table + compliance table ONLY (no narrative)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p0" title="FAIL. The response includes extensive narrative sections (“Detailed Analysis”, “Limitations”, “Verification”) beyond the required output.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The response includes Executive Summary, Detailed Analysis, Decision Rule Evaluation, and Limitations sections beyond the required output.">✗</span></td><td class="rcell"><span class="dotp p1" title="The output consists only of the required decision line, bridge table, and compliance table.  [oai_citation:2‡board_decision.md.docx](sediment://file_00000000e13872098d0f2af0aa21e944)">✓</span></td></tr><tr id="v-V15">
+              <td class="vid">V15</td>
+              <td class="crit">Bridge table exactly 7 rows; Row6 = Row1−(Row2+Row3+Row4+Row5); Row7 not netted</td>
+              <td class="dep"><a href="#v-DI2">DI2</a><a href="#v-EP2">EP2</a><a href="#v-V12">V12</a></td>
+              <td class="dagcell">9.8%</td><td class="rcell"><span class="dotp p0" title="FAIL. Row6 reconciliation does not follow the required structure because L4 is represented as a separate bridge adjustment rather than embedded in the normalized baseline.">✗</span></td><td class="rcell"><span class="dotp p1" title="Bridge table contains exactly 7 rows and follows the required Row6 structure.">✓</span></td><td class="rcell"><span class="dotp p1" title="Bridge table contains 7 rows and follows the requested structure.">✓</span></td></tr><tr id="v-EP3">
+              <td class="vid">EP3</td>
+              <td class="crit">Bridge Row6 arithmetic reconciliation correct within ±$10</td>
+              <td class="dep"><a href="#v-V15">V15</a></td>
+              <td class="dagcell">10.6%</td><td class="rcell"><span class="dotp p0" title="FAIL. Row6 arithmetic is based on an incorrect bridge structure and does not reconcile to the expected normalized baseline approach.">✗</span></td><td class="rcell"><span class="dotp p1" title="Row6 arithmetic reconciles correctly within tolerance based on the bridge structure used by the response.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Row6 arithmetic is based on an incorrect PPI value and incorrect bridge methodology.">✗</span></td></tr><tr id="v-FD1">
+              <td class="vid">FD1</td>
+              <td class="crit">Output contains ONLY the three required components (no additional text/narrative)</td>
+              <td class="dep"><a href="#v-V14">V14</a></td>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p0" title="FAIL. Output contains significant additional narrative beyond the required decision line, bridge table, and compliance table.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Additional narrative sections violate the requirement that only the decision line, bridge table, and compliance table be present.">✗</span></td><td class="rcell"><span class="dotp p1" title="No additional narrative is present in the final output structure.">✓</span></td></tr><tr id="v-FD2">
+              <td class="vid">FD2</td>
+              <td class="crit">Bridge table has exactly 7 rows with columns: Step_Order │ Bridge_Item │ USD_2025 │ Sign │ Notes</td>
+              <td class="dep"><a href="#v-V15">V15</a></td>
+              <td class="dagcell">10.6%</td><td class="rcell"><span class="dotp p1" title="Bridge table contains the required columns and exactly 7 rows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Bridge table contains the required columns and exactly 7 rows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Bridge table contains the required columns and seven rows.">✓</span></td></tr><tr id="v-FD3">
+              <td class="vid">FD3</td>
+              <td class="crit">Compliance table has exactly 5 rows (PC1-PC5) with columns: Check_ID │ Check_Name │ PASS_FAIL │ Evidence</td>
+              <td class="dep"><a href="#v-V13">V13</a></td>
+              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp p1" title="Compliance table contains the required columns and exactly 5 rows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Compliance table contains the required columns and exactly 5 rows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Compliance table contains the required columns and five rows.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST6</span>
+          <h4>ST6: Source Discipline</h4><span class="agg">0.8% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-RF1">
+              <td class="vid">RF1</td>
+              <td class="crit">All data from TMS log + policy memo + workbook + FRED PPI only; no other sources</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response relies only on the TMS data, policy memo, workbook assumptions, and FRED PPI source.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response relies only on TMS data, policy memo, workbook content, and the required FRED source.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The companion file references external sources (TruckRadar.AI and DataSetIQ) rather than relying exclusively on the permitted sources.  [oai_citation:3‡tsk_1754637700_qwen_p1_response.docx](sediment://file_00000000e1f07209b5c8da768937">✗</span></td></tr></tbody></table></div><p class="trapwarn">Note: TRAP2, TRAP3 are defined in the golden rubric but not scored in this run set (shown as “–”). VPR is computed over scored verifiers only.</p></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+      <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.jpg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
+        <a class="flink" href="https://drive.google.com/drive/folders/1hWuSoOAwWKnRsgqhBB7U8IMOtOhYmbkW?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
+      <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
+      <div class="filegrid"><div class="frow"><div class="rl">Run 1 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1Mx0beD-tAt1rmoGSPtotEUQ1WRNlUJ4E" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 2 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1C91KpXCwg6wAsxxEvFlr_jWKMIQsSjsZ" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 3 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1RKKc-Pyk1EV_Gbr0QfC5W6kJWuvBTf4s" target="_blank" rel="noopener">📄 Output files ↗</a></div></div><div class="note" style="margin-top:14px"><h4>SME note — closest run to the golden solution</h4><p>Response 2 is the strongest submission because it correctly performs almost all quantitative analyses, including baseline reconstruction, PPI normalization, lever savings, decision logic, and bridge reconciliation. While it loses points for structural non-compliance and handling L4 as a separate bridge item, it is materially closer to the solution logic than Response 1 and substantially more accurate than Response 3.</p></div></div>
+    </div>
+
+    <div class="modal" id="gmodal" onclick="closeModal(event)"><div class="modal-card">
+      <button class="modal-x" onclick="closeModal(event)">×</button>
+      <h3>Verifier dependency graph</h3>
+      <p class="sub" style="margin-bottom:12px">tsk_1754637700 · 28 verifiers</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.jpg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div>
+    </div></div>
+    
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    if(location.hash==='#graph'){var b=[...document.querySelectorAll('.tabbtn')].find(x=>x.textContent.includes('Dependency'));if(b)b.click();}
+    </script></body></html>

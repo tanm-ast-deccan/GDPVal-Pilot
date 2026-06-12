@@ -1,0 +1,433 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsk_4726551239 · Zinc Diversification Strategy Decision</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head>
+<body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip active" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+      </nav></div></header>
+    <section class="taskhead"><div class="wrap">
+      <div class="crumb"><a href="index.html">Overview</a> &nbsp;/&nbsp; tsk_4726551239</div>
+      <div class="idline">
+        <span class="ptype">LDP · Latent Decomposition</span>
+        <span class="pill med">Medium</span>
+        <span class="tag">Operations Research</span>
+        <span class="tag"><b>23</b> verifiers</span>
+        <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
+      </div>
+      <h1>Zinc Diversification Strategy Decision</h1>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">77.1%</div><div class="meta">19/23 verifiers · raw 83%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">77.1%</div><div class="meta">19/23 verifiers · raw 83%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">77.1%</div><div class="meta">19/23 verifiers · raw 83%</div></div><div class="scard mean"><div class="rl">Mean · Medium</div><div class="big">77.1%</div><div class="meta">DAG-weighted · best-of-3 77%</div></div></div>
+    </div></section>
+
+    <div class="wrap">
+      <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-prompt',this)">Prompt</button><button class="tabbtn" onclick="showTab('tab-sanity',this)">Sanity check</button><button class="tabbtn" onclick="showTab('tab-traj',this)">Trajectory &amp; deliverable</button><button class="tabbtn" onclick="showTab('tab-ver',this)">Scored verifiers</button><button class="tabbtn" onclick="showTab('tab-graph',this)">Dependency graph</button><button class="tabbtn" onclick="showTab('tab-files',this)">Files</button></div>
+      <div class="tabpane active" id="tab-prompt">
+      <a class="flink" href="https://drive.google.com/drive/folders/1sSSrdzoE_91SqrLj9PTIGtUqwFQi2x8G?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a>
+      <div class="grid g3" style="margin:14px 0 4px"><div class='note'><h4>Output Artifact</h4><p>DOCX named “Zinc Future Strategy - BOD” with chosen strategy, rationale, net profits, methodology</p></div><div class='note'><h4>Tools Required</h4><p>Python or spreadsheet (probability calculations), PPTX reader (extract data from slides), Word processor (output DOCX)</p></div><div class='note'><h4>Corpus Discipline</h4><p>Strictly closed — no web search permitted, only internal PPTX files</p></div><div class='note'><h4>Estimated Completion Time</h4><p>[SME to confirm — must be timed on actual task completion]</p></div><div class='note'><h4>O*NET Occupation</h4><p>13-1111.00 — Management Analysts (verified via O*NET OnLine)</p></div></div>
+      <p class='kicker' style='margin-top:22px'>Reference files (inputs shown to the model)</p><table><tbody><tr><td class='vid'>Strategy A.pptx</td><td style='color:var(--muted)'>McKinsey’s recommendation: single-phase investment (2 Cr), 7-year horizon, High/Low demand scenarios. TRAP: Low Demand probability is left BLANK — must be inferred as 1 − 0.7 = 0.3.</td></tr><tr><td class='vid'>Strategy B – Part 1.0.pptx</td><td style='color:var(--muted)'>Bain’s recommendation Phase 1: investment (1 Cr), 2-year Phase 1 with expansion decision point. Diagrammatic phase-wise strategy with linguistic details requiring inference.</td></tr><tr><td class='vid'>Strategy B – Part 2.0.pptx</td><td style='color:var(--muted)'>Bain’s recommendation Phase 2: 5-year phase with year-by-year cash flows under High/Low demand, expansion toll-gating. Contains noise: discounting discussion, campaign info (red herrings).</td></tr></tbody></table>
+      <p class="kicker" style="margin-top:22px">Task prompt — delivered verbatim to the model</p>
+      <div class="blockq">Zinc Manufacturing Pvt. Ltd. is a company which is willing to perform a diversification. The Board of Directors (BOD) is clueless about best strategy to be adopted. They have hired two best external consultants to help them with this open request.
+
+Over a duration of 3 months, two consultants have already performed their own market assessments as well as investment-return analysis using industry sensing and manufacturing domain connects. The list of sub-steps considered across consultants include different combinations of Capex (Capital Expenditures), sales forecasting (using sales pipeline assessment) for product (0→1 stage), cash flows against the expected life of the manufacturing plant.
+
+Last week all of them submitted their recommendations to the board of directors.
+
+The BOD wants to know the best strategy amongst the two recommendations by external consultants with the intent to maximize the total probable net profits realized by the opted strategy.
+
+• Use Strategy A.pptx for detailed recommendations from McKinsey’s consultant.
+
+• Use Strategy B – Part 1.0.pptx &amp; Strategy B – Part 2.0.pptx for detailed recommendation by Bain’s consultant.
+
+Strictly DO NOT browse the web for any information. Only rely on the internal files provided.
+
+Over the years, the base organizations of consultants have realized that the demand scenarios within the Zinc manufacturing industry strictly be categorized as either “High” or “Low”. There exist no other moderate or interim scenarios.
+
+There is a limitation to the benchmarked industry standard reports utilized for future analysis or projections. Hence, all consultants are confident of cash flow for next 7 years and the same timeline shall be strictly used for any decision analysis.
+
+All set-up, expansion related Capex, cash outflow are one time i.e., there is no staggered investment. Similarly, all the cash inflows are single shot at the year end, no staggering patterns observed.
+
+Do not hallucinate or use/assume datapoints by yourself. Strictly adhere to data points provided in this prompt.
+
+Create an output word document with name of the file as “Zinc Future Strategy - BOD” &amp; include chosen strategy, rationale, realized net profits from each recommendation as well as explain the methodology &amp; decision logics used to arrive at the final go-to strategy.</div></div><div class="tabpane" id="tab-sanity"><p class="kicker">Embedded cognitive trap · not shown to the model</p>
+      <div class="blockq">LAZY AI TEST:
+- The lazy AI test was performed using ChatGPT LLM basic model and the prompt has been designed with appropriate complexity so that basic model fails. Below are the reasons:
+o There is a known pitfall created for the LLM where in Strategy A.pptx the Low demand probability has been left blank. Forces LLM to consider constraint of only presence of Low or High demand scenario
+o There are three .pptx files where Strategy B has been sliced into two different power point files.
+o There is a diagrammatic phase wise strategy, expansion toll-gating used in synthetic files as well as linguistic driven details, constraints mentioned in PowerPoint files. This requires strong processing, inferencing as well as cross-linking capacities.
+o All the calculation logic, variables, other details have been disguised. Leaving pure analysis on the LLM
+o Rather directly asking LLM to not use discounting principles of cash inflow and outflow for decision making. There is indirect constraint to not use any additional data points or assume any data points which forces LLM to stick to the plain logic of aggregating probable net profits.
+o Additional information regarding discounting, campaign has been mentioned just to confuse the LLM and check its focus and adherence to the task.
+
+EXPERT TEST:
+- There is just a single business logic which shall be used step by step to ensure that a single correct mathematical logical answer is achieved by a human. Any incorrect logic or missing step will lead to wrong answers.</div></div><div class="tabpane" id="tab-traj"><p class="kicker">Golden trajectory · expert-authored deterministic reasoning path</p>
+      <p class="sub">6 subtasks, 10 steps. Expected-value decision tree with latent probability inference, phased investment analysis, and conditional expansion logic.</p>
+      <div class="st"><div class="st-h"><span class="st-n">ST1</span>
+          <span class="st-t">Strategy A — McKinsey (Steps 1–2)</span></div>
+          <div class="st-body"><p class="purpose">Compute expected net profit for the single-phase McKinsey strategy, inferring the missing Low Demand probability.</p><div class="step"><span class="step-b">Step 1</span><div class="step-x">**Extract from Strategy A.pptx: Investment = 2 Cr. P(High Demand) = 0.7. P(Low Demand) is BLANK — infer from constraint: only High/Low exist, so P(Low) = 1 − 0.7 = 0.3. **</div></div><div class="step"><span class="step-b">Step 2</span><div class="step-x">**Cash flows over 7 years: High = 7×50L = 3.5 Cr. Low = 7×10L = 0.7 Cr. Expected net = [0.7×(3.5−2)] + [0.3×(0.7−2)] = [0.7×1.5] + [0.3×(−1.3)] = 1.05 − 0.39 = 0.66 Cr.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Strategy A.pptx</span></span><span><span class="lab">Feeds</span> <span class="val">V6, V7, DI1, EP3_A, TRAP1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST2</span>
+          <span class="st-t">Strategy B Phase 1 — Bain (Steps 3–4)</span></div>
+          <div class="st-body"><p class="purpose">Compute Phase 1 cash flows and identify the expansion decision point.</p><div class="step"><span class="step-b">Step 3</span><div class="step-x">**Extract from Strategy B Part 1.0.pptx: Investment = 1 Cr. P(Low Phase 1) = 0.5, so P(High Phase 1) = 0.5. Phase 1 = 2 years. **</div></div><div class="step"><span class="step-b">Step 4</span><div class="step-x">**Phase 1 cash flows: High = Yr1(50L) + Yr2(80L) = 1.3 Cr. Low = Yr1(10L) + Yr2(30L) = 0.4 Cr. Decision point: If High demand in Phase 1 → expand (invest 0.5 Cr). If Low → no expansion (invest 0).</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Strategy B Part 1.0.pptx</span></span><span><span class="lab">Feeds</span> <span class="val">V8, V10, DI2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST3</span>
+          <span class="st-t">Strategy B Phase 2 — Bain (Steps 5–6)</span></div>
+          <div class="st-body"><p class="purpose">Compute Phase 2 cash flows under both expansion and non-expansion paths.</p><div class="step"><span class="step-b">Step 5</span><div class="step-x">**Extract from Strategy B Part 2.0.pptx: P(Low Phase 2) = 0.4, so P(High Phase 2) = 0.6. Phase 2 = 5 years. **</div></div><div class="step"><span class="step-b">Step 6</span><div class="step-x">**Phase 2 cash flows: High = 50L+80L+70L+50L+60L = 3.1 Cr. Low = 10L+30L+20L+50L+60L = 1.7 Cr. Expected Phase 2 value = 0.6×3.1 + 0.4×1.7 = 1.86 + 0.68 = 2.54 Cr. Expansion scenario: 2.54 − 0.5 = 2.04 Cr. Non-expansion: 2.54 − 0 = 2.54 Cr.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Strategy B Part 2.0.pptx</span></span><span><span class="lab">Feeds</span> <span class="val">DI3, EP1, EP2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST4</span>
+          <span class="st-t">Strategy B Aggregation (Steps 7–8)</span></div>
+          <div class="st-body"><p class="purpose">Combine Phase 1 and Phase 2 values at each branch and compute total expected net profit.</p><div class="step"><span class="step-b">Step 7</span><div class="step-x">**Aggregate: High Phase 1 (expand) path: 1.3 + 2.04 = 3.34 Cr. Low Phase 1 (no expand) path: 0.4 + 2.54 = 2.94 Cr. **</div></div><div class="step"><span class="step-b">Step 8</span><div class="step-x">**Total expected = 0.5×3.34 + 0.5×2.94 = 1.67 + 1.47 = 3.14 Cr. Net after investment: 3.14 − 1.0 = 2.14 Cr.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Steps 4+6 combined</span></span><span><span class="lab">Feeds</span> <span class="val">V5, V11, EP3_B</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST5</span>
+          <span class="st-t">Comparison &amp; Decision (Steps 9)</span></div>
+          <div class="st-body"><p class="purpose">Compare expected net profits and recommend the superior strategy.</p><div class="step"><span class="step-b">Step 9</span><div class="step-x">**McKinsey (Strategy A): 0.66 Cr. Bain (Strategy B): 2.14 Cr. Bain exceeds McKinsey by 1.48 Cr. Recommend: Bain’s Strategy B. Key constraint validation: 7-year horizon used, no discounting applied (no rate provided), probabilities sum to 1 at each node, only High/Low scenarios.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Steps 2+8</span></span><span><span class="lab">Feeds</span> <span class="val">V3, V4, V9, TRAP2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST6</span>
+          <span class="st-t">Deliverable Production (Step 10)</span></div>
+          <div class="st-body"><p class="purpose">Produce the Word document with prescribed filename and content.</p><div class="step"><span class="step-b">Step 10</span><div class="step-x">**Create DOCX named “Zinc Future Strategy - BOD” containing: chosen strategy (Bain), rationale (expected value methodology), realized net profits (A=0.66 Cr, B=2.14 Cr), and methodology explanation (probability-weighted scenario analysis with phased decision tree).</div></div><div class="srcrow"><span><span class="lab">Feeds</span> <span class="val">V1, V2, FD1, FD2</span></span><span><span class="lab">Output</span> <span class="val">DOCX</span></span></div></div></div>
+      <div style="height:1px;background:var(--line);margin:26px 0 22px"></div>
+      <p class="kicker">Golden deliverable · the expert-level output that follows the trajectory</p>
+      <div class="blockq"><p>DOCX named “Zinc Future Strategy - BOD”. Structure:</p><p>Section 1 — Board Recommendation: Strategy B (Bain’s phased approach) is recommended, delivering expected net profits of 2.14 Cr vs 0.66 Cr from Strategy A (McKinsey).</p><p>Section 2 — Strategy A Analysis: Investment 2 Cr, P(High)=0.7, P(Low)=0.3 (inferred). High scenario: 7×50L=3.5 Cr. Low: 7×10L=0.7 Cr. Expected net = 0.7×1.5 + 0.3×(−1.3) = 0.66 Cr.</p><p>Section 3 — Strategy B Analysis: Phase 1 (2yr): Investment 1 Cr, P(High)=P(Low)=0.5. High→1.3 Cr (expand, invest 0.5 Cr). Low→0.4 Cr (no expansion). Phase 2 (5yr): P(High)=0.6, P(Low)=0.4. Expected=2.54 Cr. Expansion path: 1.3+2.04=3.34 Cr. No-expansion: 0.4+2.54=2.94 Cr. Total: 0.5×3.34+0.5×2.94=3.14 Cr. Net: 3.14−1.0=2.14 Cr.</p><p>Section 4 — Methodology: Probability-weighted expected value at each decision node. Sum[ P(scenario)×Scenario Net Profit ] at each branching point. 7-year horizon per constraint. No discounting applied (no rate provided). Only High/Low scenarios per industry constraint.</p><p>Decision rationale: Key validation: The latent decomposition test is the inference of P(Low)=0.3 from a blank cell and the construction of a 4-branch decision tree for Bain with conditional expansion. A lazy model will either ignore the blank probability, assume equal probabilities, or apply discounting from red-herring content in the slides.</p></div></div><div class="tabpane" id="tab-ver"><p class="kicker">Scored verifiers · grouped by subtask, in trajectory order</p>
+      <p class="sub"><b>Depends on</b> lists the parent verifiers whose result this one builds on
+      (<span class="dep"><span class="root">root</span></span> = sourced directly, no parents). <b>DAG</b> is the verifier's weight.
+      Hover a result mark for the SME's justification.</p>
+      <div class="vg"><div class="vg-h"><span class="st-n">ST1</span>
+          <h4>ST1: Strategy A — McKinsey</h4><span class="agg">12.5% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V7">
+              <td class="vid">V7</td>
+              <td class="crit">Sum of demand probabilities within each strategy phase equals 1</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="High/Low probabilities sum to 1 in Strategy A (0.7+0.3) and both Bain phases (0.5+0.5, 0.6+0.4).">✓</span></td><td class="rcell"><span class="dotp p1" title="High/Low probabilities sum correctly to 1 across all phases.">✓</span></td><td class="rcell"><span class="dotp p1" title="High/Low probabilities correctly sum to 1 for Strategy A (0.7+0.3), Phase 1 (0.5+0.5), and Phase 2 (0.6+0.4).">✓</span></td></tr><tr id="v-DI1">
+              <td class="vid">DI1</td>
+              <td class="crit">Low Demand probability for Strategy A correctly inferred as 1 − 0.7 = 0.3 (blank in PPTX)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Correctly inferred missing Low-demand probability as 0.3.">✓</span></td><td class="rcell"><span class="dotp p1" title="Missing Low-demand probability correctly inferred as 0.3.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly derives the missing Low-demand probability in Strategy A as 0.3.">✓</span></td></tr><tr id="v-TRAP1">
+              <td class="vid">TRAP1</td>
+              <td class="crit">Correctly infers missing Low probability instead of ignoring it, assuming 0, or fabricating</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Did not ignore or fabricate the missing probability.">✓</span></td><td class="rcell"><span class="dotp p1" title="Did not ignore the missing probability or invent a value.">✓</span></td><td class="rcell"><span class="dotp p1" title="Does not ignore the blank probability or invent an unsupported value.">✓</span></td></tr><tr id="v-V6">
+              <td class="vid">V6</td>
+              <td class="crit">McKinsey’s total probable net profits = 0.66 Cr (±0.01)</td>
+              <td class="dep"><a href="#v-DI1">DI1</a><a href="#v-V7">V7</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p1" title="McKinsey expected profit correctly calculated as 0.66 Cr.">✓</span></td><td class="rcell"><span class="dotp p1" title="Strategy A expected profit correctly calculated as 0.66 Cr.">✓</span></td><td class="rcell"><span class="dotp p1" title="Strategy A expected net profit correctly calculated as ₹66,00,000.">✓</span></td></tr><tr id="v-EP3_A">
+              <td class="vid">EP3_A</td>
+              <td class="crit">McKinsey investment (2 Cr) correctly subtracted from expected cash flows</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">4.6%</td><td class="rcell"><span class="dotp p1" title="Strategy A capex of 2 Cr correctly deducted.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct subtraction of 2 Cr investment from Strategy A cash flows.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly subtracts the ₹2 Cr investment when computing Strategy A net profit.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+          <h4>ST2: Strategy B Phase 1</h4><span class="agg">5.7% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-DI2">
+              <td class="vid">DI2</td>
+              <td class="crit">Phase 1 cash flows correctly extracted: High=1.3 Cr (50L+80L), Low=0.4 Cr (10L+30L)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Phase-1 cash flows correctly extracted as 1.3 Cr and 0.4 Cr.">✓</span></td><td class="rcell"><span class="dotp p1" title="Phase-1 cash flows correctly extracted from Bain materials.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly extracts Phase 1 cash flows as ₹1.3 Cr (High) and ₹0.4 Cr (Low).">✓</span></td></tr><tr id="v-V8">
+              <td class="vid">V8</td>
+              <td class="crit">Bain scenario does NOT include expansion in Phase 2 when Low demand in Phase 1</td>
+              <td class="dep"><a href="#v-DI2">DI2</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="No expansion applied after Low demand in Phase 1.">✓</span></td><td class="rcell"><span class="dotp p1" title="Low-demand Phase-1 branch correctly terminates without expansion.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly applies the rule that no expansion occurs when Phase 1 demand is Low.">✓</span></td></tr><tr id="v-V10">
+              <td class="vid">V10</td>
+              <td class="crit">Bain scenario strictly includes expansion in Phase 2 when High demand in Phase 1</td>
+              <td class="dep"><a href="#v-DI2">DI2</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Expansion applied after High demand in Phase 1.">✓</span></td><td class="rcell"><span class="dotp p1" title="High-demand Phase-1 branch correctly triggers expansion.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly applies expansion when Phase 1 demand is High.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST3</span>
+          <h4>ST3: Strategy B Phase 2</h4><span class="agg">9.1% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-DI3">
+              <td class="vid">DI3</td>
+              <td class="crit">Phase 2 cash flows correctly summed: High=3.1 Cr, Low=1.7 Cr (5 years each)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Phase-2 High and Low cash flows correctly summed to 3.1 Cr and 1.7 Cr.">✓</span></td><td class="rcell"><span class="dotp p1" title="Phase-2 cash flows correctly totaled as 3.1 Cr and 1.7 Cr.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly totals Phase 2 High and Low cash flows as ₹3.1 Cr and ₹1.7 Cr.">✓</span></td></tr><tr id="v-EP1">
+              <td class="vid">EP1</td>
+              <td class="crit">Expected value formula correctly applied at Phase 2: 0.6×3.1 + 0.4×1.7 = 2.54 Cr</td>
+              <td class="dep"><a href="#v-DI3">DI3</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p0" title="Did not follow benchmark expected-value reconstruction path that yields 2.54 Cr and subsequently 2.14 Cr.">✗</span></td><td class="rcell"><span class="dotp p0" title="Does not follow benchmark Phase-2 expected-value path used in solution logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="Does not follow the benchmark expected-value aggregation method that yields Phase 2 expected value of ₹2.54 Cr.">✗</span></td></tr><tr id="v-EP2">
+              <td class="vid">EP2</td>
+              <td class="crit">Expansion cost (0.5 Cr) subtracted only in expansion scenario, not in non-expansion</td>
+              <td class="dep"><a href="#v-EP1">EP1</a><a href="#v-V10">V10</a></td>
+              <td class="dagcell">5.7%</td><td class="rcell"><span class="dotp p1" title="Expansion cost deducted only on expansion branch.">✓</span></td><td class="rcell"><span class="dotp p1" title="Expansion capex deducted only on expansion path.">✓</span></td><td class="rcell"><span class="dotp p1" title="Expansion cost of ₹0.5 Cr is only applied to expansion branches.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+          <h4>ST4: Strategy B Aggregation</h4><span class="agg">20.6% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V11">
+              <td class="vid">V11</td>
+              <td class="crit">Exactly 2 scenarios for McKinsey and 4 sub-scenarios for Bain (Phase1×Phase2 branches)</td>
+              <td class="dep"><a href="#v-DI2">DI2</a><a href="#v-DI3">DI3</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p0" title="Bain modeled as 3 terminal outcomes rather than benchmark 4 branch structure.">✗</span></td><td class="rcell"><span class="dotp p0" title="Bain modeled using condensed branching rather than benchmark four-subscenario representation.">✗</span></td><td class="rcell"><span class="dotp p0" title="Models Bain using three terminal outcomes rather than the benchmark&#x27;s four explicit Phase1×Phase2 sub-scenarios.">✗</span></td></tr><tr id="v-V5">
+              <td class="vid">V5</td>
+              <td class="crit">Bain’s total probable net profits = 2.14 Cr (±0.007)</td>
+              <td class="dep"><a href="#v-EP2">EP2</a><a href="#v-V8">V8</a><a href="#v-DI2">DI2</a><a href="#v-EP1">EP1</a></td>
+              <td class="dagcell">8.0%</td><td class="rcell"><span class="dotp p0" title="Bain expected profit reported as 0.87 Cr instead of benchmark 2.14 Cr.">✗</span></td><td class="rcell"><span class="dotp p0" title="Reports Bain expected profit as 0.87 Cr rather than benchmark 2.14 Cr.">✗</span></td><td class="rcell"><span class="dotp p0" title="Calculates Bain expected net profit as ₹87 lakh instead of benchmark ₹2.14 Cr.">✗</span></td></tr><tr id="v-EP3_B">
+              <td class="vid">EP3_B</td>
+              <td class="crit">Bain investment (1 Cr) correctly subtracted from total expected value (3.14 − 1.0 = 2.14)</td>
+              <td class="dep"><a href="#v-V5">V5</a></td>
+              <td class="dagcell">9.2%</td><td class="rcell"><span class="dotp p0" title="Final Bain aggregation differs from benchmark expected-value formula.">✗</span></td><td class="rcell"><span class="dotp p0" title="Final Bain expected-value aggregation differs from benchmark formula.">✗</span></td><td class="rcell"><span class="dotp p0" title="Final Bain expected-value aggregation differs from the benchmark calculation (3.14 − 1.0 = 2.14 Cr).">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST5</span>
+          <h4>ST5: Comparison &amp; Decision</h4><span class="agg">29.8% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V3">
+              <td class="vid">V3</td>
+              <td class="crit">Finally recommended strategy is Bain’s Strategy (2.14 Cr &gt; 0.66 Cr)</td>
+              <td class="dep"><a href="#v-V6">V6</a><a href="#v-V5">V5</a></td>
+              <td class="dagcell">12.6%</td><td class="rcell"><span class="dotp p1" title="Bain still selected as recommended strategy.">✓</span></td><td class="rcell"><span class="dotp p1" title="Bain still correctly selected as superior strategy.">✓</span></td><td class="rcell"><span class="dotp p1" title="Bain is still correctly identified as the preferred strategy over McKinsey.">✓</span></td></tr><tr id="v-V4">
+              <td class="vid">V4</td>
+              <td class="crit">Rationale outlines probability-weighted expected value methodology</td>
+              <td class="dep"><a href="#v-V3">V3</a></td>
+              <td class="dagcell">13.8%</td><td class="rcell"><span class="dotp p1" title="Probability-weighted expected-value methodology explained.">✓</span></td><td class="rcell"><span class="dotp p1" title="Expected-value methodology clearly explained.">✓</span></td><td class="rcell"><span class="dotp p1" title="Provides a clear explanation of probability-weighted expected value methodology.">✓</span></td></tr><tr id="v-V9">
+              <td class="vid">V9</td>
+              <td class="crit">No use of discounting methodology (no discount rate provided in prompt)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="No discounting used.">✓</span></td><td class="rcell"><span class="dotp p1" title="No discounting applied.">✓</span></td><td class="rcell"><span class="dotp p1" title="No discounting methodology is used.">✓</span></td></tr><tr id="v-TRAP2">
+              <td class="vid">TRAP2</td>
+              <td class="crit">Does not apply NPV, DCF, or discounting despite red-herring mentions in PPTX</td>
+              <td class="dep"><a href="#v-V9">V9</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="No NPV/DCF calculations applied.">✓</span></td><td class="rcell"><span class="dotp p1" title="Avoids NPV/DCF despite prompt distractions.">✓</span></td><td class="rcell"><span class="dotp p1" title="Avoids NPV, DCF, or any discounting despite references in the source material.">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST6</span>
+          <h4>ST6: Deliverable</h4><span class="agg">22.3% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V1">
+              <td class="vid">V1</td>
+              <td class="crit">Output file named “Zinc Future Strategy - BOD”</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Correct file name used.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct document name used.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct output file name used.">✓</span></td></tr><tr id="v-V2">
+              <td class="vid">V2</td>
+              <td class="crit">Output format is a Word document (DOCX)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Submitted as DOCX.">✓</span></td><td class="rcell"><span class="dotp p1" title="Output produced as DOCX.">✓</span></td><td class="rcell"><span class="dotp p1" title="Output delivered as a DOCX document.">✓</span></td></tr><tr id="v-FD1">
+              <td class="vid">FD1</td>
+              <td class="crit">File has correct name AND correct format</td>
+              <td class="dep"><a href="#v-V1">V1</a><a href="#v-V2">V2</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p1" title="File name and format both correct.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct filename and document format.">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct file name and document format provided.">✓</span></td></tr><tr id="v-FD2">
+              <td class="vid">FD2</td>
+              <td class="crit">Document contains: chosen strategy, rationale, net profits from each recommendation, methodology</td>
+              <td class="dep"><a href="#v-V3">V3</a><a href="#v-V4">V4</a></td>
+              <td class="dagcell">15.6%</td><td class="rcell"><span class="dotp p1" title="Includes recommendation, rationale, methodology, and profits.">✓</span></td><td class="rcell"><span class="dotp p1" title="Includes recommendation, rationale, methodology, and profit calculations.">✓</span></td><td class="rcell"><span class="dotp p1" title="Includes recommendation, rationale, methodology, and net-profit analysis.">✓</span></td></tr><tr id="v-RF1">
+              <td class="vid">RF1</td>
+              <td class="crit">No web search used; all data from internal PPTX files only</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Relied only on internal PPTX files.">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses only internal consultant files and no web search.">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses only internal PPTX materials and does not perform web searches.">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+      <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk4726551239.jpg" alt="Verifier dependency graph for tsk_4726551239" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
+        <a class="flink" href="https://drive.google.com/drive/folders/1sSSrdzoE_91SqrLj9PTIGtUqwFQi2x8G?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
+      <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
+      <div class="filegrid"><div class="frow"><div class="rl">Run 1 · output</div><a class="flink" href="https://drive.google.com/drive/folders/18PJOz7jaJfc4k0h-btuAmPUTi9fPLGhC" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 2 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1nNMO3lDdypsK09f3XXIT_CL_UtV92GWs" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 3 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1sPfQHrrt0PQCMHdpBVdzkyYQrvlMI1Tx" target="_blank" rel="noopener">📄 Output files ↗</a></div></div><div class="note" style="margin-top:14px"><h4>SME note — closest run to the golden solution</h4><p>Response 1 is the best because it correctly infers the missing probability in Strategy A, follows the expected-value methodology consistently, and arrives at the correct recommendation (Bain) while satisfying all structural and document-format requirements. Although it makes the same Bain aggregation error as the other responses, its reasoning is the clearest and most closely aligned with the intended decision framework</p></div></div>
+    </div>
+
+    <div class="modal" id="gmodal" onclick="closeModal(event)"><div class="modal-card">
+      <button class="modal-x" onclick="closeModal(event)">×</button>
+      <h3>Verifier dependency graph</h3>
+      <p class="sub" style="margin-bottom:12px">tsk_4726551239 · 23 verifiers</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk4726551239.jpg" alt="Verifier dependency graph for tsk_4726551239" loading="lazy"></div>
+    </div></div>
+    
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    if(location.hash==='#graph'){var b=[...document.querySelectorAll('.tabbtn')].find(x=>x.textContent.includes('Dependency'));if(b)b.click();}
+    </script></body></html>

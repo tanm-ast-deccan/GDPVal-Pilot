@@ -1,0 +1,457 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GDPVal Golden-Sample Benchmark · Qwen 3.6 27B</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head>
+<body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip active" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+      </nav></div></header>
+    <section class="hero"><div class="wrap">
+      <div class="eyebrow">Management Consulting · Golden-Sample Benchmark · Open-Weight Study</div>
+      <h1>GDPVal Pilot Program</h1>
+      <p class="lead">Every task is authored by a domain expert drawing from real professional work pattern.
+      Each task is modelled on an actual professional assignment: a board memo requiring a cost bridge, a
+      feasibility study requiring capacity analysis, an investment decision requiring financial modelling.</p>
+      <p class="lead">The benchmark covers <b>Management Consulting</b> (O*NET 13-1111.00, Management Analysts),
+      with the six tasks here spanning operations optimization, cost optimization, operations research, and market
+      strategy.</p>
+      <p class="lead">Six expert-authored management-consulting tasks, each run <b>three times</b> on
+      <b>Qwen 3.6 27B</b> and scored by domain SMEs against atomic, DAG-weighted verifiers.
+      This showcase presents every task in full — prompt, hidden trap, golden trajectory and deliverable,
+      the verifier rubric, and the dependency graph — alongside how the model actually performed.</p>
+      <div class="metarow">
+        <span class="tag"><b>6</b> tasks</span><span class="tag"><b>3</b> runs each</span>
+        <span class="tag"><b>147</b> verifiers</span><span class="tag">Model&nbsp;<b>Qwen 3.6 27B</b></span>
+        <span class="tag">Scoring&nbsp;<b>DAG-weighted VPR</b></span>
+      </div>
+    </div></section><section class="blk"><div class="wrap"><h2><span class="num">01</span>Anatomy of a task page</h2>
+      <p class="sub">Each task page carries the six golden-sample components. Inputs (prompt + reference files) are
+      shown to the model; the ground-truth layers (sanity check, trajectory, deliverable, verifiers) are not.</p>
+      <div class="grid g3"><div class='note'><h4>Task Prompt</h4><p>The verbatim prompt shown to the model — context, the analytical task, hard constraints, and the exact output-format spec. Every task is ≥30 min of real professional work.</p></div><div class='note'><h4>Sanity Check</h4><p>The cognitive trap embedded in the task. Documents the <em>Lazy-AI failure mode</em> and the <em>Expert path</em> around it — not shown to the model.</p></div><div class='note'><h4>Golden Trajectory</h4><p>Extracted from the SME's solution logic by an LLM: the deterministic reasoning path in two layers — named subtasks (Layer 1) and tool/source-annotated steps (Layer 2) with golden answer ranges.</p></div><div class='note'><h4>Golden Deliverable</h4><p>The expert-level output, also LLM-extracted from the solution logic: concrete numbers in the exact format the prompt prescribes, not a description.</p></div><div class='note'><h4>Scored Verifiers</h4><p>Atomic, binary pass/fail criteria grouped by subtask. Each has a specific value, a dependency on its parents, and a DAG weight.</p></div><div class='note'><h4>Dependency Graph</h4><p>Constructed automatically from the golden trajectory: an algorithm identifies root verifiers, wires the minimal parent-child dependencies, validates acyclicity, and assigns depth-proportional weights — turning a pile of failures into a cascade story (one root error vs. many independent ones).</p></div></div></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">02</span>Prompt-type taxonomy</h2>
+      <p class="sub">Each task is classified by one of five prompt types, defined by the reasoning capability it tests
+      and its characteristic trap pattern.</p>
+      <table><thead><tr><th>Type</th><th>Name</th><th>Tests whether the model can…</th><th>Trap pattern</th></tr></thead>
+        <tbody><tr><td><span class='ptype'>CRP</span></td><td><b>Constrained Research</b></td><td>Faithful retrieval from authoritative information sources. Obey explicit constraints without drift.</td><td style='color:var(--muted)'>Plausible option that violates a buried constraint.</td></tr><tr><td><span class='ptype'>RCP</span></td><td><b>Relevance Compression</b></td><td>Needle in a haystack problem. Find signal in noisy multi-file corpora.</td><td style='color:var(--muted)'>Dashboard headline contradicts granular data.</td></tr><tr><td><span class='ptype'>SCP</span></td><td><b>Structural Compliance</b></td><td>Produce exact prescribed output format.</td><td style='color:var(--muted)'>Any structural deviation is a binary fail.</td></tr><tr><td><span class='ptype'>LDP</span></td><td><b>Latent Decomposition</b></td><td>Infer unstated variables from context.</td><td style='color:var(--muted)'>Blank field, linguistic model description.</td></tr><tr><td><span class='ptype'>FSP</span></td><td><b>Failure-Sensitive</b></td><td>Avoiding critical cognitive traps which can result in cascaded errors. Detect and reject stale/incorrect input data.</td><td style='color:var(--muted)'>Outdated rate that flips the recommendation.</td></tr></tbody></table></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">03</span>Dependency graph and DAG weighting</h2>
+      <p class="sub">The graph is built <b>automatically from the golden trajectory</b>: an algorithm identifies the
+      root verifiers (values from a single source), wires the minimal parent-child dependencies needed to compute each
+      non-root verifier, validates acyclicity, then computes each verifier's transitive ancestors. Weights follow from
+      that structure — <b>depth-proportional</b>, so the deeper in the chain a verifier sits, the more it is worth, and
+      no verifier is ever negligible.</p>
+      <div class="formula">wᵢ&nbsp;=&nbsp;( 1 + |ancestors(vᵢ)| )&nbsp;/&nbsp;Σⱼ ( 1 + |ancestors(vⱼ)| )&nbsp;×&nbsp;100%</div>
+      <div class="grid g2" style="margin-top:14px">
+        <div class="note"><h4>Reading the weight</h4><p>A root verifier (no parents) gets weight 1/total — small but
+        never zero. A verifier sitting on 10 ancestors gets 11/total. The scheme is invariant to whether
+        dependencies are written directly or transitively.</p></div>
+        <div class="note"><h4>Independent scoring, no double-penalty</h4><p>Each verifier is scored on its own. A child
+        can PASS even when its parent FAILs, provided its method is correct given whatever input was used — so a single
+        upstream error doesn't get punished all the way down the chain.</p></div>
+      </div>
+      <p class="toolnote">The per-task <b>Dependency graph</b> tab visualises this: node colour marks role
+      (root, calculation, trap, high-weight, recommendation, format) and the % label is the DAG weight.</p></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">04</span>Scoring — VPR, difficulty bands, and why not Pass@k</h2>
+      <p class="sub">A task's verifiers aren't independent — they form a dependency chain. We score each run by its
+      <b>DAG-weighted Verifier Pass Rate</b> and report the <b>mean across 3 runs</b> as the primary metric.</p>
+      <div class="grid g2">
+        <div class="note"><h4>Verifier Pass Rate (VPR)</h4><p>The share of a run's verifiers that pass, each
+        weighted by its DAG weight. A run that nails the deep, high-weight chain scores far above one that only
+        clears shallow root checks. We normalise over the verifiers actually scored in that run.</p></div>
+        <div class="note"><h4>Why mean VPR, not Pass@3</h4><p>Pass@k assumes criteria are independent. With a
+        dependency chain, a downstream verifier can "pass" in a run where its parent failed — the method was right
+        but the input was wrong. Pass@3 stitches such disconnected wins into a composite run that never existed.
+        Across these tasks Pass@3 adds only ~0.4% over the best single run — failures are
+        <em>structural</em>, not stochastic (full breakdown in the final section).</p></div>
+      </div>
+      <h3 style="margin:24px 0 6px;font-size:18px">Difficulty bands</h3>
+      <p class="sub">Thresholds adapted from the classical item-difficulty (p-value) index, recalibrated for multi-verifier agentic tasks.</p>
+      <table><thead><tr><th>Mean DAG-weighted VPR</th><th>Difficulty</th><th>Interpretation</th></tr></thead>
+        <tbody><tr><td class='mono'>≥ 80%</td><td><span class='pill easy'>Easy</span></td><td style='color:var(--muted)'>Model reliably completes most of the analytical chain; remaining misses are peripheral (format, external lookups).</td></tr><tr><td class='mono'>65 – 79%</td><td><span class='pill med'>Medium</span></td><td style='color:var(--muted)'>Core chain completed, but specific sub-chains fail — external retrieval, multi-step cascades, trap verifiers.</td></tr><tr><td class='mono'>50 – 64%</td><td><span class='pill hard'>Hard</span></td><td style='color:var(--muted)'>Struggles with the core chain: fundamental calculation errors or inability to retrieve required external data.</td></tr><tr><td class='mono'>< 50%</td><td><span class='pill exp'>Expert</span></td><td style='color:var(--muted)'>Fails on foundational steps; multiple root verifiers fail and cascade through the graph.</td></tr></tbody></table></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">05</span>Study design</h2>
+      <div class="grid g3">
+        <div class="note"><h4>Model</h4><p>Qwen 3.6 27B, open weights, served via OpenRouter with provider pinning.
+        Standardised sandbox tools (openpyxl, python-docx/pptx, pdfplumber, pandas) for file reading.</p></div>
+        <div class="note"><h4>Runs</h4><p>3 independent runs per task. Each run's full output is scored by a domain
+        SME against the golden verifiers — binary pass/fail with a written justification per verifier.</p></div>
+        <div class="note"><h4>Temporal pinning</h4><p>Every numeric datapoint in a task is pinned to a fixed date,
+        never "current"/"latest", so scoring is stable over time and reruns stay comparable.</p></div>
+      </div></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">06</span>Open-weight benchmark results</h2>
+      <p class="sub">Per-run figures are <b>DAG-weighted verifier pass rates (VPR)</b>. The mean of the three runs sets
+      the difficulty band. Click any task to open its full breakdown.</p>
+      <table class="results"><thead><tr>
+        <th>Task</th><th>Type</th><th>Domain</th><th class="num">#V</th>
+        <th class="num">Run 1</th><th class="num">Run 2</th><th class="num">Run 3</th>
+        <th class="num">Mean</th><th>Difficulty</th></tr></thead>
+        <tbody><tr>
+          <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
+          <td><span class="ptype">CRP</span></td>
+          <td>Operations Optimization</td>
+          <td class="num">27</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>71.4%</span><span class="vbar med" style="width:46px"><i style="width:71%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>38.6%</span><span class="vbar exp" style="width:46px"><i style="width:39%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>76.0%</span><span class="vbar med" style="width:46px"><i style="width:76%"></i></span></div></td>
+          <td class="num"><b>62.0%</b></td>
+          <td><span class="pill hard">Hard</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
+          <td><span class="ptype">FSP</span></td>
+          <td>Cost Optimization</td>
+          <td class="num">25</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.4%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.4%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>55.2%</span><span class="vbar hard" style="width:46px"><i style="width:55%"></i></span></div></td>
+          <td class="num"><b>54.6%</b></td>
+          <td><span class="pill hard">Hard</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
+          <td><span class="ptype">LDP</span></td>
+          <td>Operations Research</td>
+          <td class="num">23</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td>
+          <td class="num"><b>77.1%</b></td>
+          <td><span class="pill med">Medium</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
+          <td><span class="ptype">RCP</span></td>
+          <td>Operations Optimization</td>
+          <td class="num">26</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>81.9%</span><span class="vbar easy" style="width:46px"><i style="width:82%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>80.5%</span><span class="vbar easy" style="width:46px"><i style="width:80%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>81.2%</span><span class="vbar easy" style="width:46px"><i style="width:81%"></i></span></div></td>
+          <td class="num"><b>81.2%</b></td>
+          <td><span class="pill easy">Easy</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td>Cost Optimization</td>
+          <td class="num">28</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>65.0%</span><span class="vbar hard" style="width:46px"><i style="width:65%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>92.4%</span><span class="vbar easy" style="width:46px"><i style="width:92%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>69.3%</span><span class="vbar med" style="width:46px"><i style="width:69%"></i></span></div></td>
+          <td class="num"><b>75.6%</b></td>
+          <td><span class="pill med">Medium</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td>Market Strategy</td>
+          <td class="num">24</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.1%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.1%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>57.5%</span><span class="vbar hard" style="width:46px"><i style="width:58%"></i></span></div></td>
+          <td class="num"><b>55.2%</b></td>
+          <td><span class="pill hard">Hard</span></td></tr></tbody></table>
+      <p class="toolnote">Closed-corpus tasks (all data internal) score highest; tasks gated on a live external
+      lookup (Glassdoor salary, RBI FX rate, FRED PPI, market data) lose the most — consistently, not randomly.</p></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">07</span>Pass@k and trap avoidance</h2>
+      <p class="sub">The primary metric above is mean DAG-weighted VPR. For completeness, here is the best-of-3
+      view (<b>Pass@3</b>: a verifier counts as passed if it passed in <em>any</em> of the three runs) and how the
+      model handled the planted <b>trap verifiers</b>. <b>Lift = Pass@3 − Best-of-3</b> — how
+      much the union of three runs adds over the single best run. It averages <b>+0.4%</b> here, and is
+      zero on five of six tasks: the model misses the <em>same</em> verifiers every run, so failures are
+      <em>structural</em>, not stochastic. Only SCP-Hard lifts, where the FRED PPI lookup lands in one run but not others.</p>
+
+      <h3 style="margin:18px 0 6px;font-size:18px">Mean · Best-of-3 · Pass@3 (DAG-weighted)</h3>
+      <table class="results"><thead><tr>
+        <th>Task</th><th>Type</th><th class="num">Mean</th><th class="num">Best-of-3</th>
+        <th class="num">Pass@3</th><th class="num">Lift</th></tr></thead>
+        <tbody><tr>
+          <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
+          <td><span class="ptype">CRP</span></td>
+          <td class="num">62.0%</td>
+          <td class="num">76.0%</td>
+          <td class="num">76.0%</td>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
+          <td><span class="ptype">FSP</span></td>
+          <td class="num">54.6%</td>
+          <td class="num">55.2%</td>
+          <td class="num">55.2%</td>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
+          <td><span class="ptype">LDP</span></td>
+          <td class="num">77.1%</td>
+          <td class="num">77.1%</td>
+          <td class="num">77.1%</td>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
+          <td><span class="ptype">RCP</span></td>
+          <td class="num">81.2%</td>
+          <td class="num">81.9%</td>
+          <td class="num">81.9%</td>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td class="num">75.6%</td>
+          <td class="num">92.4%</td>
+          <td class="num">95.0%</td>
+          <td class="num"><span class="lift pos">+2.5%</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td class="num">55.2%</td>
+          <td class="num">57.5%</td>
+          <td class="num">57.5%</td>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr></tbody></table>
+      <p class="toolnote">Mean is the average single-run VPR (the Mean column in the results table); Best-of-3 is the
+      single best run; Pass@3 is the union over all three. Lift is Pass@3 over Best-of-3 — a near-zero lift means even
+      pooling three runs recovers nothing beyond the best attempt, because the misses are the same every time.</p>
+
+      <h3 style="margin:24px 0 6px;font-size:18px">Trap avoidance</h3>
+      <p class="sub">Traps are deliberately planted errors in the reference files (stale values, placeholder numbers,
+      rows that must be excluded). A trap verifier <b>passes when the model avoided the trap</b>. Per-run cells show
+      traps avoided / traps scored.</p>
+      <table class="results"><thead><tr>
+        <th>Task</th><th>Type</th><th class="num">Traps (scored/total)</th>
+        <th class="num">Run 1</th><th class="num">Run 2</th><th class="num">Run 3</th>
+        <th class="num">Avoided@3</th></tr></thead>
+        <tbody><tr>
+          <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
+          <td><span class="ptype">CRP</span></td>
+          <td class="num">2/2</td>
+          <td class="num"><span class="trap miss">1/2</span></td><td class="num"><span class="trap miss">1/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
+          <td class="num"><b>2/2</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
+          <td><span class="ptype">FSP</span></td>
+          <td class="num">1/3</td>
+          <td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td>
+          <td class="num"><b>0/1</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
+          <td><span class="ptype">LDP</span></td>
+          <td class="num">2/2</td>
+          <td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
+          <td class="num"><b>2/2</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
+          <td><span class="ptype">RCP</span></td>
+          <td class="num">2/2</td>
+          <td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
+          <td class="num"><b>2/2</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td class="num">1/3</td>
+          <td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td>
+          <td class="num"><b>0/1</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
+          <td><span class="ptype">SCP</span></td>
+          <td class="num">3/3</td>
+          <td class="num"><span class="trap ok">3/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap ok">3/3</span></td>
+          <td class="num"><b>3/3</b></td></tr></tbody></table>
+      <p class="toolnote">The model avoids most traps reliably, but falls for the single scored trap on the FSP and
+      SCP-Hard tasks in <em>every</em> run — a consistent failure mode, not noise. Traps shown as <span class='mono'>–/–</span> or a smaller scored/total count are defined in the golden rubric but were not scored in this run-set; avoidance is computed over scored traps only.</div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">08</span>Scaling up</h2>
+      <p class="copy">Scaling beyond the pilot rests on two levers: an existing task inventory and pipeline
+      automation. We already hold a repository of <b>70 tasks</b> from a prior study built on a similar two-layer
+      evaluation design — binary verifiers plus an SME rubric — which can be converted with LLM assistance to align
+      with this study's schema, giving a substantial head start on volume without authoring from scratch.</p>
+      <p class="copy">To hold quality constant as volume grows, an automated pipeline pre-checks the verifiers that
+      are deterministically coverable — exact values, format compliance, presence tests — so SME annotation effort
+      concentrates on the judgement-heavy criteria rather than mechanical ones. Human QC is accelerated the same way:
+      the pipeline surfaces likely discrepancies for review, leaving experts to adjudicate rather than scan every
+      verifier by hand.</p></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">09</span>Team, domain expertise & expert network</h2>
+      <p class="copy">The program is delivered by an expert network of <b>40+ active SMEs</b>, onboarded from a
+      shortlisted pool of <b>200+ candidates</b>, with an average of <b>8–9 years</b> of professional experience.
+      The network carries institutional pedigree from IIM Ahmedabad, Calcutta, Lucknow, and Kozhikode, IIT Kharagpur,
+      XLRI Jamshedpur, and SPJIMR, spanning the management-consulting and financial-analysis occupations the
+      benchmark targets.</p></div></section>
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script></body></html>

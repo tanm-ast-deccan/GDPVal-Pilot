@@ -1,0 +1,430 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsk_8717359545 · Brake Caliper Constraint Diagnosis &amp; DBR Redesign</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head>
+<body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip active" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+      </nav></div></header>
+    <section class="taskhead"><div class="wrap">
+      <div class="crumb"><a href="index.html">Overview</a> &nbsp;/&nbsp; tsk_8717359545</div>
+      <div class="idline">
+        <span class="ptype">RCP · Relevance Compression</span>
+        <span class="pill easy">Easy</span>
+        <span class="tag">Operations Optimization</span>
+        <span class="tag"><b>26</b> verifiers</span>
+        <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
+      </div>
+      <h1>Brake Caliper Constraint Diagnosis &amp; DBR Redesign</h1>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">81.9%</div><div class="meta">22/26 verifiers · raw 85%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">80.5%</div><div class="meta">20/26 verifiers · raw 77%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">81.2%</div><div class="meta">21/26 verifiers · raw 81%</div></div><div class="scard mean"><div class="rl">Mean · Easy</div><div class="big">81.2%</div><div class="meta">DAG-weighted · best-of-3 82%</div></div></div>
+    </div></section>
+
+    <div class="wrap">
+      <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-prompt',this)">Prompt</button><button class="tabbtn" onclick="showTab('tab-sanity',this)">Sanity check</button><button class="tabbtn" onclick="showTab('tab-traj',this)">Trajectory &amp; deliverable</button><button class="tabbtn" onclick="showTab('tab-ver',this)">Scored verifiers</button><button class="tabbtn" onclick="showTab('tab-graph',this)">Dependency graph</button><button class="tabbtn" onclick="showTab('tab-files',this)">Files</button></div>
+      <div class="tabpane active" id="tab-prompt">
+      <a class="flink" href="https://drive.google.com/drive/folders/1BVGlAr5Iv9ATrcIYlwyDaxyikBbKr1fW" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a>
+      <div class="grid g3" style="margin:14px 0 4px"><div class='note'><h4>Output Artifact</h4><p>DOCX — 1-page COO decision memo with exactly 5 sections</p></div><div class='note'><h4>Tools Required</h4><p>Python (pandas for XLSX), PDF reader (maintenance logs, capex notes, supervisor notes)</p></div><div class='note'><h4>Corpus Discipline</h4><p>Strictly closed — 5 internal files only, no external sources</p></div><div class='note'><h4>Estimated Completion Time</h4><p>[SME to confirm — must be timed on actual task completion]</p></div><div class='note'><h4>O*NET Occupation</h4><p>13-1111.00 — Management Analysts (verified via O*NET OnLine)</p></div></div>
+      <p class='kicker' style='margin-top:22px'>Reference files (inputs shown to the model)</p><table><tbody><tr><td class='vid'>Plant_Performance_Dashboard_Q2.xlsx</td><td style='color:var(--muted)'>Exec Summary (CNC=91.2% util, HT=82.2%), Cycle Time Master (HT=240min/400 parts), Process Utilization, Line Output Weekly, Capex Justification. TRAP: Dashboard shows CNC as bottleneck.</td></tr><tr><td class='vid'>HeatTreat_Maintenance_and_Cycle_Log.pdf</td><td style='color:var(--muted)'>Furnace overview (120 hrs/wk planned, 25 batches, 6% shared), Weekly Availability (downtime by week), Warm-Up Losses (hidden from dashboard), Cycle Interruptions, Shift Engineer Remarks.</td></tr><tr><td class='vid'>Quality_Rework_and_Scrap_Register.xlsx</td><td style='color:var(--muted)'>FPY by Process (HT=95.6%), Rework Loop Detail (310 units/wk post-HT), Scrap by Defect Code, Post-HT Distortion (3.8-4.5%), Batch Rejection Summary, Inspection Holds.</td></tr><tr><td class='vid'>COO_Capex_Note_and_Customer_Penalty_Tracker.pdf</td><td style='color:var(--muted)'>Proposed CNC business case (claims +1600/wk uplift, post-capex=15600/wk), penalty tracker. Footnote: downstream losses assumed stable.</td></tr><tr><td class='vid'>Shift_Supervisor_Daily_Notes.pdf</td><td style='color:var(--muted)'>Weekly notes confirming HT as operational constraint: highest queue near HT, HT batch losses, suggestions for tighter release into HT.</td></tr></tbody></table>
+      <p class="kicker" style="margin-top:22px">Task prompt — delivered verbatim to the model</p>
+      <div class="blockq">A Tier-1 auto components manufacturer supplying brake caliper brackets to two major passenger vehicle OEMs has missed dispatch commitments in three of the last six weeks, triggering expedited freight, line-side shortage alerts from one OEM, and a potential annualized penalty exposure if service levels do not recover within the next month. The COO must decide within 72 hours whether to approve a proposed Rs 12 crore capex request for a second CNC machining cell or instead stabilize throughput through an operations-control redesign.
+
+Using only the provided files, determine the true system constraint for the brake caliper bracket line, assess whether the proposed second CNC cell should be approved, and design a Drum-Buffer-Rope operating logic for the line. Your answer must identify the correct drum resource, define what buffer should protect it, explain how upstream release should be controlled, and quantify the expected impact on throughput and WIP if the recommended action is implemented.
+
+Do not use any external sources. Solve only from the provided files.
+
+Prepare a 1-page COO decision memo with exactly these 5 sections:
+
+1. Executive recommendation: approve or reject the second CNC cell, with a one-sentence reason.
+
+2. True constraint diagnosis: identify the real bottleneck and explain why the apparent bottleneck is incorrect.
+
+3. Effective capacity build: compare nominal vs effective capacity for the relevant resources.
+
+4. DBR redesign: define the drum, buffer, and rope logic for the line.
+
+5. Operational impact: quantify expected change in weekly throughput, WIP, and customer service risk.
+
+Key Assumptions: Demand over next 8 weeks is stable and above current output. No new labor or floor space. Only one primary action may be recommended. Use weekly throughput as main metric.</div></div><div class="tabpane" id="tab-sanity"><p class="kicker">Embedded cognitive trap · not shown to the model</p>
+      <div class="blockq">Lazy AI Test
+A weak model will likely use the Exec Summary, Process Utilization, and Proposed CNC Cell Business Case materials to conclude that CNC machining is the pacing resource, approve the Rs 12 crore CNC capex, and project weekly shipments of about 9920; this will be wrong by roughly 1250-1400 units/week because the model will fail to integrate furnace downtime, restart stabilization loss, interrupted batch recovery, and post heat treatment distortion/rework, which make HT 02 the actual constraint and keep realistic shipments near 8500 - 8700/week good output before downstream minor losses.
+
+Expert Test
+Experienced consultants will use the the same files and would reach the same answer: reject or defer the second CNC cell, identify HT-02 as the true drum, and redesign the line using Drum-Buffer-Rope with a controlled buffer before heat treatment and upstream release subordinated to furnace-effective pace. One correct answer exists because demand is above output, no approved alternate furnace is available, immediate labor or space expansion is disallowed, and the file evidence consistently shows furnace-effective capacity and post-HT yield determine shipments</div></div><div class="tabpane" id="tab-traj"><p class="kicker">Golden trajectory · expert-authored deterministic reasoning path</p>
+      <p class="sub">5 subtasks, 19 analytical steps (compressed here). Progressive constraint discovery across 5 files: headline utilization → hidden furnace losses → effective capacity ceiling → capex rejection → DBR redesign.</p>
+      <div class="st"><div class="st-h"><span class="st-n">ST1</span>
+          <span class="st-t">Headline Trap Recognition (Steps 1–2)</span></div>
+          <div class="st-body"><p class="purpose">Recognize that the dashboard’s CNC bottleneck diagnosis is wrong.</p><div class="step"><span class="step-b">Step 1–2</span><div class="step-x">**Dashboard shows CNC utilization=91.2%, HT=82.2%, queue before CNC=1150 vs HT=780. A shallow model stops here and approves CNC capex. TOC requires identifying the constraint by flow and throughput, not local utilization.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Plant_Performance_Dashboard_Q2.xlsx Exec Summary</span></span><span><span class="lab">Feeds</span> <span class="val">V2, TRAP1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST2</span>
+          <span class="st-t">Furnace Effective Capacity (Steps 3–9)</span></div>
+          <div class="st-body"><p class="purpose">Compute actual heat-treat capacity after three categories of hidden losses.</p><div class="step"><span class="step-b">Step 3</span><div class="step-x">**Rated: 120 hrs/wk planned, 240 min/400-part batch, 25 batches/wk, 10,000 rated capacity. **</div></div><div class="step"><span class="step-b">Step 4</span><div class="step-x">**Unplanned downtime: 6-week average = 17.17 hrs/wk (from Weekly Furnace Availability). **</div></div><div class="step"><span class="step-b">Step 5</span><div class="step-x">**Restart stabilization loss: average = 4.22 hrs/wk (from Warm-Up section — excluded from dashboard standards per Cycle Time Master footer note). **</div></div><div class="step"><span class="step-b">Step 6</span><div class="step-x">**Interruption/reload delay: average = 2.0 hrs/wk (from Cycle Interruptions). **</div></div><div class="step"><span class="step-b">Step 7</span><div class="step-x">**Effective furnace time = 120 − 17.17 − 4.22 − 2.0 = 96.61 hrs/wk. Effective batches = 96.61/4 = 24.15. Gross capacity = 24.15 × 400 = 9,661 parts/wk.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">HeatTreat_Maintenance_and_Cycle_Log.pdf + Dashboard Cycle Time Master</span></span><span><span class="lab">Feeds</span> <span class="val">V3–V9, DI1, DI2, EP1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST3</span>
+          <span class="st-t">Yield &amp; Sharing Adjustments (Steps 10–13)</span></div>
+          <div class="st-body"><p class="purpose">Apply sharing deduction and heat-treat yield to get true good-output ceiling.</p><div class="step"><span class="step-b">Step 9</span><div class="step-x">**Shared capacity = 6% → bracket-dedicated = 9,661 × 0.94 = 9,081 parts/wk. **</div></div><div class="step"><span class="step-b">Step 10</span><div class="step-x">**Heat-treat FPY = 95.6% (from Quality Register FPY tab). Good output ceiling = 9,081 × 0.956 = 8,684 parts/wk. **</div></div><div class="step"><span class="step-b">Step 11</span><div class="step-x">**Cross-validate: actual weekly shipments 8,150–8,380 match calculated ceiling (8,580–8,780 range) far better than capex note’s claimed 9,920. **</div></div><div class="step"><span class="step-b">Step 12–14</span><div class="step-x">**Confirm with quality data: post-HT distortion 3.8–4.5%, rework 310 units/wk, 2–3 QA holds/wk — all confirming HT as the throughput-limiting stage.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Quality_Rework_and_Scrap_Register.xlsx + HeatTreat log</span></span><span><span class="lab">Feeds</span> <span class="val">V1, V10–V13, EP2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST4</span>
+          <span class="st-t">CNC Capex Assessment (Steps 15–17)</span></div>
+          <div class="st-body"><p class="purpose">Demonstrate that CNC capex adds capacity above a non-binding constraint.</p><div class="step"><span class="step-b">Step 15</span><div class="step-x">**Current CNC standard capacity = 10,800/wk (from Dashboard Process Utilization). Proposed post-capex = 15,600/wk. But system ceiling = ~8,684/wk (HT-constrained). CNC already exceeds system limit by 2,000+ parts/wk. **</div></div><div class="step"><span class="step-b">Step 16–17</span><div class="step-x">**Capex business case assumes downstream losses are stable (footnote in Capex Justification) — but quality files show HT losses are neither minor nor stable. Realistic uplift from CNC alone = 0–250 parts/wk, not the claimed 1,600.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Dashboard + COO_Capex_Note</span></span><span><span class="lab">Feeds</span> <span class="val">V14–V16, TRAP2</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST5</span>
+          <span class="st-t">DBR Redesign &amp; Deliverable (Steps 18–19)</span></div>
+          <div class="st-body"><p class="purpose">Design the TOC operating logic and produce the 1-page COO memo.</p><div class="step"><span class="step-b">Step 18</span><div class="step-x">**TOC/DBR: Drum = HT-02 (pace all production to furnace-effective throughput). Buffer = protective time/inventory buffer before heat treatment. Rope = upstream CNC and machining release controlled by furnace pace, not local utilization targets. **</div></div><div class="step"><span class="step-b">Step 19</span><div class="step-x">**Near-term HT exploitation plan: restore PM discipline, reduce restart loss, reduce reload delays, tighten pre-HT quality checks. Only consider HT-focused capex after exploitation.</div></div><div class="srcrow"><span><span class="lab">Feeds</span> <span class="val">V17, FD1, FD2</span></span><span><span class="lab">Output</span> <span class="val">1-page DOCX with 5 sections</span></span></div></div></div>
+      <div style="height:1px;background:var(--line);margin:26px 0 22px"></div>
+      <p class="kicker">Golden deliverable · the expert-level output that follows the trajectory</p>
+      <div class="blockq"><p>1-page DOCX COO decision memo. 5 sections:</p><p>Section 1 — Executive Recommendation: REJECT (defer) the second CNC cell. The true system constraint is the heat-treat furnace, not CNC machining. Additional CNC capacity will inflate WIP without improving shipments.</p><p>Section 2 — True Constraint Diagnosis: HT-02 is the actual bottleneck. Dashboard shows CNC at 91.2% utilization, but utilization ≠ constraint under TOC. Effective furnace capacity (~8,684 good parts/wk) is below CNC capacity (10,800/wk). Three hidden loss categories (downtime 17.2 hrs, restart 4.2 hrs, reload 2.0 hrs) reduce furnace time from 120 to ~96.6 hrs/wk.</p><p>Section 3 — Effective Capacity Build: Nominal furnace: 10,000/wk. After downtime: ~9,661. After 6% sharing: ~9,081. After 95.6% FPY: ~8,684 good parts/wk. CNC nominal: 10,800/wk (already exceeds system limit). Proposed post-capex CNC: 15,600/wk (irrelevant — system capped at ~8,684).</p><p>Section 4 — DBR Redesign: Drum = HT-02 (all production paced to furnace-effective throughput). Buffer = protective time buffer before heat treatment (target: 4–6 hours of WIP). Rope = upstream CNC and machining release gated by furnace consumption rate, not local utilization targets.</p><p>Section 5 — Operational Impact: Current shipments: ~8,270/wk. With DBR + HT exploitation: target 8,500–8,700/wk (recovering ~250–450 units from reduced restart loss and tighter scheduling). WIP reduction: 15–25% (eliminating pre-HT queue buildup). Customer service: dispatch reliability improves as production release matches true system pace.</p></div></div><div class="tabpane" id="tab-ver"><p class="kicker">Scored verifiers · grouped by subtask, in trajectory order</p>
+      <p class="sub"><b>Depends on</b> lists the parent verifiers whose result this one builds on
+      (<span class="dep"><span class="root">root</span></span> = sourced directly, no parents). <b>DAG</b> is the verifier's weight.
+      Hover a result mark for the SME's justification.</p>
+      <div class="vg"><div class="vg-h"><span class="st-n">ST1</span>
+          <h4>ST1: Headline Trap</h4><span class="agg">2.0% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V2">
+              <td class="vid">V2</td>
+              <td class="crit">Does NOT identify CNC Machining as the true bottleneck</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="Clearly labels CNC as &quot;apparent bottleneck&quot; and rejects it">✓</span></td><td class="rcell"><span class="dotp p1" title="CNC NOT identified as true bottleneck">✓</span></td><td class="rcell"><span class="dotp p1" title="Explicitly states &quot;The furnace - not CNC machining - limits line throughput&quot; and &quot;CNC runs at 91% because it is being overfed&quot;">✓</span></td></tr><tr id="v-TRAP1">
+              <td class="vid">TRAP1</td>
+              <td class="crit">Rejects dashboard utilization (CNC=91.2%) as constraint indicator; recognizes utilization ≠ constraint under TOC</td>
+              <td class="dep"><a href="#v-V2">V2</a></td>
+              <td class="dagcell">1.3%</td><td class="rcell"><span class="dotp p1" title="States CNC high utilization is caused by planner over-releasing work, not true capacity shortage">✓</span></td><td class="rcell"><span class="dotp p1" title="Rejects CNC utilization (91.2%) as constraint indicator">✓</span></td><td class="rcell"><span class="dotp p1" title="Directly states &quot;utilization measures output relative to capacity - it does not identify the constraint&quot;; quotes CNC 91.2% and correctly explains it as a symptom of over-release">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+          <h4>ST2: Furnace Effective Capacity</h4><span class="agg">13.5% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V3">
+              <td class="vid">V3</td>
+              <td class="crit">Uses planned furnace time of 120 hours per week</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="Drum schedule references 120 hrs/week planned time in Section 4">✓</span></td><td class="rcell"><span class="dotp p0" title="Never states 120 hrs/week as the planned baseline">✗</span></td><td class="rcell"><span class="dotp p1" title="Section 3 capacity breakdown explicitly states &quot;120 hrs planned&quot; as the starting point of the deduction chain">✓</span></td></tr><tr id="v-V4">
+              <td class="vid">V4</td>
+              <td class="crit">Uses standard heat-treat cycle of 240 minutes per 400 parts</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="States &quot;25 batches/week × 400 parts&quot; implying 4 hrs/batch = 240 min">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses 240 min / 400-part standard batch cycle">✓</span></td><td class="rcell"><span class="dotp p1" title="Section 4 DBR Redesign explicitly states &quot;400 units/batch, 240 min/cycle&quot;">✓</span></td></tr><tr id="v-V5">
+              <td class="vid">V5</td>
+              <td class="crit">Includes average weekly furnace downtime of ~17.2 hours</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="States &quot;17.2 hrs/week unplanned downtime&quot; and 85.7% availability">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;unplanned downtime (17.2 hrs)&quot; as a specific loss component">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;17.2 hrs (unplanned downtime)&quot; in both Section 2 and the Section 3 capacity breakdown">✓</span></td></tr><tr id="v-V6">
+              <td class="vid">V6</td>
+              <td class="crit">Includes average weekly warm-up and stabilization loss of ~4.2 hours</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="Explicitly lists &quot;−4.2h warm-up&quot; as a loss factor in the capacity table">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;warm-up after restarts (4.2 hrs)&quot; explicitly">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;4.2 hrs (warm-up)&quot; explicitly in the Section 3 deduction chain">✓</span></td></tr><tr id="v-V7">
+              <td class="vid">V7</td>
+              <td class="crit">Includes average weekly interruption and reload delay of ~2.0 hours</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="Explicitly lists &quot;−2.0h interrupt&quot; in the capacity table">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;reload delays (2.0 hrs)&quot; explicitly">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;2.0 hrs (reload delay)&quot; explicitly in the Section 3 deduction chain">✓</span></td></tr><tr id="v-DI1">
+              <td class="vid">DI1</td>
+              <td class="crit">Downtime correctly averaged from 6 weekly readings (14,18,21,16,19,15 hrs)</td>
+              <td class="dep"><a href="#v-V5">V5</a></td>
+              <td class="dagcell">1.3%</td><td class="rcell"><span class="dotp p1" title="Uses 17.2 hrs/week which is the correct 6-week average = (14+18+21+16+19+15)/6">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses 17.2 hrs/week = correct 6-week average; cross-referenced against HeatTreat Log">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses 17.2 hrs/week, the correct 6-week average of (14+18+21+16+19+15)/6 = 17.17 hrs">✓</span></td></tr><tr id="v-DI2">
+              <td class="vid">DI2</td>
+              <td class="crit">Restart stabilization loss identified from Warm-Up section (hidden from dashboard standard)</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">1.3%</td><td class="rcell"><span class="dotp p1" title="States warm-up loss &quot;excluded from dashboard standard&quot; and sourced from HeatTreat log">✓</span></td><td class="rcell"><span class="dotp p1" title="Identifies 4.2 hrs warm-up loss from HeatTreat Log pages 1-5; characterizes it as a separate hidden loss not captured in dashboard standards">✓</span></td><td class="rcell"><span class="dotp p1" title="Identifies 4.2 hrs warm-up loss as a separate line item distinct from downtime, consistent with the HeatTreat Log warm-up section">✓</span></td></tr><tr id="v-V8">
+              <td class="vid">V8</td>
+              <td class="crit">Effective furnace time = 95.5–97.5 hours per week</td>
+              <td class="dep"><a href="#v-V3">V3</a><a href="#v-V5">V5</a><a href="#v-V6">V6</a><a href="#v-V7">V7</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p0" title="Response uses ~101 hrs/week in Section 4 (post-PM-recovery target), not 96.61 hrs current state">✗</span></td><td class="rcell"><span class="dotp p0" title="Response never computes an explicit effective furnace hours figure. The capacity table jumps directly to ~8,635 units/week&quot; as effective output">✗</span></td><td class="rcell"><span class="dotp p0" title="Section 3 shows 120 - 7.2 - 17.2 - 4.2 - 2.0 = 89.4 hrs net; correct effective furnace time should be 120 - 17.17 - 4.22 - 2.0 = 96.61 hrs">✗</span></td></tr><tr id="v-EP1">
+              <td class="vid">EP1</td>
+              <td class="crit">Chained subtraction arithmetic: 120 − 17.17 − 4.22 − 2.0 = 96.61 hrs (±1 hr)</td>
+              <td class="dep"><a href="#v-V8">V8</a></td>
+              <td class="dagcell">4.0%</td><td class="rcell"><span class="dotp p0" title="The arithmetic chain is not explicitly shown. Section 4 jumps to ~101 hrs/week">✗</span></td><td class="rcell"><span class="dotp p0" title="Chained subtraction: 120 - 17.17 - 4.22 - 2.0 = 96.61 hrs The arithmetic chain is entirely absent. The response lists loss components in hours but never performs or states the subtraction from 120 hrs/week to arrive at effective hours">✗</span></td><td class="rcell"><span class="dotp p0" title="Response shows 120 - 7.2 - 17.2 - 4.2 - 2.0 = 89.4 hrs; incorrectly deducts shared capacity from hours instead of applying 6% sharing after output calculation">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST3</span>
+          <h4>ST3: Yield &amp; Sharing</h4><span class="agg">35.7% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V9">
+              <td class="vid">V9</td>
+              <td class="crit">Gross effective furnace capacity = 9,550–9,750 parts/week</td>
+              <td class="dep"><a href="#v-V8">V8</a><a href="#v-V4">V4</a></td>
+              <td class="dagcell">4.7%</td><td class="rcell"><span class="dotp p0" title="Response gives effective range as &quot;8,600-9,050&quot; for brackets, which is post-sharing and post-yield.">✗</span></td><td class="rcell"><span class="dotp p0" title="Gross effective capacity = 9,550-9,750 parts/week - Gross capacity step (before 6% sharing deduction) is never computed or stated">✗</span></td><td class="rcell"><span class="dotp p0" title="Computes 89.4 hrs × (400/4) = 8,960 parts gross, below the required 9,550-9,750 range">✗</span></td></tr><tr id="v-V10">
+              <td class="vid">V10</td>
+              <td class="crit">Applies shared capacity deduction of 6%</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="Implied through the bracket-dedicated figure, though not called out with &quot;6%&quot; label explicitly">✓</span></td><td class="rcell"><span class="dotp p0" title="7.2 hrs is not the same as 6% of 120 hrs">✗</span></td><td class="rcell"><span class="dotp p0" title="Applies shared capacity as 7.2 hrs deducted from planned hours (120 × 6% = 7.2 hrs), but applies it at the wrong stage">✗</span></td></tr><tr id="v-V11">
+              <td class="vid">V11</td>
+              <td class="crit">Bracket-dedicated effective capacity = 8,950–9,150 parts/week</td>
+              <td class="dep"><a href="#v-V9">V9</a><a href="#v-V10">V10</a></td>
+              <td class="dagcell">6.0%</td><td class="rcell"><span class="dotp p0" title="Reports 8,600-9,050 as the final effective capacity range, which already folds in yield losses.">✗</span></td><td class="rcell"><span class="dotp p0" title="Bracket-dedicated effective capacity = 8,950-9,150 parts/week Intermediate bracket-dedicated step is not computed; the build goes straight from loss listing to the final ~8,635 figure without this intermediate step">✗</span></td><td class="rcell"><span class="dotp p0" title="Does not isolate bracket-dedicated effective capacity as a separate intermediate step; resulting capacity is below the required range">✗</span></td></tr><tr id="v-V12">
+              <td class="vid">V12</td>
+              <td class="crit">Applies heat-treat first-pass yield of 95.6%</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="States &quot;95.6% FPY (distortion + hardness failures)&quot; in both capacity table and Section 2">✓</span></td><td class="rcell"><span class="dotp p1" title="Applies HT first-pass yield of 95.6%">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;95.6% FPY&quot; in the capacity table and applies it in the deduction chain: 22.4 × 400 × 95.6% = 8,548 theoretical">✓</span></td></tr><tr id="v-V13">
+              <td class="vid">V13</td>
+              <td class="crit">Good output ceiling = 8,580–8,780 good parts/week</td>
+              <td class="dep"><a href="#v-V11">V11</a><a href="#v-V12">V12</a></td>
+              <td class="dagcell">7.4%</td><td class="rcell"><span class="dotp p1" title="Reports &quot;8,600-9,050&quot; - lower bound of 8,600 is within range">✓</span></td><td class="rcell"><span class="dotp p1" title="Good output ceiling = 8,580-8,780 good parts/week">✓</span></td><td class="rcell"><span class="dotp p1" title="Reports &quot;8,548 theoretical - actual 8,255 after quality rework loops&quot;">✓</span></td></tr><tr id="v-V1">
+              <td class="vid">V1</td>
+              <td class="crit">Identifies Heat Treat Furnace HT-02 as the true bottleneck</td>
+              <td class="dep"><a href="#v-V13">V13</a></td>
+              <td class="dagcell">8.1%</td><td class="rcell"><span class="dotp p1" title="Explicitly states &quot;True constraint: Heat Treat furnace (HT-02)&quot; in Section 2">✓</span></td><td class="rcell"><span class="dotp p1" title="HT-02 identified as true bottleneck">✓</span></td><td class="rcell"><span class="dotp p1" title="Section 1 states &quot;centered on the Heat Treat Furnace (HT-02) as the true system constraint&quot;; Section 2 opens with &quot;The true constraint is the Heat Treat Furnace (HT-02)&quot;">✓</span></td></tr><tr id="v-EP2">
+              <td class="vid">EP2</td>
+              <td class="crit">Calculated ceiling cross-validated against actual shipments (8,150–8,380/wk)</td>
+              <td class="dep"><a href="#v-V13">V13</a></td>
+              <td class="dagcell">8.1%</td><td class="rcell"><span class="dotp p1" title="Validates against actual output &quot;8,635/week avg&quot; and 6-week shipped data">✓</span></td><td class="rcell"><span class="dotp p1" title="Ceiling cross-validated against actual shipments (8,150–8,380/wk)">✓</span></td><td class="rcell"><span class="dotp p1" title="Current weekly throughput shown as 8,268 units/week, consistent with the actual shipment range">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+          <h4>ST4: CNC Assessment</h4><span class="agg">35.6% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V14">
+              <td class="vid">V14</td>
+              <td class="crit">States that current CNC capacity (10,800/wk) already exceeds system limit (~8,684/wk)</td>
+              <td class="dep"><a href="#v-V13">V13</a></td>
+              <td class="dagcell">8.1%</td><td class="rcell"><span class="dotp p1" title="States &quot;CNC already produces 9,845 units/week against Heat Treat effective capacity of ~8,600–9,050&quot; and nominal CNC = 10,800">✓</span></td><td class="rcell"><span class="dotp p1" title="CNC current capacity (10,800/wk) already exceeds system limit">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;Nominal Capacity: CNC = 10,800&quot; versus HT effective capacity of ~8,255-8,548; Section 4 states CNC release capped because HT cannot absorb more">✓</span></td></tr><tr id="v-V15">
+              <td class="vid">V15</td>
+              <td class="crit">Rejects claimed 1,600 parts/wk shipment uplift from CNC capex</td>
+              <td class="dep"><a href="#v-V14">V14</a></td>
+              <td class="dagcell">8.7%</td><td class="rcell"><span class="dotp p1" title="States &quot;extra CNC output will only accumulate as WIP before the furnace&quot; and realistic uplift = 0">✓</span></td><td class="rcell"><span class="dotp p1" title="Rejects claimed 1,600 parts/week uplift from CNC capex">✓</span></td><td class="rcell"><span class="dotp p1" title="States &quot;adding CNC capacity would only increase WIP without improving shipments&quot; and quantifies &quot;increasing WIP by ~6,200 units/week with zero throughput gain&quot;">✓</span></td></tr><tr id="v-V16">
+              <td class="vid">V16</td>
+              <td class="crit">Recommends deferring/rejecting immediate approval of second CNC cell</td>
+              <td class="dep"><a href="#v-V15">V15</a><a href="#v-V1">V1</a></td>
+              <td class="dagcell">10.1%</td><td class="rcell"><span class="dotp p1" title="Executive recommendation opens with &quot;REJECT the Rs 12 crore second CNC cell capex">✓</span></td><td class="rcell"><span class="dotp p1" title="Recommends deferring/rejecting second CNC cell">✓</span></td><td class="rcell"><span class="dotp p1" title="Opens with &quot;REJECT the Rs 12 crore second CNC cell capex&quot;">✓</span></td></tr><tr id="v-TRAP2">
+              <td class="vid">TRAP2</td>
+              <td class="crit">Recognizes CNC capex adds capacity above a non-binding constraint (will inflate WIP, not shipments)</td>
+              <td class="dep"><a href="#v-V14">V14</a></td>
+              <td class="dagcell">8.7%</td><td class="rcell"><span class="dotp p1" title="Explicitly states &quot;Extra CNC output will only accumulate as WIP before the furnace, increasing carrying costs without improving dispatch">✓</span></td><td class="rcell"><span class="dotp p1" title="CNC capex adds capacity above non-binding constraint (inflates WIP, not shipments)">✓</span></td><td class="rcell"><span class="dotp p1" title="Explicitly quantifies &quot;increasing WIP by ~6,200 units/week with zero throughput gain&quot;">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST5</span>
+          <h4>ST5: DBR &amp; Deliverable</h4><span class="agg">13.2% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V17">
+              <td class="vid">V17</td>
+              <td class="crit">Recommends TOC/DBR action focused on Heat Treat: drum=HT-02, buffer before HT, rope=upstream release paced to furnace</td>
+              <td class="dep"><a href="#v-V1">V1</a><a href="#v-V16">V16</a></td>
+              <td class="dagcell">10.5%</td><td class="rcell"><span class="dotp p1" title="Full DBR section defines drum=HT-02, 2-day time buffer of ~800 units before HT, rope=CNC release controlled by furnace consumption rate">✓</span></td><td class="rcell"><span class="dotp p1" title="DBR: Drum=HT-02, buffer before HT, rope=upstream release paced to furnace">✓</span></td><td class="rcell"><span class="dotp p1" title="Full DBR defined: Drum = HT-02, 4-batch time buffer (1,600 units) before HT, Rope = CNC release capped at drum absorption rate (~9,500/wk),
+FD1 -COO_Decision_Memo Document generated; PDF version also provided">✓</span></td></tr><tr id="v-FD1">
+              <td class="vid">FD1</td>
+              <td class="crit">Output is a 1-page COO decision memo (DOCX)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="COO_Decision_Memo_run1.docx generated at 40.6 KB">✓</span></td><td class="rcell"><span class="dotp p1" title="Output is a 1-page COO decision memo (DOCX)">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-FD2">
+              <td class="vid">FD2</td>
+              <td class="crit">Memo has exactly 5 sections: exec recommendation, constraint diagnosis, capacity build, DBR redesign, operational impact</td>
+              <td class="dep"><a href="#v-FD1">FD1</a></td>
+              <td class="dagcell">1.3%</td><td class="rcell"><span class="dotp p1" title="Sections 1-5 are present: Exec Recommendation, Constraint Diagnosis, Capacity Build, DBR Redesign, Operational Impact">✓</span></td><td class="rcell"><span class="dotp p1" title="Memo has exactly 5 sections">✓</span></td><td class="rcell"><span class="dotp p1" title="Sections 1-5 present as required: Executive Recommendation, Constraint Diagnosis, Capacity Build, DBR Redesign, Operational Impact">✓</span></td></tr><tr id="v-RF1">
+              <td class="vid">RF1</td>
+              <td class="crit">All analysis from 5 provided internal files only; no external sources</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.7%</td><td class="rcell"><span class="dotp p1" title="All citations trace to the 5 provided files; no external sources referenced">✓</span></td><td class="rcell"><span class="dotp p1" title="All analysis from 5 provided internal files only;">✓</span></td><td class="rcell"><span class="dotp p1" title="All data points traced to the 5 provided internal files; shift note quotes, dashboard figures, and Heat Treat log data cited inline">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+      <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk8717359545.png" alt="Verifier dependency graph for tsk_8717359545" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
+        <a class="flink" href="https://drive.google.com/drive/folders/1BVGlAr5Iv9ATrcIYlwyDaxyikBbKr1fW" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
+      <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
+      <div class="filegrid"><div class="frow"><div class="rl">Run 1 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1cHkUV-VpykRxa3_1-iZYvWBuT-AP4F9Z" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 2 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1Ra44on3KaQchPoPoetVPWSwGPZDJg3Rv" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 3 · output</div><a class="flink" href="https://drive.google.com/drive/folders/16sqOfRz31SQe_-w-3dRlZn6o4MqtyoI0" target="_blank" rel="noopener">📄 Output files ↗</a></div></div><div class="note" style="margin-top:14px"><h4>SME note — closest run to the golden solution</h4><p>Response 1 is the best because it is the only one that explicitly anchors all three arithmetic inputs - the 120 hrs/week planned baseline (V3), the 240 min/400-part batch cycle (V4), and the 6% sharing deduction applied correctly against parts output (V10) giving a reviewer a fully auditable calculation chain. It also delivers constraint diagnosis (citing the capex note&#x27;s own footnote admission against itself), a three-zone buffer monitoring protocol (Green/Yellow/Red) with a rope release rate in units/day, and the clearest articulation that extra CNC output inflates WIP without touching shipments.</p></div></div>
+    </div>
+
+    <div class="modal" id="gmodal" onclick="closeModal(event)"><div class="modal-card">
+      <button class="modal-x" onclick="closeModal(event)">×</button>
+      <h3>Verifier dependency graph</h3>
+      <p class="sub" style="margin-bottom:12px">tsk_8717359545 · 26 verifiers</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk8717359545.png" alt="Verifier dependency graph for tsk_8717359545" loading="lazy"></div>
+    </div></div>
+    
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    if(location.hash==='#graph'){var b=[...document.querySelectorAll('.tabbtn')].find(x=>x.textContent.includes('Dependency'));if(b)b.click();}
+    </script></body></html>

@@ -1,0 +1,434 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsk_2602202235206123_JNLG · EU Market Entry Feasibility Report</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head>
+<body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip active" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+      </nav></div></header>
+    <section class="taskhead"><div class="wrap">
+      <div class="crumb"><a href="index.html">Overview</a> &nbsp;/&nbsp; tsk_2602202235206123_JNLG</div>
+      <div class="idline">
+        <span class="ptype">SCP · Structural Compliance</span>
+        <span class="pill hard">Hard</span>
+        <span class="tag">Market Strategy</span>
+        <span class="tag"><b>24</b> verifiers</span>
+        <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
+      </div>
+      <h1>EU Market Entry Feasibility Report</h1>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">54.1%</div><div class="meta">15/24 verifiers · raw 62%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">54.1%</div><div class="meta">15/24 verifiers · raw 62%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">57.5%</div><div class="meta">17/24 verifiers · raw 71%</div></div><div class="scard mean"><div class="rl">Mean · Hard</div><div class="big">55.2%</div><div class="meta">DAG-weighted · best-of-3 58%</div></div></div>
+    </div></section>
+
+    <div class="wrap">
+      <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-prompt',this)">Prompt</button><button class="tabbtn" onclick="showTab('tab-sanity',this)">Sanity check</button><button class="tabbtn" onclick="showTab('tab-traj',this)">Trajectory &amp; deliverable</button><button class="tabbtn" onclick="showTab('tab-ver',this)">Scored verifiers</button><button class="tabbtn" onclick="showTab('tab-graph',this)">Dependency graph</button><button class="tabbtn" onclick="showTab('tab-files',this)">Files</button></div>
+      <div class="tabpane active" id="tab-prompt">
+      <a class="flink" href="https://drive.google.com/drive/folders/1o1us5MxBcQJIiwVGjFQCWXRngDJ0rklH" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a>
+      <div class="grid g3" style="margin:14px 0 4px"><div class='note'><h4>Output Artifact</h4><p>DOCX — Structured feasibility report with exactly 5 sections in prescribed order</p></div><div class='note'><h4>Tools Required</h4><p>Python (pandas for XLSX/CSV), web browser (EU market data retrieval), Word processor (DOCX output)</p></div><div class='note'><h4>Corpus Discipline</h4><p>Semi-closed: internal files for capacity/pricing + mandated web search for ALL EU market parameters</p></div><div class='note'><h4>Estimated Completion Time</h4><p>[SME to confirm — must be timed on actual task completion]</p></div><div class='note'><h4>O*NET Occupation</h4><p>13-1111.00 — Management Analysts (verified via O*NET OnLine)</p></div></div>
+      <p class='kicker' style='margin-top:22px'>Reference files (inputs shown to the model)</p><table><tbody><tr><td class='vid'>Manufacturing Capacity and Cost Model.xlsx</td><td style='color:var(--muted)'>Monthly production data: Export Ready Units, Domestic Contract Units, Total Units Produced + noise columns (Electricity, Water, Waste, etc.). TRAP: Total Units Produced is NOT export capacity.</td></tr><tr><td class='vid'>Domestic Sales and Pricing Data.csv</td><td style='color:var(--muted)'>Product-level pricing: 5 products with Price (₹) and Volume. Source for weighted average ASP calculation.</td></tr><tr><td class='vid'>Internal Sustainability and EU Expansion Note.docx</td><td style='color:var(--muted)'>Strategy document with FX rate (₹90/€), export markup (15%), and TRAP: €3.1B unvalidated EU market placeholder.</td></tr></tbody></table>
+      <p class="kicker" style="margin-top:22px">Task prompt — delivered verbatim to the model</p>
+      <div class="blockq">A mid-sized manufacturer of biodegradable food packaging materials based out of India currently has only one production facility with limited production capacities. With an increase in bans on single-use plastics in Europe, the company is considering entering the EU market this year. However, the company’s senior management team is unsure if its current production capacities and operational efficiencies would be enough to enter the EU market without investing additional capital costs or setting up a new facility.
+
+You have to prepare a country-specific ‘feasibility report’ to be submitted to the CEO of the company. The memo must determine whether the company should proceed with EU market entry under current capacity constraints and identify the most appropriate EU country for initial entry if the decision is to proceed.
+
+Rules:
+
+• Export capacity must be derived from Export Ready Units minus Domestic Contract Units. Do not use Total Units Produced or any summary row as proxy.
+
+• Gather latest external data for all EU market parameters from credible public sources. Include exact numeric value and source URL. Do not use the EU market figure in the internal strategy document — that is an unvalidated internal placeholder.
+
+• Do not assume, approximate, fabricate, or reuse any market data not directly retrieved from a verifiable external source.
+
+• All financial comparisons must be in euros. Formula: EU ASP (€) = (Domestic Price ₹ × 1.15 Export Markup) ÷ FX Rate (INR/EUR). FX rate and markup from internal files.
+
+• Web search required for all EU market metrics.
+
+Output (exactly 5 sections in this order):
+
+1. Executive Summary (~120 words, naming recommended country and viability)
+
+2. Market Attractiveness Table (recommended country only: market size, CAGR, regulatory score 1-5, two largest competitors, all with URLs)
+
+3. Internal Capacity vs Market Demand Table (net export capacity, Year-1 share, implied demand, capacity utilisation %)
+
+4. Entry Mode Recommendation (Export/JV/Local Mfg, exactly 3 bulleted reasons)
+
+5. Risk Factors (exactly 3: one regulatory, one operational, one market)</div></div><div class="tabpane" id="tab-sanity"><p class="kicker">Embedded cognitive trap · not shown to the model</p>
+      <div class="blockq">This task is difficult because it requires disciplined separation between internally derived operational capacity and externally validated market information, while simultaneously enforcing strict structural, arithmetic, and decision-threshold constraints. The analyst must correctly identify the net export-relevant production figure by subtracting Domestic Contract Units from Export Ready Units, two distinct columns buried within a dataset containing multiple irrelevant noise variables. The analyst must then compute a weighted average domestic ASP from a multi-product pricing file, apply the prescribed export markup and FX conversion to arrive at a euro-denominated unit price, and use that price alongside a live external market size to derive implied unit demand. The analyst must also perform comparative analysis across EU countries using market size, growth rate, regulatory stringency, and competitor intensity to select the most suitable country. These steps must then feed into a deterministic capacity utilisation calculation that produces a binary Go / No-Go decision constrained by a strict 50–85% utilisation threshold.
+Lazy AI Test (must fail)
+
+Task Type: SCP - Structural Compliance Prompt (Hybrid, Web Search Required)
+
+The Trap: The internal strategy document contains a visible reference to the EU biodegradable packaging market at approximately €3.1 billion, clearly labelled as an unvalidated internal brainstorming figure. A lazy AI will use this number directly, either because it reads the internal file and treats all figures as usable inputs, or because it fails to distinguish between a placeholder and a validated data point, and will proceed to calculate market demand and capacity utilisation without ever retrieving real external data. A second failure mode is using Total Annual Units Produced or Total Export Ready Units from the manufacturing file as the export capacity figure, instead of subtracting Domestic Contract Units to arrive at Net Export Capacity. A third failure mode is applying a live spot FX rate instead of the internal assumption value of ₹90/€. A fourth failure mode is arbitrarily selecting a country (e.g., Germany) without performing cross-country benchmarking of market size, growth, regulatory stringency, and competitor intensity.
+The Mandate: The AI must ignore the €3.1B internal placeholder, retrieve the actual EU biodegradable packaging market size, growth rate, competitor data, and regulatory stringency from live authoritative sources with cited URLs, perform cross-country comparisons, and compute all capacity and demand figures using only the prescribed internal formula and internal assumption values.
+Expert Test: What does the correct path look like?
+
+If a human consultant follows the instructions correctly, there is exactly one deterministic logical path. Net export capacity is derived only by subtracting the Domestic Contract Units column from the Export Ready Units column and summing across all twelve months. The weighted average domestic ASP is calculated from the product-level pricing file. The EU ASP is computed using the exact formula and internal FX rate. External market size, growth, competitors, and regulatory stringency are retrieved from authoritative sources with URLs. Cross-country benchmarking is conducted to select the optimal EU entry country. Capacity utilisation is calculated using these values and evaluated against the 50–85% viability threshold to produce a binary Go / No-Go decision.</div></div><div class="tabpane" id="tab-traj"><p class="kicker">Golden trajectory · expert-authored deterministic reasoning path</p>
+      <p class="sub">5 subtasks, 11 steps. Multi-source analysis combining internal capacity data, internal pricing formula, external market intelligence, and deterministic viability threshold.</p>
+      <div class="st"><div class="st-h"><span class="st-n">ST1</span>
+          <span class="st-t">Internal Capacity &amp; Pricing (Steps 1–3)</span></div>
+          <div class="st-body"><p class="purpose">Derive net export capacity and compute EU-comparable unit price from internal data.</p><div class="step"><span class="step-b">Step 1</span><div class="step-x">**Load Manufacturing Capacity XLSX. Sum Export Ready Units (12 months) = 771,400. Sum Domestic Contract Units = 360,000. Net Export Capacity = 771,400 − 360,000 = 411,400 units. Cross-check against Annual Summary tab. Ignore noise columns (Electricity, Water, Waste, etc.). **</div></div><div class="step"><span class="step-b">Step 2</span><div class="step-x">**Load Domestic Sales CSV. Weighted ASP = Σ(Price×Volume)/Σ(Volume) = ₹3,615,000/120,000 = ₹30.125 per unit. **</div></div><div class="step"><span class="step-b">Step 3</span><div class="step-x">**EU ASP = (₹30.125 × 1.15) ÷ 90 = €0.3849 per unit. FX rate (₹90/€) and markup (15%) from internal files ONLY.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">XLSX + CSV + DOCX internals</span></span><span><span class="lab">Feeds</span> <span class="val">V2–V5, DI1, DI2, EP1, EP2, TRAP2, TRAP3</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST2</span>
+          <span class="st-t">External Market Data (Step 4)</span></div>
+          <div class="st-body"><p class="purpose">Retrieve all EU market parameters from live authoritative sources.</p><div class="step"><span class="step-b">Step 4</span><div class="step-x">**Web search for: EU biodegradable packaging market size 2025 (€), CAGR 2025-2030, regulatory stringency per country, top 2 competitors per target country. Cite exact values and URLs. Explicitly ignore the €3.1B figure in the internal strategy document.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Web search</span></span><span><span class="lab">Feeds</span> <span class="val">V1, V12, TRAP1, RF1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST3</span>
+          <span class="st-t">Demand &amp; Utilisation (Steps 5–8)</span></div>
+          <div class="st-body"><p class="purpose">Calculate implied demand, discover capacity constraint, and determine viability.</p><div class="step"><span class="step-b">Step 5</span><div class="step-x">**Implied Year-1 demand at 0.5% share = Market Size × 0.005 ÷ EU ASP = ~35.7M units. **</div></div><div class="step"><span class="step-b">Step 6</span><div class="step-x">**Unadjusted utilisation = 35.7M / 411,400 = ~8,683%. Demand massively exceeds capacity. **</div></div><div class="step"><span class="step-b">Step 7</span><div class="step-x">**Adjust: cap at 80% utilisation (upper-mid of 50-85% band). Target = 80% × 411,400 = 329,120 units. Feasible share = (329,120 × €0.3849) / market size ≈ 0.0046%. **</div></div><div class="step"><span class="step-b">Step 8</span><div class="step-x">**Final utilisation = 329,120 / 411,400 = 80%. Within 50-85% → Viable (Capacity-constrained).</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Steps 1–4 combined</span></span><span><span class="lab">Feeds</span> <span class="val">V6–V10</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST4</span>
+          <span class="st-t">Country Selection &amp; Entry (Steps 9–10)</span></div>
+          <div class="st-body"><p class="purpose">Select optimal EU country using cross-country benchmarking and justify entry mode.</p><div class="step"><span class="step-b">Step 9</span><div class="step-x">**Compare EU countries on 4 parameters (market size, CAGR, regulatory score 1-5, competitors). Select country with best composite profile given capacity constraints. **</div></div><div class="step"><span class="step-b">Step 10</span><div class="step-x">**Entry mode = Export. Three reasons: (1) No capex for local manufacturing, (2) 80% utilisation viable under export model, (3) Regulatory barriers manageable via distribution partners.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Step 4 external data + Steps 6–8 viability</span></span><span><span class="lab">Feeds</span> <span class="val">V10–V12</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST5</span>
+          <span class="st-t">Deliverable Production (Step 11)</span></div>
+          <div class="st-body"><p class="purpose">Produce the structured feasibility report in exact 5-section format.</p><div class="step"><span class="step-b">Step 11</span><div class="step-x">**Write all 5 sections in prescribed order: Executive Summary (~120 words), Market Attractiveness Table (with URLs), Capacity vs Demand Table, Entry Mode (3 bullets), Risk Factors (3 risks: regulatory, operational, market).</div></div><div class="srcrow"><span><span class="lab">Feeds</span> <span class="val">FD1–FD4</span></span><span><span class="lab">Output</span> <span class="val">DOCX</span></span></div></div></div>
+      <div style="height:1px;background:var(--line);margin:26px 0 22px"></div>
+      <p class="kicker">Golden deliverable · the expert-level output that follows the trajectory</p>
+      <div class="blockq"><p>DOCX feasibility report with exactly 5 sections. Structure:</p><p>Section 1 — Executive Summary (~120 words): The company should proceed with EU market entry targeting [selected country]. At 80% capacity utilisation (329,120 units), the company can serve ~0.0046% of the €X.XX billion market. Entry is viable under current constraints; entry mode is direct export.</p><p>Section 2 — Market Attractiveness Table: [Country] | Market Size: €X.XX billion (URL) | CAGR: X.X% 2025-2030 (URL) | Regulatory: X/5 (URL) | Competitors: [Name 1], [Name 2] (URL).</p><p>Section 3 — Capacity vs Demand Table: Net Export Capacity: 411,400 units | Assumed Year-1 Share: 0.0046% | Implied Demand at cap: 329,120 units | Capacity Utilisation: 80% | Status: Viable (within 50-85% band).</p><p>Section 4 — Entry Mode: Export. Three bullets: (1) No capex for local mfg in 2025-2026, (2) 80% utilisation viable under export model, (3) Regulatory manageable via distribution partners.</p><p>Section 5 — Risk Factors: (1) Regulatory — EU packaging regulation changes may require reformulation. (2) Operational — Single facility creates supply concentration risk. (3) Market — Established competitors (Mondi, Smurfit Kappa) may respond with pricing pressure.</p><p>Decision rationale: Key validation: Initial 0.5% share assumption produces ~8,683% utilisation — agent must recognize capacity is the binding constraint and invert the calculation to find feasible share (~0.0046%). This inversion is the core analytical test.</p></div></div><div class="tabpane" id="tab-ver"><p class="kicker">Scored verifiers · grouped by subtask, in trajectory order</p>
+      <p class="sub"><b>Depends on</b> lists the parent verifiers whose result this one builds on
+      (<span class="dep"><span class="root">root</span></span> = sourced directly, no parents). <b>DAG</b> is the verifier's weight.
+      Hover a result mark for the SME's justification.</p>
+      <div class="vg"><div class="vg-h"><span class="st-n">ST1</span>
+          <h4>ST1: Internal Capacity &amp; Pricing</h4><span class="agg">23.9% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V2">
+              <td class="vid">V2</td>
+              <td class="crit">Net Export Capacity = 411,400 units (Export Ready − Domestic Contract)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Correctly derives Net Export Capacity as 771,400 − 360,000 = 411,400 units.  [oai_citation:0‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly derives Net Export Capacity as 411,400 units from Export Ready Units minus Domestic Contract Units.  [oai_citation:0‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly derives Net Export Capacity as 411,400 units from Export Ready Units minus Domestic Contract Units.  [oai_citation:0‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-V3">
+              <td class="vid">V3</td>
+              <td class="crit">Total Units Produced or Export Ready alone NOT used as capacity proxy</td>
+              <td class="dep"><a href="#v-V2">V2</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Uses Net Export Capacity rather than Total Units Produced or Export Ready Units alone.  [oai_citation:1‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Does not use Total Units Produced or Export Ready Units alone as the export-capacity proxy.  [oai_citation:1‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Does not use Total Units Produced or Export Ready Units alone as the export-capacity proxy.  [oai_citation:1‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-V4">
+              <td class="vid">V4</td>
+              <td class="crit">Weighted Domestic ASP = ₹30.125 (±5%)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p0" title="FAIL. Weighted ASP of ₹30.125 is not explicitly calculated or presented.">✗</span></td><td class="rcell"><span class="dotp p1" title="Weighted ASP of ₹30.125 is explicitly shown in the report.  [oai_citation:2‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Weighted Domestic ASP of ₹30.125 is correctly used in the EU ASP calculation methodology.  [oai_citation:2‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-V5">
+              <td class="vid">V5</td>
+              <td class="crit">EU ASP = €0.3849 (±5%) using internal formula and FX=₹90/€</td>
+              <td class="dep"><a href="#v-V4">V4</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Correct EU ASP of €0.3849 is reported using the prescribed formula and FX assumption.  [oai_citation:2‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Correct EU ASP of €0.3849 is calculated using the prescribed formula and internal FX rate.  [oai_citation:3‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="EU ASP of €0.3849 is correctly calculated using the prescribed formula and internal FX rate.  [oai_citation:3‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-DI1">
+              <td class="vid">DI1</td>
+              <td class="crit">Net capacity uses correct columns: Export Ready minus Domestic Contract, not Total Units</td>
+              <td class="dep"><a href="#v-V2">V2</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Capacity calculation uses Export Ready Units minus Domestic Contract Units as required.  [oai_citation:3‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Capacity derivation uses the correct columns and methodology.  [oai_citation:4‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Net capacity uses the required Export Ready Units minus Domestic Contract Units methodology.  [oai_citation:4‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-DI2">
+              <td class="vid">DI2</td>
+              <td class="crit">FX rate = ₹90/€ from internal files (not live spot rate)</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Uses the internal FX rate of ₹90/€ rather than a live exchange rate.  [oai_citation:4‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses the internal FX assumption of ₹90/€ rather than a live exchange rate.  [oai_citation:5‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses the required internal FX rate of ₹90/€ rather than a live exchange rate.  [oai_citation:5‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-EP1">
+              <td class="vid">EP1</td>
+              <td class="crit">Weighted ASP arithmetic: Σ(Price×Volume)/Σ(Volume) correctly computed across 5 products</td>
+              <td class="dep"><a href="#v-V4">V4</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p0" title="FAIL. The weighted ASP arithmetic across products is not shown or validated.">✗</span></td><td class="rcell"><span class="dotp p1" title="Weighted ASP arithmetic is explicitly presented and matches the expected result.  [oai_citation:6‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Product-level ASP calculations are shown and the weighted average ASP is correctly computed.  [oai_citation:6‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-EP2">
+              <td class="vid">EP2</td>
+              <td class="crit">EU ASP formula: (ASP × 1.15) ÷ 90 correctly applied</td>
+              <td class="dep"><a href="#v-V4">V4</a><a href="#v-DI2">DI2</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p1" title="EU ASP formula is correctly applied and documented.  [oai_citation:5‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="EU ASP formula is applied correctly.  [oai_citation:7‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="EU ASP formula is applied correctly and transparently.  [oai_citation:7‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-TRAP2">
+              <td class="vid">TRAP2</td>
+              <td class="crit">Does not use Total Units Produced (771,400+) or Export Ready Units alone as capacity</td>
+              <td class="dep"><a href="#v-V2">V2</a><a href="#v-V3">V3</a></td>
+              <td class="dagcell">3.4%</td><td class="rcell"><span class="dotp p1" title="Does not use Total Units Produced or Export Ready Units alone as the capacity figure.  [oai_citation:6‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly avoids using Total Units Produced or Export Ready Units as standalone capacity measures.  [oai_citation:8‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Correctly avoids using Total Units Produced or Export Ready Units alone as capacity.  [oai_citation:8‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-TRAP3">
+              <td class="vid">TRAP3</td>
+              <td class="crit">Uses internal FX rate ₹90/€ and 15% markup, not live exchange rate</td>
+              <td class="dep"><a href="#v-DI2">DI2</a><a href="#v-V5">V5</a></td>
+              <td class="dagcell">4.6%</td><td class="rcell"><span class="dotp p1" title="Uses the prescribed 15% markup and ₹90/€ FX rate from internal files.  [oai_citation:7‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses the required 15% markup and ₹90/€ FX assumption from the internal files.  [oai_citation:9‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses internal FX and markup assumptions rather than substituting external rates.  [oai_citation:9‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+          <h4>ST2: External Market Data</h4><span class="agg">8.0% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V1">
+              <td class="vid">V1</td>
+              <td class="crit">EU market size ≠ €3.1B internal placeholder; sourced externally with URL</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Explicitly rejects the internal €3.1B placeholder and uses externally sourced market figures.  [oai_citation:8‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses externally sourced market data rather than the internal €3.1B placeholder.  [oai_citation:10‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Uses externally sourced market data rather than the internal €3.1B placeholder.  [oai_citation:10‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-V12">
+              <td class="vid">V12</td>
+              <td class="crit">Country selection supported by all 4 parameters (market size, CAGR, regulation, competitors) with URLs</td>
+              <td class="dep"><a href="#v-V1">V1</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p0" title="FAIL. Country selection is not supported by a true cross-country comparison across all four required parameters; Germany is asserted rather than benchmarked against alternatives.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Germany is selected, but there is no explicit cross-country benchmarking across market size, CAGR, regulation, and competitor intensity.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Germany is recommended, but there is no explicit cross-country comparison across all four required parameters before selection.">✗</span></td></tr><tr id="v-TRAP1">
+              <td class="vid">TRAP1</td>
+              <td class="crit">Explicitly ignores the €3.1B figure from internal strategy document</td>
+              <td class="dep"><a href="#v-V1">V1</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Explicitly states that the €3.1B internal figure was excluded.  [oai_citation:9‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The response never explicitly states that the €3.1B placeholder was ignored, even though it does not use it.">✗</span></td><td class="rcell"><span class="dotp p1" title="Explicitly states that the €3.1B internal placeholder must be ignored.  [oai_citation:11‡tsk_2602202235206123JNLG_p1_response_run3 (1).docx](sediment://file_00000000047471fd8544766130f1739c)">✓</span></td></tr><tr id="v-RF1">
+              <td class="vid">RF1</td>
+              <td class="crit">All EU market data from external authoritative sources, not internal files</td>
+              <td class="dep"><a href="#v-V1">V1</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p0" title="FAIL. Market size is derived using assumptions (EU share, Germany share, FX conversion) rather than directly retrieved authoritative country-specific market data.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Market size is derived through allocation assumptions and estimates rather than directly retrieved country-specific authoritative market data.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Market size is derived through assumptions and allocation ratios rather than directly retrieved country-specific authoritative market values.  [oai_citation:12‡tsk_2602202235206123JNLG_p1_response_run3 (1).docx](sediment://file_000000">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST3</span>
+          <h4>ST3: Demand &amp; Utilisation</h4><span class="agg">28.7% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V6">
+              <td class="vid">V6</td>
+              <td class="crit">Implied Year-1 demand correctly derived using external market size and EU ASP</td>
+              <td class="dep"><a href="#v-V5">V5</a><a href="#v-V1">V1</a></td>
+              <td class="dagcell">4.6%</td><td class="rcell"><span class="dotp p0" title="FAIL. Demand is derived from an assumed 0.001% share rather than the prescribed market-size-to-demand calculation path.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Demand is calculated from an assumed market share target rather than the prescribed market-size-to-demand calculation path.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Demand is derived from an assumed 0.25% market share rather than the required market-size-to-demand calculation path in the solution logic.">✗</span></td></tr><tr id="v-V7">
+              <td class="vid">V7</td>
+              <td class="crit">Initial utilisation exceeds 100% (demand &gt;&gt; capacity), indicating capacity constraint</td>
+              <td class="dep"><a href="#v-V6">V6</a><a href="#v-V2">V2</a></td>
+              <td class="dagcell">6.9%</td><td class="rcell"><span class="dotp p0" title="FAIL. Response reports utilization of 72.3%; it never identifies the initial &gt;100% capacity constraint expected by the solution logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The solution logic requires demonstrating an initial demand far above capacity (&gt;100% utilization), which is never performed.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The required demonstration that initial demand massively exceeds capacity (&gt;100% utilisation) is not performed.">✗</span></td></tr><tr id="v-V8">
+              <td class="vid">V8</td>
+              <td class="crit">Adjusted utilisation capped within 50–85% band (≈80%)</td>
+              <td class="dep"><a href="#v-V7">V7</a></td>
+              <td class="dagcell">8.0%</td><td class="rcell"><span class="dotp p0" title="FAIL. Does not perform the capacity-constrained adjustment to approximately 80% utilization.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. No capacity-constrained adjustment to approximately 80% utilization is shown.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. No adjustment to approximately 80% utilisation based on capacity constraints is shown.">✗</span></td></tr><tr id="v-V9">
+              <td class="vid">V9</td>
+              <td class="crit">Feasible market share ≈ 0.0046% (±10%) derived from capacity constraint</td>
+              <td class="dep"><a href="#v-V8">V8</a><a href="#v-V2">V2</a></td>
+              <td class="dagcell">9.2%</td><td class="rcell"><span class="dotp p0" title="FAIL. Feasible market share of approximately 0.0046% is never derived.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Feasible market share of approximately 0.0046% is not derived.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. Feasible market share of approximately 0.0046% is not derived.">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+          <h4>ST4: Decision &amp; Entry</h4><span class="agg">19.5% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V10">
+              <td class="vid">V10</td>
+              <td class="crit">Final decision: Market Entry is Viable (Capacity-constrained)</td>
+              <td class="dep"><a href="#v-V8">V8</a></td>
+              <td class="dagcell">9.2%</td><td class="rcell"><span class="dotp p0" title="FAIL. Although it concludes entry is viable, it does not conclude &quot;Viable (Capacity-constrained)&quot; via the required capacity-constraint logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. While the report concludes entry is viable, it does not reach the specific &quot;Viable (Capacity-constrained)&quot; conclusion through the required logic.">✗</span></td><td class="rcell"><span class="dotp p0" title="FAIL. While the report concludes entry is viable, it does not reach the specific “Viable (Capacity-constrained)” conclusion through the required methodology.">✗</span></td></tr><tr id="v-V11">
+              <td class="vid">V11</td>
+              <td class="crit">Entry mode = Export with exactly 3 supporting reasons in bullets</td>
+              <td class="dep"><a href="#v-V10">V10</a></td>
+              <td class="dagcell">10.3%</td><td class="rcell"><span class="dotp p1" title="Entry mode is Export and exactly three supporting reasons are provided.  [oai_citation:10‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Export is selected and supported by exactly three bullet-point justifications.  [oai_citation:11‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Export is selected with exactly three supporting bullet-point reasons.  [oai_citation:13‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST5</span>
+          <h4>ST5: Structural Compliance</h4><span class="agg">19.9% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-FD1">
+              <td class="vid">FD1</td>
+              <td class="crit">Exactly 5 sections present in prescribed order</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Contains the required five sections in the correct order.  [oai_citation:11‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. An additional &quot;Limitations&quot; section is included, resulting in six sections rather than the required five.  [oai_citation:12‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✗</span></td><td class="rcell"><span class="dotp p1" title="Contains exactly the five required sections in the correct order and no additional standalone section.  [oai_citation:14‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-FD2">
+              <td class="vid">FD2</td>
+              <td class="crit">Executive Summary is ~120 words, names recommended country and states viability</td>
+              <td class="dep"><a href="#v-FD1">FD1</a></td>
+              <td class="dagcell">2.3%</td><td class="rcell"><span class="dotp p1" title="Executive Summary is approximately the required length, names Germany, and states viability.  [oai_citation:12‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Executive Summary is approximately the required length, names Germany, and clearly states viability.  [oai_citation:13‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Executive Summary is approximately the required length, names Germany, and clearly states viability.  [oai_citation:15‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-FD3">
+              <td class="vid">FD3</td>
+              <td class="crit">Market Attractiveness Table has: market size, CAGR, regulatory score 1-5, 2 competitors, all with URLs</td>
+              <td class="dep"><a href="#v-FD1">FD1</a><a href="#v-V12">V12</a></td>
+              <td class="dagcell">4.6%</td><td class="rcell"><span class="dotp p1" title="Market Attractiveness section contains market size, CAGR, regulatory score, competitors, and source URLs.  [oai_citation:13‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Market Attractiveness section contains the required fields and source URLs.  [oai_citation:14‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Market Attractiveness section includes market size, CAGR, regulatory score, competitors, and URLs.  [oai_citation:16‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr><tr id="v-FD4">
+              <td class="vid">FD4</td>
+              <td class="crit">Capacity vs Demand Table has: net capacity, Year-1 share, implied demand, utilisation %</td>
+              <td class="dep"><a href="#v-FD1">FD1</a><a href="#v-V9">V9</a></td>
+              <td class="dagcell">11.9%</td><td class="rcell"><span class="dotp p1" title="Capacity vs Demand table contains net capacity, market share, implied demand, and utilization.  [oai_citation:14‡EU_Market_Entry_Feasibility_Report_run1.docx](sediment://file_000000005fd071fdaa364fdce873c78e)">✓</span></td><td class="rcell"><span class="dotp p1" title="Capacity vs Demand table contains net capacity, market share, implied demand, and utilization percentage.  [oai_citation:15‡EU_Market_Entry_Feasibility_Report_run2.docx](sediment://file_0000000065007230baecfd1664ed1add)">✓</span></td><td class="rcell"><span class="dotp p1" title="Capacity vs Demand table contains net capacity, market share, implied demand, and utilisation percentage.  [oai_citation:17‡EU_Market_Entry_Feasibility_Report_run3.docx](sediment://file_00000000db6471fda041a929958a8ce4)">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+      <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk2602202235206123JNLG.png" alt="Verifier dependency graph for tsk_2602202235206123_JNLG" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
+        <a class="flink" href="https://drive.google.com/drive/folders/1o1us5MxBcQJIiwVGjFQCWXRngDJ0rklH" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
+      <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
+      <div class="filegrid"><div class="frow"><div class="rl">Run 1 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1TTlCqT7MCVHAYrUb55C1w2ArSEi-rkpU" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 2 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1XKWhhU57g7qlfjbeLm_jvL9JpLTHWy2M" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 3 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1VnZ8y7fp8KbU61gXj07qjOG58pzB0qq2" target="_blank" rel="noopener">📄 Output files ↗</a></div></div><div class="note" style="margin-top:14px"><h4>SME note — closest run to the golden solution</h4><p>Response 3 achieves the highest verifier score and is the strongest on both internal-data calculations and structural compliance. It correctly derives the net export capacity (411,400 units), applies the required ASP and FX calculations, explicitly acknowledges that the €3.1B internal market-size placeholder should be ignored, and adheres to the required five-section report structure without introducing extra sections.</p></div></div>
+    </div>
+
+    <div class="modal" id="gmodal" onclick="closeModal(event)"><div class="modal-card">
+      <button class="modal-x" onclick="closeModal(event)">×</button>
+      <h3>Verifier dependency graph</h3>
+      <p class="sub" style="margin-bottom:12px">tsk_2602202235206123_JNLG · 24 verifiers</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk2602202235206123JNLG.png" alt="Verifier dependency graph for tsk_2602202235206123_JNLG" loading="lazy"></div>
+    </div></div>
+    
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    if(location.hash==='#graph'){var b=[...document.querySelectorAll('.tabbtn')].find(x=>x.textContent.includes('Dependency'));if(b)b.click();}
+    </script></body></html>
