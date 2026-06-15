@@ -165,7 +165,7 @@ th.rcell{font-size:10px}
 /* dag */
 .dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
 svg.dag{display:block;min-width:100%;height:auto}
-img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+img.dagimg{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:#fff}
 svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
 svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
 svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
@@ -221,7 +221,7 @@ svg.dag .node{cursor:default}
       the verifier rubric, and the dependency graph — alongside how the model actually performed.</p>
       <div class="metarow">
         <span class="tag"><b>6</b> tasks</span><span class="tag"><b>3</b> runs each</span>
-        <span class="tag"><b>147</b> verifiers</span><span class="tag">Model&nbsp;<b>Qwen 3.6 27B</b></span>
+        <span class="tag"><b>153</b> verifiers</span><span class="tag">Model&nbsp;<b>Qwen 3.6 27B</b></span>
         <span class="tag">Scoring&nbsp;<b>DAG-weighted VPR</b></span>
       </div>
     </div></section><section class="blk"><div class="wrap"><h2><span class="num">01</span>Anatomy of a task page</h2>
@@ -249,7 +249,7 @@ svg.dag .node{cursor:default}
         upstream error doesn't get punished all the way down the chain.</p></div>
       </div>
       <p class="toolnote">The per-task <b>Dependency graph</b> tab visualises this: node colour marks role
-      (root, calculation, trap, high-weight, recommendation, format) and the % label is the DAG weight.</p></div></section>
+      (root, calculation, trap, high-weight, recommendation, final deliverable) and the % label is the DAG weight.</p></div></section>
 <section class="blk"><div class="wrap"><h2><span class="num">04</span>Scoring — VPR, difficulty bands, and why not Pass@k</h2>
       <p class="sub">A task's verifiers aren't independent — they form a dependency chain. We score each run by its
       <b>DAG-weighted Verifier Pass Rate</b> and report the <b>mean across 3 runs</b> as the primary metric.</p>
@@ -295,8 +295,8 @@ svg.dag .node{cursor:default}
           <td><span class="ptype">FSP</span></td>
           <td>Cost Optimization</td>
           <td class="num">25</td>
-          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.4%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.4%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>55.2%</span><span class="vbar hard" style="width:46px"><i style="width:55%"></i></span></div></td>
-          <td class="num"><b>54.6%</b></td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>56.6%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>56.6%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>57.4%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td>
+          <td class="num"><b>56.9%</b></td>
           <td><span class="pill hard">Hard</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
           <td><span class="ptype">LDP</span></td>
@@ -316,8 +316,8 @@ svg.dag .node{cursor:default}
           <td><span class="ptype">SCP</span></td>
           <td>Cost Optimization</td>
           <td class="num">28</td>
-          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>65.0%</span><span class="vbar hard" style="width:46px"><i style="width:65%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>92.4%</span><span class="vbar easy" style="width:46px"><i style="width:92%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>69.3%</span><span class="vbar med" style="width:46px"><i style="width:69%"></i></span></div></td>
-          <td class="num"><b>75.6%</b></td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>66.7%</span><span class="vbar med" style="width:46px"><i style="width:67%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>89.5%</span><span class="vbar easy" style="width:46px"><i style="width:90%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>70.8%</span><span class="vbar med" style="width:46px"><i style="width:71%"></i></span></div></td>
+          <td class="num"><b>75.7%</b></td>
           <td><span class="pill med">Medium</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
           <td><span class="ptype">SCP</span></td>
@@ -332,9 +332,10 @@ svg.dag .node{cursor:default}
       <p class="sub">The primary metric above is mean DAG-weighted VPR. For completeness, here is the best-of-3
       view (<b>Pass@3</b>: a verifier counts as passed if it passed in <em>any</em> of the three runs) and how the
       model handled the planted <b>trap verifiers</b>. <b>Lift = Pass@3 − Best-of-3</b> — how
-      much the union of three runs adds over the single best run. It averages <b>+0.4%</b> here, and is
-      zero on five of six tasks: the model misses the <em>same</em> verifiers every run, so failures are
-      <em>structural</em>, not stochastic. Only SCP-Hard lifts, where the FRED PPI lookup lands in one run but not others.</p>
+      much the union of three runs adds over the single best run. It averages <b>+1.0%</b> here, and is
+      zero on five of six tasks: the model misses the <em>same</em> verifiers every run, so failures are largely
+      <em>structural</em>, not stochastic. The exception is SCP-Hard (SkyRoute), whose lift comes from genuine
+      run-to-run variance — the FRED PPI lookup and an L4 double-count that appears in only one of the three runs.</p>
 
       <h3 style="margin:18px 0 6px;font-size:18px">Mean · Best-of-3 · Pass@3 (DAG-weighted)</h3>
       <table class="results"><thead><tr>
@@ -349,9 +350,9 @@ svg.dag .node{cursor:default}
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
           <td><span class="ptype">FSP</span></td>
-          <td class="num">54.6%</td>
-          <td class="num">55.2%</td>
-          <td class="num">55.2%</td>
+          <td class="num">56.9%</td>
+          <td class="num">57.4%</td>
+          <td class="num">57.4%</td>
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
           <td><span class="ptype">LDP</span></td>
@@ -367,10 +368,10 @@ svg.dag .node{cursor:default}
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
           <td><span class="ptype">SCP</span></td>
-          <td class="num">75.6%</td>
-          <td class="num">92.4%</td>
-          <td class="num">95.0%</td>
-          <td class="num"><span class="lift pos">+2.5%</span></td></tr><tr>
+          <td class="num">75.7%</td>
+          <td class="num">89.5%</td>
+          <td class="num">95.2%</td>
+          <td class="num"><span class="lift pos">+5.7%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
           <td><span class="ptype">SCP</span></td>
           <td class="num">55.2%</td>
@@ -397,9 +398,9 @@ svg.dag .node{cursor:default}
           <td class="num"><b>2/2</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
           <td><span class="ptype">FSP</span></td>
-          <td class="num">1/3</td>
-          <td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td>
-          <td class="num"><b>0/1</b></td></tr><tr>
+          <td class="num">3/3</td>
+          <td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">2/3</span></td>
+          <td class="num"><b>2/3</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
           <td><span class="ptype">LDP</span></td>
           <td class="num">2/2</td>
@@ -412,16 +413,18 @@ svg.dag .node{cursor:default}
           <td class="num"><b>2/2</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
           <td><span class="ptype">SCP</span></td>
-          <td class="num">1/3</td>
-          <td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td><td class="num"><span class="trap miss">0/1</span></td>
-          <td class="num"><b>0/1</b></td></tr><tr>
+          <td class="num">3/3</td>
+          <td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">1/3</span></td><td class="num"><span class="trap miss">2/3</span></td>
+          <td class="num"><b>2/3</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
           <td><span class="ptype">SCP</span></td>
           <td class="num">3/3</td>
           <td class="num"><span class="trap ok">3/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap ok">3/3</span></td>
           <td class="num"><b>3/3</b></td></tr></tbody></table>
-      <p class="toolnote">The model avoids most traps reliably, but falls for the single scored trap on the FSP and
-      SCP-Hard tasks in <em>every</em> run — a consistent failure mode, not noise. Traps shown as <span class='mono'>–/–</span> or a smaller scored/total count are defined in the golden rubric but were not scored in this run-set; avoidance is computed over scored traps only.</div></section>
+      <p class="toolnote">The model avoids most traps reliably (overall 35/45 ≈ 78%). Its one consistent miss is the
+      <em>live-data-retrieval</em> trap (TRAP1) on FMCG and SkyRoute — it uses the stale in-file value (₹82/USD;
+      FRED placeholder) instead of fetching the live rate. TRAP2/TRAP3 on those two tasks were re-adjudicated directly
+      from the model's run output deliverables (they were left unscored in the source sheet).</div></section>
 <section class="blk"><div class="wrap"><h2><span class="num">08</span>Scaling up</h2>
       <p class="copy">Scaling beyond the pilot rests on two levers: an existing task inventory and pipeline
       automation. We already hold a repository of <b>70 tasks</b> from a prior study built on a similar two-layer

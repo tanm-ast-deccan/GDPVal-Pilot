@@ -165,7 +165,7 @@ th.rcell{font-size:10px}
 /* dag */
 .dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
 svg.dag{display:block;min-width:100%;height:auto}
-img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+img.dagimg{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:#fff}
 svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
 svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
 svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
@@ -216,7 +216,7 @@ svg.dag .node{cursor:default}
         <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
       </div>
       <h1>Lane Optimization Board Recommendation</h1>
-      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">65.0%</div><div class="meta">19/26 verifiers · raw 73%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">92.4%</div><div class="meta">22/26 verifiers · raw 85%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">69.3%</div><div class="meta">16/26 verifiers · raw 62%</div></div><div class="scard mean"><div class="rl">Mean · Medium</div><div class="big">75.6%</div><div class="meta">DAG-weighted · best-of-3 92%</div></div></div>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">66.7%</div><div class="meta">21/28 verifiers · raw 75%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">89.5%</div><div class="meta">23/28 verifiers · raw 82%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">70.8%</div><div class="meta">18/28 verifiers · raw 64%</div></div><div class="scard mean"><div class="rl">Mean · Medium</div><div class="big">75.7%</div><div class="meta">DAG-weighted · best-of-3 90%</div></div></div>
     </div></section>
 
     <div class="wrap">
@@ -333,7 +333,7 @@ Expert must pass:
               <td class="vid">TRAP2</td>
               <td class="crit">Excludes BOTH &#x27;Pilot&#x27; exact match AND &#x27;Noise&#x27; substring match from ALL calculations</td>
               <td class="dep"><a href="#v-V6">V6</a></td>
-              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
           <h4>ST2: PPI &amp; Normalization</h4><span class="agg">16.2% of task</span></div>
           <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
           <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
@@ -389,7 +389,7 @@ Expert must pass:
               <td class="vid">TRAP3</td>
               <td class="crit">Does not double-count L4 as separate savings (index normalization already in baseline)</td>
               <td class="dep"><a href="#v-V9">V9</a><a href="#v-V10">V10</a></td>
-              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
           <h4>ST4: Decision Logic</h4><span class="agg">13.2% of task</span></div>
           <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
           <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
@@ -445,9 +445,9 @@ Expert must pass:
               <td class="vid">RF1</td>
               <td class="crit">All data from TMS log + policy memo + workbook + FRED PPI only; no other sources</td>
               <td class="dep"><span class="root">root</span></td>
-              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response relies only on the TMS data, policy memo, workbook assumptions, and FRED PPI source.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response relies only on TMS data, policy memo, workbook content, and the required FRED source.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The companion file references external sources (TruckRadar.AI and DataSetIQ) rather than relying exclusively on the permitted sources.  [oai_citation:3‡tsk_1754637700_qwen_p1_response.docx](sediment://file_00000000e1f07209b5c8da768937">✗</span></td></tr></tbody></table></div><p class="trapwarn">Note: TRAP2, TRAP3 are defined in the golden rubric but not scored in this run set (shown as “–”). VPR is computed over scored verifiers only.</p></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+              <td class="dagcell">0.8%</td><td class="rcell"><span class="dotp p1" title="Response relies only on the TMS data, policy memo, workbook assumptions, and FRED PPI source.">✓</span></td><td class="rcell"><span class="dotp p1" title="Response relies only on TMS data, policy memo, workbook content, and the required FRED source.">✓</span></td><td class="rcell"><span class="dotp p0" title="FAIL. The companion file references external sources (TruckRadar.AI and DataSetIQ) rather than relying exclusively on the permitted sources.  [oai_citation:3‡tsk_1754637700_qwen_p1_response.docx](sediment://file_00000000e1f07209b5c8da768937">✗</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
       <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.jpg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.svg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
       <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
         <a class="flink" href="https://drive.google.com/drive/folders/1XLTwjuVwl0WaAI_xEi-zpj3ORqEd2xBb?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
       <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
@@ -458,7 +458,7 @@ Expert must pass:
       <button class="modal-x" onclick="closeModal(event)">×</button>
       <h3>Verifier dependency graph</h3>
       <p class="sub" style="margin-bottom:12px">tsk_1754637700 · 28 verifiers</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.jpg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk1754637700.svg" alt="Verifier dependency graph for tsk_1754637700" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div>
     </div></div>
     
 <footer class="foot"><div class="wrap">

@@ -165,7 +165,7 @@ th.rcell{font-size:10px}
 /* dag */
 .dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
 svg.dag{display:block;min-width:100%;height:auto}
-img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+img.dagimg{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:#fff}
 svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
 svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
 svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
@@ -216,7 +216,7 @@ svg.dag .node{cursor:default}
         <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
       </div>
       <h1>Dual Sourcing Cost Analysis</h1>
-      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">54.4%</div><div class="meta">11/23 verifiers · raw 48%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">54.4%</div><div class="meta">11/23 verifiers · raw 48%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">55.2%</div><div class="meta">12/23 verifiers · raw 52%</div></div><div class="scard mean"><div class="rl">Mean · Hard</div><div class="big">54.6%</div><div class="meta">DAG-weighted · best-of-3 55%</div></div></div>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">56.6%</div><div class="meta">13/25 verifiers · raw 52%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">56.6%</div><div class="meta">13/25 verifiers · raw 52%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">57.4%</div><div class="meta">14/25 verifiers · raw 56%</div></div><div class="scard mean"><div class="rl">Mean · Hard</div><div class="big">56.9%</div><div class="meta">DAG-weighted · best-of-3 57%</div></div></div>
     </div></section>
 
     <div class="wrap">
@@ -322,7 +322,7 @@ and recommend ACCEPT dual sourcing.</div></div><div class="tabpane" id="tab-traj
               <td class="vid">TRAP2</td>
               <td class="crit">FX risk premium correctly excluded from Supplier B (domestic, no currency exposure)</td>
               <td class="dep"><a href="#v-V4">V4</a></td>
-              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+              <td class="dagcell">3.3%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
           <h4>ST4: Total Cost &amp; Comparison</h4><span class="agg">38.6% of task</span></div>
           <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
           <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
@@ -382,9 +382,9 @@ and recommend ACCEPT dual sourcing.</div></div><div class="tabpane" id="tab-traj
               <td class="vid">TRAP3</td>
               <td class="crit">Procurement_Report.pdf data not used in any calculation</td>
               <td class="dep"><a href="#v-DI2">DI2</a></td>
-              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td><td class="rcell"><span class="dotp pn" title="not scored in this run">–</span></td></tr></tbody></table></div><p class="trapwarn">Note: TRAP2, TRAP3 are defined in the golden rubric but not scored in this run set (shown as “–”). VPR is computed over scored verifiers only.</p></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+              <td class="dagcell">1.6%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
       <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk6177770042.jpg" alt="Verifier dependency graph for tsk_6177770042" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk6177770042.svg" alt="Verifier dependency graph for tsk_6177770042" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
       <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
         <a class="flink" href="https://drive.google.com/drive/folders/1PqqoHBZrmmI5jb3RcXzB5csPHxTQTTaL?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
       <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
@@ -395,7 +395,7 @@ and recommend ACCEPT dual sourcing.</div></div><div class="tabpane" id="tab-traj
       <button class="modal-x" onclick="closeModal(event)">×</button>
       <h3>Verifier dependency graph</h3>
       <p class="sub" style="margin-bottom:12px">tsk_6177770042 · 25 verifiers</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk6177770042.jpg" alt="Verifier dependency graph for tsk_6177770042" loading="lazy"></div>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk6177770042.svg" alt="Verifier dependency graph for tsk_6177770042" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div>
     </div></div>
     
 <footer class="foot"><div class="wrap">

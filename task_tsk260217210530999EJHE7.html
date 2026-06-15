@@ -165,7 +165,7 @@ th.rcell{font-size:10px}
 /* dag */
 .dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
 svg.dag{display:block;min-width:100%;height:auto}
-img.dagimg{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+img.dagimg{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:#fff}
 svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
 svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
 svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
@@ -419,7 +419,7 @@ Option A requires FDA-mandated sterility training for new technicians before the
               <td class="dep"><span class="root">root</span></td>
               <td class="dagcell">1.1%</td><td class="rcell"><span class="dotp p1" title="Only internal files + Glassdoor attempt; no banned sources.">✓</span></td><td class="rcell"><span class="dotp p1" title="Only Glassdoor + internal files; no banned sources.">✓</span></td><td class="rcell"><span class="dotp p1" title="Only internal files + Glassdoor; no banned sources.">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
       <p class="sub">Edges run parent → child. Deeper nodes carry more weight; root checks gate the chains above them.</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk260217210530999EJHE7.jpg" alt="Verifier dependency graph for tsk_260217210530999EJHE7" loading="lazy"></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk260217210530999EJHE7.svg" alt="Verifier dependency graph for tsk_260217210530999EJHE7" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
       <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
         <a class="flink" href="https://drive.google.com/drive/folders/13vSP4qXmRb7L0ApqACsA-GHyU_IyUZR1?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
       <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
@@ -430,7 +430,7 @@ Option A requires FDA-mandated sterility training for new technicians before the
       <button class="modal-x" onclick="closeModal(event)">×</button>
       <h3>Verifier dependency graph</h3>
       <p class="sub" style="margin-bottom:12px">tsk_260217210530999EJHE7 · 27 verifiers</p>
-      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk260217210530999EJHE7.jpg" alt="Verifier dependency graph for tsk_260217210530999EJHE7" loading="lazy"></div>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk260217210530999EJHE7.svg" alt="Verifier dependency graph for tsk_260217210530999EJHE7" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div>
     </div></div>
     
 <footer class="foot"><div class="wrap">
