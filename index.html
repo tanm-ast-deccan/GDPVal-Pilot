@@ -318,8 +318,9 @@ svg.dag .node{cursor:default}
       <p class="toolnote">Closed-corpus tasks with a shallow chain score highest (Zinc, 77.1%, zero variance) — but a
       closed-corpus task can still be Hard when its dependency weight concentrates in a long quantitative chain (Nirma,
       52.2%: the model nails the base, the revenue build and the Go call, yet fails the multi-step EBIT→FCF→IRR model).
-      Tasks gated on a live external lookup (Glassdoor salary, RBI FX rate, FRED PPI, market data) lose the most —
-      consistently, not randomly.</p></div></section>
+      Tasks gated on a date-pinned external data fetch (Glassdoor salary, RBI FX rate, FRED PPI, market data — each
+      retrieved as of a fixed reference date so the answer stays reproducible) lose the most — consistently, not
+      randomly.</p></div></section>
 <section class="blk"><div class="wrap"><h2><span class="num">06</span>Pass@k and trap avoidance</h2>
       <p class="sub">The headline metric is mean DAG-weighted VPR — the direct analogue of a single-attempt
       <b>pass@1</b> score. Pass@3 is reported here only as a <b>consistency diagnostic</b>: the fraction of verifiers
@@ -442,8 +443,8 @@ svg.dag .node{cursor:default}
           <td class="num"><span class="trap ok">3/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap ok">3/3</span></td>
           <td class="num"><b>3/3</b></td></tr></tbody></table>
       <p class="toolnote">The model avoids most traps reliably (overall 32/42 ≈ 76%). Its one consistent miss is the
-      <em>live-data-retrieval</em> trap (TRAP1) on FMCG (Dual Sourcing) and Lane Optimization — it uses the stale
-      in-file value (₹82/USD; FRED placeholder) instead of fetching the live rate. Rather than separating “careful”
+      <em>date-pinned external data fetch</em> trap (TRAP1) on FMCG (Dual Sourcing) and Lane Optimization — it uses the stale
+      in-file value (₹82/USD; FRED placeholder) instead of fetching the external value as of the pinned date. Rather than separating “careful”
       from “wholesale-failure” tasks, the traps isolate one specific weakness (external data retrieval) while
       structural and exclusion traps are handled reliably.</p></div></section>
 <section class="blk"><div class="wrap"><h2><span class="num">07</span>Scaling up</h2>
