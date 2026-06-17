@@ -204,7 +204,7 @@ svg.dag .node{cursor:default}
       <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
       <nav class="navlinks">
         <a class="chip active" href="index.html"><b>Overview</b><span>summary</span></a>
-        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>CRP·Medi</b><span>Medical Device Bottlen…</span></a><a class="chip" href="task_tsk6177770042.html"><b>FSP·Hard</b><span>Dual Sourcing Cost Ana…</span></a><a class="chip" href="task_tsk4726551239.html"><b>LDP·Hard</b><span>Zinc Diversification S…</span></a><a class="chip" href="task_tsk8717359545.html"><b>RCP·Medi</b><span>Brake Caliper Constrai…</span></a><a class="chip" href="task_tsk1754637700.html"><b>SCP·Hard</b><span>Lane Optimization Boar…</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>SCP·Medi</b><span>EU Market Entry Feasib…</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>Medical Device</b><span>Bottleneck Analysis</span></a><a class="chip" href="task_tsk6177770042.html"><b>Dual Sourcing</b><span>Cost Analysis</span></a><a class="chip" href="task_tsk4726551239.html"><b>Zinc Diversification</b><span>Strategy Decision</span></a><a class="chip" href="task_tsk7726785796.html"><b>Nirma Premium</b><span>Detergent Re-Entry</span></a><a class="chip" href="task_tsk1754637700.html"><b>Lane Optimization</b><span>Board Recommendation</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>EU Market</b><span>Entry Feasibility</span></a>
       </nav></div></header>
     <section class="hero"><div class="wrap">
       <div class="eyebrow">Management Consulting · Golden-Sample Benchmark · Open-Weight Study</div>
@@ -213,27 +213,22 @@ svg.dag .node{cursor:default}
       Each task is modelled on an actual professional assignment: a board memo requiring a cost bridge, a
       feasibility study requiring capacity analysis, an investment decision requiring financial modelling.</p>
       <p class="lead">The benchmark covers <b>Management Consulting</b> (O*NET 13-1111.00, Management Analysts),
-      with the six tasks here spanning operations optimization, cost optimization, operations research, and market
-      strategy.</p>
+      with the six tasks here spanning operations optimization, cost optimization, operations research, market
+      strategy, and financial modelling.</p>
       <p class="lead">Six expert-authored management-consulting tasks, each run <b>three times</b> on
       <b>Qwen 3.6 27B</b> and scored by domain SMEs against atomic, DAG-weighted verifiers.
       This showcase presents every task in full — prompt, hidden trap, golden trajectory and deliverable,
       the verifier rubric, and the dependency graph — alongside how the model actually performed.</p>
       <div class="metarow">
         <span class="tag"><b>6</b> tasks</span><span class="tag"><b>3</b> runs each</span>
-        <span class="tag"><b>153</b> verifiers</span><span class="tag">Model&nbsp;<b>Qwen 3.6 27B</b></span>
+        <span class="tag"><b>150</b> verifiers</span><span class="tag">Model&nbsp;<b>Qwen 3.6 27B</b></span>
         <span class="tag">Scoring&nbsp;<b>DAG-weighted VPR</b></span>
       </div>
     </div></section><section class="blk"><div class="wrap"><h2><span class="num">01</span>Anatomy of a task page</h2>
       <p class="sub">Each task page carries the six golden-sample components. Inputs (prompt + reference files) are
       shown to the model; the ground-truth layers (sanity check, trajectory, deliverable, verifiers) are not.</p>
       <div class="grid g3"><div class='note'><h4>Task Prompt</h4><p>The verbatim prompt shown to the model — context, the analytical task, hard constraints, and the exact output-format spec. Every task is ≥30 min of real professional work.</p></div><div class='note'><h4>Sanity Check</h4><p>The cognitive trap embedded in the task. Documents the <em>Lazy-AI failure mode</em> and the <em>Expert path</em> around it — not shown to the model.</p></div><div class='note'><h4>Golden Trajectory</h4><p>Extracted from the SME's solution logic by an LLM: the deterministic reasoning path in two layers — named subtasks (Layer 1) and tool/source-annotated steps (Layer 2) with golden answer ranges.</p></div><div class='note'><h4>Golden Deliverable</h4><p>The expert-level output, also LLM-extracted from the solution logic: concrete numbers in the exact format the prompt prescribes, not a description.</p></div><div class='note'><h4>Scored Verifiers</h4><p>Atomic, binary pass/fail criteria grouped by subtask. Each has a specific value, a dependency on its parents, and a DAG weight.</p></div><div class='note'><h4>Dependency Graph</h4><p>Constructed automatically from the golden trajectory: an algorithm identifies root verifiers, wires the minimal parent-child dependencies, validates acyclicity, and assigns depth-proportional weights — turning a pile of failures into a cascade story (one root error vs. many independent ones).</p></div></div></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">02</span>Prompt-type taxonomy</h2>
-      <p class="sub">Each task is classified by one of five prompt types, defined by the reasoning capability it tests
-      and its characteristic trap pattern.</p>
-      <table><thead><tr><th>Type</th><th>Name</th><th>Tests whether the model can…</th><th>Trap pattern</th></tr></thead>
-        <tbody><tr><td><span class='ptype'>CRP</span></td><td><b>Constrained Research</b></td><td>Faithful retrieval from authoritative information sources. Obey explicit constraints without drift.</td><td style='color:var(--muted)'>Plausible option that violates a buried constraint.</td></tr><tr><td><span class='ptype'>RCP</span></td><td><b>Relevance Compression</b></td><td>Needle in a haystack problem. Find signal in noisy multi-file corpora.</td><td style='color:var(--muted)'>Dashboard headline contradicts granular data.</td></tr><tr><td><span class='ptype'>SCP</span></td><td><b>Structural Compliance</b></td><td>Produce exact prescribed output format.</td><td style='color:var(--muted)'>Any structural deviation is a binary fail.</td></tr><tr><td><span class='ptype'>LDP</span></td><td><b>Latent Decomposition</b></td><td>Infer unstated variables from context.</td><td style='color:var(--muted)'>Blank field, linguistic model description.</td></tr><tr><td><span class='ptype'>FSP</span></td><td><b>Failure-Sensitive</b></td><td>Avoiding critical cognitive traps which can result in cascaded errors. Detect and reject stale/incorrect input data.</td><td style='color:var(--muted)'>Outdated rate that flips the recommendation.</td></tr></tbody></table></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">03</span>Dependency graph and DAG weighting</h2>
+<section class="blk"><div class="wrap"><h2><span class="num">02</span>Dependency graph and DAG weighting</h2>
       <p class="sub">The graph is built <b>automatically from the golden trajectory</b>: an algorithm identifies the
       root verifiers (values from a single source), wires the minimal parent-child dependencies needed to compute each
       non-root verifier, validates acyclicity, then computes each verifier's transitive ancestors. Weights follow from
@@ -250,7 +245,7 @@ svg.dag .node{cursor:default}
       </div>
       <p class="toolnote">The per-task <b>Dependency graph</b> tab visualises this: node colour marks role
       (root, calculation, trap, high-weight, recommendation, final deliverable) and the % label is the DAG weight.</p></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">04</span>Scoring — VPR, difficulty bands, and why not Pass@k</h2>
+<section class="blk"><div class="wrap"><h2><span class="num">03</span>Scoring — VPR, difficulty bands, and why not Pass@k</h2>
       <p class="sub">A task's verifiers aren't independent — they form a dependency chain. We score each run by its
       <b>DAG-weighted Verifier Pass Rate</b> and report the <b>mean across 3 runs</b> as the primary metric.</p>
       <div class="grid g2">
@@ -260,14 +255,14 @@ svg.dag .node{cursor:default}
         <div class="note"><h4>Why mean VPR, not Pass@3</h4><p>Pass@k assumes criteria are independent. With a
         dependency chain, a downstream verifier can "pass" in a run where its parent failed — the method was right
         but the input was wrong. Pass@3 stitches such disconnected wins into a composite run that never existed.
-        Across these tasks Pass@3 adds only ~0.4% over the best single run — failures are
+        Across these tasks Pass@3 adds only ~0.95% over the best single run — failures are
         <em>structural</em>, not stochastic (full breakdown in the final section).</p></div>
       </div>
       <h3 style="margin:24px 0 6px;font-size:18px">Difficulty bands</h3>
       <p class="sub">Thresholds adapted from the classical item-difficulty (p-value) index, recalibrated for multi-verifier agentic tasks.</p>
       <table><thead><tr><th>Mean DAG-weighted VPR</th><th>Difficulty</th><th>Interpretation</th></tr></thead>
         <tbody><tr><td class='mono'>≥ 80%</td><td><span class='pill easy'>Easy</span></td><td style='color:var(--muted)'>Model reliably completes most of the analytical chain; remaining misses are peripheral (format, external lookups).</td></tr><tr><td class='mono'>65 – 79%</td><td><span class='pill med'>Medium</span></td><td style='color:var(--muted)'>Core chain completed, but specific sub-chains fail — external retrieval, multi-step cascades, trap verifiers.</td></tr><tr><td class='mono'>50 – 64%</td><td><span class='pill hard'>Hard</span></td><td style='color:var(--muted)'>Struggles with the core chain: fundamental calculation errors or inability to retrieve required external data.</td></tr><tr><td class='mono'>< 50%</td><td><span class='pill exp'>Expert</span></td><td style='color:var(--muted)'>Fails on foundational steps; multiple root verifiers fail and cascade through the graph.</td></tr></tbody></table></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">05</span>Study design</h2>
+<section class="blk"><div class="wrap"><h2><span class="num">04</span>Study design</h2>
       <div class="grid g3">
         <div class="note"><h4>Model</h4><p>Qwen 3.6 27B, open weights, served via OpenRouter with provider pinning.
         Standardised sandbox tools (openpyxl, python-docx/pptx, pdfplumber, pandas) for file reading.</p></div>
@@ -276,156 +271,182 @@ svg.dag .node{cursor:default}
         <div class="note"><h4>Temporal pinning</h4><p>Every numeric datapoint in a task is pinned to a fixed date,
         never "current"/"latest", so scoring is stable over time and reruns stay comparable.</p></div>
       </div></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">06</span>Open-weight benchmark results</h2>
+<section class="blk"><div class="wrap"><h2><span class="num">05</span>Open-weight benchmark results</h2>
       <p class="sub">Per-run figures are <b>DAG-weighted verifier pass rates (VPR)</b>. The mean of the three runs sets
       the difficulty band. Click any task to open its full breakdown.</p>
       <table class="results"><thead><tr>
-        <th>Task</th><th>Type</th><th>Domain</th><th class="num">#V</th>
+        <th>Task</th><th>Domain</th><th class="num">#V</th>
         <th class="num">Run 1</th><th class="num">Run 2</th><th class="num">Run 3</th>
         <th class="num">Mean</th><th>Difficulty</th></tr></thead>
         <tbody><tr>
           <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
-          <td><span class="ptype">CRP</span></td>
           <td>Operations Optimization</td>
           <td class="num">27</td>
           <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>71.4%</span><span class="vbar med" style="width:46px"><i style="width:71%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>38.6%</span><span class="vbar exp" style="width:46px"><i style="width:39%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>76.0%</span><span class="vbar med" style="width:46px"><i style="width:76%"></i></span></div></td>
           <td class="num"><b>62.0%</b></td>
           <td><span class="pill hard">Hard</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
-          <td><span class="ptype">FSP</span></td>
           <td>Cost Optimization</td>
           <td class="num">25</td>
           <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>56.6%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>56.6%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>57.4%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td>
           <td class="num"><b>56.9%</b></td>
           <td><span class="pill hard">Hard</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
-          <td><span class="ptype">LDP</span></td>
           <td>Operations Research</td>
           <td class="num">23</td>
           <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>77.1%</span><span class="vbar med" style="width:46px"><i style="width:77%"></i></span></div></td>
           <td class="num"><b>77.1%</b></td>
           <td><span class="pill med">Medium</span></td></tr><tr>
-          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
-          <td><span class="ptype">RCP</span></td>
-          <td>Operations Optimization</td>
-          <td class="num">26</td>
-          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>81.9%</span><span class="vbar easy" style="width:46px"><i style="width:82%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>80.5%</span><span class="vbar easy" style="width:46px"><i style="width:80%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>81.2%</span><span class="vbar easy" style="width:46px"><i style="width:81%"></i></span></div></td>
-          <td class="num"><b>81.2%</b></td>
-          <td><span class="pill easy">Easy</span></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk7726785796.html">Nirma Premium Detergent Re-Entry<small>tsk_7726785796</small></a></td>
+          <td>Financial Modelling</td>
+          <td class="num">23</td>
+          <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.8%</span><span class="vbar hard" style="width:46px"><i style="width:55%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>56.5%</span><span class="vbar hard" style="width:46px"><i style="width:57%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>45.2%</span><span class="vbar exp" style="width:46px"><i style="width:45%"></i></span></div></td>
+          <td class="num"><b>52.2%</b></td>
+          <td><span class="pill hard">Hard</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td>Cost Optimization</td>
           <td class="num">28</td>
           <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>66.7%</span><span class="vbar med" style="width:46px"><i style="width:67%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>89.5%</span><span class="vbar easy" style="width:46px"><i style="width:90%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>70.8%</span><span class="vbar med" style="width:46px"><i style="width:71%"></i></span></div></td>
           <td class="num"><b>75.7%</b></td>
           <td><span class="pill med">Medium</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td>Market Strategy</td>
           <td class="num">24</td>
           <td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.1%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>54.1%</span><span class="vbar hard" style="width:46px"><i style="width:54%"></i></span></div></td><td class="num"><div style="display:flex;align-items:center;gap:7px;justify-content:flex-end"><span>57.5%</span><span class="vbar hard" style="width:46px"><i style="width:58%"></i></span></div></td>
           <td class="num"><b>55.2%</b></td>
           <td><span class="pill hard">Hard</span></td></tr></tbody></table>
-      <p class="toolnote">Closed-corpus tasks (all data internal) score highest; tasks gated on a live external
-      lookup (Glassdoor salary, RBI FX rate, FRED PPI, market data) lose the most — consistently, not randomly.</p></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">07</span>Pass@k and trap avoidance</h2>
-      <p class="sub">The primary metric above is mean DAG-weighted VPR. For completeness, here is the best-of-3
-      view (<b>Pass@3</b>: a verifier counts as passed if it passed in <em>any</em> of the three runs) and how the
-      model handled the planted <b>trap verifiers</b>. <b>Lift = Pass@3 − Best-of-3</b> — how
-      much the union of three runs adds over the single best run. It averages <b>+1.0%</b> here, and is
-      zero on five of six tasks: the model misses the <em>same</em> verifiers every run, so failures are largely
-      <em>structural</em>, not stochastic. The exception is SCP-Hard (SkyRoute), whose lift comes from genuine
-      run-to-run variance — the FRED PPI lookup and an L4 double-count that appears in only one of the three runs.</p>
+      <p class="toolnote">Closed-corpus tasks with a shallow chain score highest (Zinc, 77.1%, zero variance) — but a
+      closed-corpus task can still be Hard when its dependency weight concentrates in a long quantitative chain (Nirma,
+      52.2%: the model nails the base, the revenue build and the Go call, yet fails the multi-step EBIT→FCF→IRR model).
+      Tasks gated on a live external lookup (Glassdoor salary, RBI FX rate, FRED PPI, market data) lose the most —
+      consistently, not randomly.</p></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">06</span>Pass@k and trap avoidance</h2>
+      <p class="sub">The headline metric is mean DAG-weighted VPR — the direct analogue of a single-attempt
+      <b>pass@1</b> score. Pass@3 is reported here only as a <b>consistency diagnostic</b>: the fraction of verifiers
+      that pass in <em>at least one</em> of the three runs. The gap between Pass@3 and the best single run quantifies
+      how much capability the model shows in aggregate versus its best attempt — in other words, whether its
+      failures are stochastic (recoverable by sampling more) or structural (the same every time).</p>
 
-      <h3 style="margin:18px 0 6px;font-size:18px">Mean · Best-of-3 · Pass@3 (DAG-weighted)</h3>
+      <h3 style="margin:22px 0 8px;font-size:18px">How this relates to standard pass@k</h3>
+      <div class="grid g3">
+        <div class="note"><h4>Verifier-level, not problem-level</h4><p>The canonical pass@k (Chen et al., 2021) is
+        <em>problem-level</em>: a task counts only if one sampled solution passes every test. Our tasks award partial
+        credit across dependency-linked verifiers, so a problem-level pass@k would be ≈ 0 and uninformative. We apply
+        the same “≥1 of k succeeds” criterion at the <b>verifier level</b> with n = k = 3, then DAG-weight-average it
+        into a task score.</p></div>
+        <div class="note"><h4>No bias correction needed</h4><p>The unbiased estimator
+        1 − C(n−c, k) / C(n, k) corrects for drawing k of n &gt; k samples. Because we do not subsample
+        (n = k = 3), it reduces exactly to “verifier satisfied in at least one of the three runs,” and we take the
+        real union rather than the biased 1 − (1−p)<sup>k</sup> shortcut. Scoring verifiers independently makes this
+        the most <b>generous</b> reading of the runs.</p></div>
+        <div class="note"><h4>Mean VPR is the pass@1 analogue</h4><p>Set k = 1 and the estimator collapses to
+        pass@1 = c/n — the fraction of runs that pass a binary criterion; for rubric scoring, the mean per-run
+        satisfaction rate. Sampling each prompt more than once only reduces estimator <em>variance</em>; it never
+        credits “≥1 of n succeeded.” That union is the k ≥ 2 case (our Pass@3). So mean VPR is our pass@1.</p></div>
+      </div>
+      <div class="formula" style="margin-top:14px">pass@k&nbsp;=&nbsp;1&nbsp;−&nbsp;C(n−c, k) / C(n, k)
+&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;k = 1:&nbsp;pass@1&nbsp;=&nbsp;1&nbsp;−&nbsp;(n−c)/n&nbsp;=&nbsp;c/n
+&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;n = k = 3:&nbsp;Pass@3&nbsp;=&nbsp;“satisfied in ≥1 of 3 runs”</div>
+
+      <h3 style="margin:24px 0 8px;font-size:18px">Convention across comparable benchmarks</h3>
+      <p class="copy">Leading economic- and professional-work benchmarks all headline single-attempt quality.
+      OpenAI’s GDPval is one-shot, scored by blind expert win-rate against a human deliverable, with no pass@k.
+      Humanity’s Last Exam reports pass@1 accuracy alongside a calibration-error term. Mercor’s APEX and APEX-Agents
+      grade responses against binary rubric criteria with a judge model and report pass@1 — even though APEX-Agents
+      samples each prompt eight times. APEX-Agents is, like ours, a deep-research benchmark over agentic professional
+      work; the difference is breadth versus depth — it spans many self-contained multi-application environments with
+      wider task variety, whereas each of our tasks concentrates more analytical complexity into one problem (long
+      quantitative chains with dependency-linked verifiers). Reporting mean VPR as the primary metric, with Pass@3 as a
+      consistency check, is consistent with this convention.</p>
+
+      <h3 style="margin:24px 0 6px;font-size:18px">Mean · Best-of-3 · Pass@3 (DAG-weighted)</h3>
+      <p class="sub"><b>Lift = Pass@3 − Best-of-3</b> averages <b>+0.95%</b> and is exactly zero on five of six tasks:
+      the model misses the <em>same</em> verifiers every run, so failures are structural, not stochastic. The lone
+      exception is Lane Optimization Board Recommendation (+5.7%), whose lift comes from genuine run-to-run variance —
+      the FRED PPI lookup succeeds in one run but not the others. A lift this small is itself strong evidence that
+      pooling runs recovers almost nothing beyond the single best attempt.</p>
       <table class="results"><thead><tr>
-        <th>Task</th><th>Type</th><th class="num">Mean</th><th class="num">Best-of-3</th>
+        <th>Task</th><th class="num">Mean</th><th class="num">Best-of-3</th>
         <th class="num">Pass@3</th><th class="num">Lift</th></tr></thead>
         <tbody><tr>
           <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
-          <td><span class="ptype">CRP</span></td>
           <td class="num">62.0%</td>
           <td class="num">76.0%</td>
           <td class="num">76.0%</td>
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
-          <td><span class="ptype">FSP</span></td>
           <td class="num">56.9%</td>
           <td class="num">57.4%</td>
           <td class="num">57.4%</td>
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
-          <td><span class="ptype">LDP</span></td>
           <td class="num">77.1%</td>
           <td class="num">77.1%</td>
           <td class="num">77.1%</td>
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
-          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
-          <td><span class="ptype">RCP</span></td>
-          <td class="num">81.2%</td>
-          <td class="num">81.9%</td>
-          <td class="num">81.9%</td>
+          <td><a class="tasklink" href="task_tsk7726785796.html">Nirma Premium Detergent Re-Entry<small>tsk_7726785796</small></a></td>
+          <td class="num">52.2%</td>
+          <td class="num">56.5%</td>
+          <td class="num">56.5%</td>
           <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td class="num">75.7%</td>
           <td class="num">89.5%</td>
           <td class="num">95.2%</td>
           <td class="num"><span class="lift pos">+5.7%</span></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td class="num">55.2%</td>
           <td class="num">57.5%</td>
           <td class="num">57.5%</td>
-          <td class="num"><span class="lift zero">+0.0%</span></td></tr></tbody></table>
+          <td class="num"><span class="lift zero">+0.0%</span></td></tr><tr style="font-weight:600">
+          <td>Average</td>
+          <td class="num">63.2%</td>
+          <td class="num">69.0%</td>
+          <td class="num">70.0%</td>
+          <td class="num"><span class="lift pos">+0.95%</span></td></tr></tbody></table>
       <p class="toolnote">Mean is the average single-run VPR (the Mean column in the results table); Best-of-3 is the
-      single best run; Pass@3 is the union over all three. Lift is Pass@3 over Best-of-3 — a near-zero lift means even
-      pooling three runs recovers nothing beyond the best attempt, because the misses are the same every time.</p>
+      single best run; Pass@3 is the union over all three. Because verifiers are scored independently, Pass@3 is the
+      most generous reading — which is why a ~1% lift confirms failures are consistent rather than recoverable.</p>
 
       <h3 style="margin:24px 0 6px;font-size:18px">Trap avoidance</h3>
       <p class="sub">Traps are deliberately planted errors in the reference files (stale values, placeholder numbers,
       rows that must be excluded). A trap verifier <b>passes when the model avoided the trap</b>. Per-run cells show
       traps avoided / traps scored.</p>
       <table class="results"><thead><tr>
-        <th>Task</th><th>Type</th><th class="num">Traps (scored/total)</th>
+        <th>Task</th><th class="num">Traps (scored/total)</th>
         <th class="num">Run 1</th><th class="num">Run 2</th><th class="num">Run 3</th>
         <th class="num">Avoided@3</th></tr></thead>
         <tbody><tr>
           <td><a class="tasklink" href="task_tsk260217210530999EJHE7.html">Medical Device Bottleneck Investment Analysis<small>tsk_260217210530999EJHE7</small></a></td>
-          <td><span class="ptype">CRP</span></td>
           <td class="num">2/2</td>
           <td class="num"><span class="trap miss">1/2</span></td><td class="num"><span class="trap miss">1/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
           <td class="num"><b>2/2</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk6177770042.html">Dual Sourcing Cost Analysis<small>tsk_6177770042</small></a></td>
-          <td><span class="ptype">FSP</span></td>
           <td class="num">3/3</td>
           <td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">2/3</span></td>
           <td class="num"><b>2/3</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk4726551239.html">Zinc Diversification Strategy Decision<small>tsk_4726551239</small></a></td>
-          <td><span class="ptype">LDP</span></td>
           <td class="num">2/2</td>
           <td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
           <td class="num"><b>2/2</b></td></tr><tr>
-          <td><a class="tasklink" href="task_tsk8717359545.html">Brake Caliper Constraint Diagnosis &amp; DBR Redesign<small>tsk_8717359545</small></a></td>
-          <td><span class="ptype">RCP</span></td>
-          <td class="num">2/2</td>
-          <td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td><td class="num"><span class="trap ok">2/2</span></td>
-          <td class="num"><b>2/2</b></td></tr><tr>
+          <td><a class="tasklink" href="task_tsk7726785796.html">Nirma Premium Detergent Re-Entry<small>tsk_7726785796</small></a></td>
+          <td class="num">1/1</td>
+          <td class="num"><span class="trap ok">1/1</span></td><td class="num"><span class="trap ok">1/1</span></td><td class="num"><span class="trap ok">1/1</span></td>
+          <td class="num"><b>1/1</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk1754637700.html">Lane Optimization Board Recommendation<small>tsk_1754637700</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td class="num">3/3</td>
           <td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap miss">1/3</span></td><td class="num"><span class="trap miss">2/3</span></td>
           <td class="num"><b>2/3</b></td></tr><tr>
           <td><a class="tasklink" href="task_tsk2602202235206123JNLG.html">EU Market Entry Feasibility Report<small>tsk_2602202235206123_JNLG</small></a></td>
-          <td><span class="ptype">SCP</span></td>
           <td class="num">3/3</td>
           <td class="num"><span class="trap ok">3/3</span></td><td class="num"><span class="trap miss">2/3</span></td><td class="num"><span class="trap ok">3/3</span></td>
           <td class="num"><b>3/3</b></td></tr></tbody></table>
-      <p class="toolnote">The model avoids most traps reliably (overall 35/45 ≈ 78%). Its one consistent miss is the
-      <em>live-data-retrieval</em> trap (TRAP1) on FMCG and SkyRoute — it uses the stale in-file value (₹82/USD;
-      FRED placeholder) instead of fetching the live rate. TRAP2/TRAP3 on those two tasks were re-adjudicated directly
-      from the model's run output deliverables (they were left unscored in the source sheet).</div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">08</span>Scaling up</h2>
+      <p class="toolnote">The model avoids most traps reliably (overall 32/42 ≈ 76%). Its one consistent miss is the
+      <em>live-data-retrieval</em> trap (TRAP1) on FMCG (Dual Sourcing) and Lane Optimization — it uses the stale
+      in-file value (₹82/USD; FRED placeholder) instead of fetching the live rate. Rather than separating “careful”
+      from “wholesale-failure” tasks, the traps isolate one specific weakness (external data retrieval) while
+      structural and exclusion traps are handled reliably.</p></div></section>
+<section class="blk"><div class="wrap"><h2><span class="num">07</span>Scaling up</h2>
       <p class="copy">Scaling beyond the pilot rests on two levers: an existing task inventory and pipeline
       automation. We already hold a repository of <b>70 tasks</b> from a prior study built on a similar two-layer
       evaluation design — binary verifiers plus an SME rubric — which can be converted with LLM assistance to align
@@ -435,7 +456,7 @@ svg.dag .node{cursor:default}
       concentrates on the judgement-heavy criteria rather than mechanical ones. Human QC is accelerated the same way:
       the pipeline surfaces likely discrepancies for review, leaving experts to adjudicate rather than scan every
       verifier by hand.</p></div></section>
-<section class="blk"><div class="wrap"><h2><span class="num">09</span>Team, domain expertise & expert network</h2>
+<section class="blk"><div class="wrap"><h2><span class="num">08</span>Team, domain expertise & expert network</h2>
       <p class="copy">The program is delivered by an expert network of <b>40+ active SMEs</b>, onboarded from a
       shortlisted pool of <b>200+ candidates</b>, with an average of <b>8–9 years</b> of professional experience.
       The network carries institutional pedigree from IIM Ahmedabad, Calcutta, Lucknow, and Kozhikode, IIT Kharagpur,

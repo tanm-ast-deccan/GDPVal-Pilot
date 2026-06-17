@@ -1,0 +1,392 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tsk_7726785796 · Nirma Premium Detergent Re-Entry</title><style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#1d1b16; --muted:#6f695d; --faint:#928b7c;
+  --line:#e7e2d8; --line2:#efebe3; --accent:#3a4db8; --accent2:#1aa39a;
+  --gold:#b8860b; --shadow:0 1px 2px rgba(40,34,20,.04),0 8px 24px rgba(40,34,20,.05);
+  --easy:#2e7d5b; --easybg:#e7f3ec; --med:#9a7400; --medbg:#fbf3da;
+  --hard:#b3491f; --hardbg:#fbe9df; --exp:#a32020; --expbg:#fbe3e3;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em}
+code,.mono{font-family:var(--mono)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+header.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.92);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:18px;height:54px}
+.brand{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);white-space:nowrap}
+.brand .dot{color:var(--accent2)}
+.navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;margin-left:auto}
+.chip{display:inline-flex;flex-direction:column;line-height:1.15;padding:6px 10px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card);white-space:nowrap;min-width:0}
+.chip b{font-size:12px;color:var(--ink)}
+.chip span{font-size:10.5px;color:var(--faint)}
+.chip:hover{border-color:var(--accent);text-decoration:none}
+.chip.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+
+/* hero */
+.hero{padding:46px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.hero h1{font-size:40px;margin:.28em 0 .26em}
+.lead{font-size:18px;color:var(--muted);max-width:760px}
+.metarow{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{font-family:var(--mono);font-size:12px;padding:5px 11px;border:1px solid var(--line);
+  border-radius:999px;background:var(--card);color:var(--muted)}
+.tag b{color:var(--ink)}
+
+section.blk{padding:34px 0;border-bottom:1px solid var(--line2)}
+section.blk h2{font-size:25px;margin:0 0 4px}
+section.blk h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent2);margin-right:10px;vertical-align:middle}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.copy{color:var(--ink);line-height:1.65;margin:0 0 14px;max-width:820px}
+.copy b{font-weight:600}
+
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);font-weight:600;background:#faf8f4}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+.results td{vertical-align:middle}
+.results tr:hover td{background:#fcfbf8}
+.tasklink{font-weight:600}
+.tasklink small{display:block;color:var(--faint);font-weight:400;font-family:var(--mono);font-size:11px}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;line-height:1.5}
+.pill.easy{color:var(--easy);background:var(--easybg)}
+.pill.med{color:var(--med);background:var(--medbg)}
+.pill.hard{color:var(--hard);background:var(--hardbg)}
+.pill.exp{color:var(--exp);background:var(--expbg)}
+.ptype{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* vpr bar */
+.vbar{position:relative;height:7px;border-radius:4px;background:#eee7da;overflow:hidden;min-width:46px}
+.vbar>i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.vbar.easy>i{background:var(--easy)} .vbar.med>i{background:var(--med)}
+.vbar.hard>i{background:var(--hard)} .vbar.exp>i{background:var(--exp)}
+.lift{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.lift.pos{color:#1a7a4a;background:#e4f3ea} .lift.zero{color:var(--muted);background:#efeadf}
+.trap{font-family:var(--mono);font-size:12px;font-weight:700;padding:1px 7px;border-radius:6px}
+.trap.ok{color:#1a7a4a;background:#e4f3ea} .trap.miss{color:#b4413c;background:#f6e4e2}
+
+/* cards grid */
+.grid{display:grid;gap:14px}
+.grid.g2{grid-template-columns:1fr 1fr}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+.note h4{margin:0 0 6px;font-size:16px}
+.note p{margin:0;color:var(--muted);font-size:13.5px}
+.formula{font-family:var(--mono);background:#f6f3ec;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;font-size:13.5px;overflow-x:auto;color:#33302a}
+ol.flow{list-style:none;counter-reset:f;margin:18px 0 0;padding:0}
+ol.flow>li{counter-increment:f;position:relative;padding:0 0 16px 44px;color:var(--muted);line-height:1.55}
+ol.flow>li::before{content:counter(f);position:absolute;left:0;top:0;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;
+  color:#fff;background:var(--accent);border-radius:7px}
+ol.flow>li:not(:last-child)::after{content:"";position:absolute;left:13px;top:30px;bottom:2px;width:2px;background:var(--line)}
+ol.flow>li b{color:var(--ink)}
+
+/* ---------- task page ---------- */
+.taskhead{padding:34px 0 8px}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);margin-bottom:14px}
+.taskhead h1{font-size:30px;margin:.1em 0 .35em;max-width:840px}
+.idline{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.scard .rl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.scard .big{font-family:var(--serif);font-size:30px;font-weight:600;margin:2px 0 4px}
+.scard .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.scard.mean{background:#1d1b16;color:#f6f3ec}
+.scard.mean .rl,.scard.mean .meta{color:#b8b2a4}
+.scard.mean .big{color:#fff}
+
+/* tabs */
+.tabbar{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:26px 0 0;position:sticky;top:54px;background:var(--paper);z-index:20;padding-top:4px}
+.tabbtn{appearance:none;background:none;border:none;font-family:var(--sans);font-size:14px;color:var(--muted);
+  padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tabpane{display:none;padding:26px 0 10px;animation:fade .2s ease}
+.tabpane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+.blockq{white-space:pre-wrap;font-size:14.5px;line-height:1.66;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:10px;padding:18px 20px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+
+/* trajectory subtask blocks */
+.st{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 14px;overflow:hidden;box-shadow:var(--shadow)}
+.st-h{display:flex;align-items:baseline;gap:10px;padding:13px 18px;background:#f7f4ee;border-bottom:1px solid var(--line2)}
+.st-n{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px}
+.st-t{font-family:var(--serif);font-size:17px;font-weight:600}
+.st-dag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.st-body{padding:14px 18px}
+.purpose{color:var(--accent2);font-size:13.5px;margin:0 0 12px;font-style:italic}
+.step{display:flex;gap:11px;margin:0 0 10px}
+.step-b{flex:none;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:#eceaf6;
+  border-radius:6px;padding:2px 7px;height:fit-content;white-space:nowrap}
+.step-x{font-size:13.6px;color:#34302a}
+.srcrow{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;padding-top:10px;border-top:1px dashed var(--line)}
+.srcrow .lab{font-family:var(--mono);font-size:11px;color:var(--gold);font-weight:600}
+.srcrow .val{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* verifier groups */
+.vg{margin:0 0 16px}
+.vg-h{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}
+.vg-h .st-n{background:var(--accent2)}
+.vg-h h4{margin:0;font-size:16px}
+.vg-h .agg{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+table.vtab td{vertical-align:middle}
+.vid{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.crit{font-size:13.4px}
+.dep{font-family:var(--mono);font-size:11px}
+.dep .root{color:var(--faint)}
+.dep a{display:inline-block;background:#eceaf6;border-radius:5px;padding:1px 5px;margin:1px 2px 1px 0;color:var(--accent)}
+.dagcell{font-family:var(--mono);font-size:12px;text-align:right;color:var(--muted)}
+.rcell{text-align:center;width:42px}
+.dotp{display:inline-block;width:16px;height:16px;border-radius:50%;line-height:16px;font-size:10px;color:#fff;font-family:var(--mono)}
+.p1{background:var(--easy)} .p0{background:#d9534f} .pn{background:#cfc8ba;color:#fff}
+th.rcell{font-size:10px}
+.trapwarn{font-size:12px;color:var(--hard);margin-top:8px}
+
+/* dag */
+.dagwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;overflow:auto;box-shadow:var(--shadow)}
+svg.dag{display:block;min-width:100%;height:auto}
+img.dagimg{display:block;max-width:100%;height:auto;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+svg.dag .edge{stroke:#cdc7ba;stroke-width:1.4;fill:none}
+svg.dag .nid{font-family:var(--mono);font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
+svg.dag .nw{font-family:var(--mono);font-size:9px;fill:rgba(255,255,255,.85);text-anchor:middle}
+svg.dag .node{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* file links */
+.filegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.frow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.frow .rl{font-family:var(--mono);font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.flink{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:600}
+.bestc{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* graph modal */
+.gbtn{appearance:none;cursor:pointer;font-family:var(--sans);font-size:13px;border:1px solid var(--line);
+  background:var(--card);border-radius:8px;padding:7px 13px;color:var(--accent);font-weight:600}
+.gbtn:hover{border-color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(28,24,18,.55);display:none;z-index:100;padding:34px}
+.modal.open{display:flex;align-items:center;justify-content:center}
+.modal-card{background:var(--paper);border-radius:16px;max-width:1000px;width:100%;max-height:88vh;
+  overflow:auto;padding:22px 24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.modal-card h3{margin:0 0 2px;font-size:20px}
+.modal-x{float:right;cursor:pointer;border:none;background:none;font-size:24px;color:var(--muted);line-height:1}
+
+.foot{padding:40px 0 60px;color:var(--faint);font-size:12.5px}
+.toolnote{font-size:12px;color:var(--muted);margin-top:8px}
+@media(max-width:760px){
+  .grid.g2,.grid.g3,.scorecards,.filegrid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}.taskhead h1{font-size:24px}
+  .tabbar{top:54px}
+}
+</style></head><body><header class="top"><div class="wrap topbar">
+      <a class="brand" href="index.html">GDPVal Bench<span class="dot">·</span>Qwen</a>
+      <nav class="navlinks">
+        <a class="chip" href="index.html"><b>Overview</b><span>summary</span></a>
+        <a class="chip" href="task_tsk260217210530999EJHE7.html"><b>Medical Device</b><span>Bottleneck Analysis</span></a><a class="chip" href="task_tsk6177770042.html"><b>Dual Sourcing</b><span>Cost Analysis</span></a><a class="chip" href="task_tsk4726551239.html"><b>Zinc Diversification</b><span>Strategy Decision</span></a><a class="chip active" href="task_tsk7726785796.html"><b>Nirma Premium</b><span>Detergent Re-Entry</span></a><a class="chip" href="task_tsk1754637700.html"><b>Lane Optimization</b><span>Board Recommendation</span></a><a class="chip" href="task_tsk2602202235206123JNLG.html"><b>EU Market</b><span>Entry Feasibility</span></a>
+      </nav></div></header>
+    <section class="taskhead"><div class="wrap">
+      <div class="crumb"><a href="index.html">Overview</a> &nbsp;/&nbsp; tsk_7726785796</div>
+      <div class="idline">
+        <span class="tag">Financial Modelling</span>
+        <span class="tag"><b>23</b> verifiers</span>
+        <button class="gbtn" onclick="openModal()">◇ View dependency graph</button>
+      </div>
+      <h1>Nirma Premium Detergent Re-Entry — Board Go/No-Go</h1>
+      <div class="scorecards"><div class="scard"><div class="rl">Run 1</div><div class="big">54.8%</div><div class="meta">16/23 verifiers · raw 70%</div></div><div class="scard"><div class="rl">Run 2</div><div class="big">56.5%</div><div class="meta">17/23 verifiers · raw 74%</div></div><div class="scard"><div class="rl">Run 3</div><div class="big">45.2%</div><div class="meta">14/23 verifiers · raw 61%</div></div><div class="scard mean"><div class="rl">Mean · Hard</div><div class="big">52.2%</div><div class="meta">DAG-weighted · best-of-3 56%</div></div></div>
+    </div></section>
+
+    <div class="wrap">
+      <div class="tabbar"><button class="tabbtn active" onclick="showTab('tab-prompt',this)">Prompt</button><button class="tabbtn" onclick="showTab('tab-sanity',this)">Sanity check</button><button class="tabbtn" onclick="showTab('tab-traj',this)">Trajectory &amp; deliverable</button><button class="tabbtn" onclick="showTab('tab-ver',this)">Scored verifiers</button><button class="tabbtn" onclick="showTab('tab-graph',this)">Dependency graph</button><button class="tabbtn" onclick="showTab('tab-files',this)">Files</button></div>
+      <div class="tabpane active" id="tab-prompt">
+      <a class="flink" href="https://drive.google.com/drive/folders/17OxBt2d82Tzr0INOy09y0lWmLNLm9pS1?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a>
+      <div class="grid g3" style="margin:14px 0 4px"><div class='note'><h4>Output Artifact</h4><p>DOCX — 1-page Board decision memo with exactly 5 sections</p></div><div class='note'><h4>Tools Required</h4><p>Python (openpyxl for XLSX), PDF reader (strategy brief), PPTX reader (market pack)</p></div><div class='note'><h4>Corpus Discipline</h4><p>Strictly closed — 3 internal files only, no web search</p></div><div class='note'><h4>Estimated Completion Time</h4><p>[SME to confirm — must be timed on actual task completion]</p></div><div class='note'><h4>O*NET Occupation</h4><p>13-2051.00 — Financial &amp; Investment Analysts (verified via O*NET OnLine)</p></div></div>
+      <p class='kicker' style='margin-top:22px'>Reference files (inputs shown to the model)</p><table><tbody><tr><td class='vid'>Nirma_Internal_FinancialBrief_FY25.xlsx</td><td style='color:var(--muted)'>Financials, Note 7 (Rs 620 Cr Soda Ash demerger), Board Mandate, model assumptions. TRAP: headline Rs 3,240 Cr includes the demerged unit.</td></tr><tr><td class='vid'>Nirma_StrategyBrief_Board_v3.pdf</td><td style='color:var(--muted)'>Strategy context, 72% addressable footprint, continuing-operations directive.</td></tr><tr><td class='vid'>Nirma_MarketResearch_Pack.pptx</td><td style='color:var(--muted)'>Nielsen market data — Premium FY30 = Rs 32,000 Cr.</td></tr></tbody></table>
+      <p class="kicker" style="margin-top:22px">Task prompt — delivered verbatim to the model</p>
+      <div class="blockq">You are advising the Chief Strategy Officer of Nirma Limited. The Board meets 31-March-2026 to deliberate a Rs 450 Crore capital commitment to re-enter the premium detergent segment in India. Prepare a Board-ready one-page decision memo delivering: the correct FY25 Continuing-Operations Detergent base, FY30 Continuing Revenue at the Board-mandated CAGR, the Premium SAM for FY30, Year-5 incremental Premium Revenue at Target SOM, Year-5 Total Segment Revenue, project IRR on the Rs 450 Cr capex over a 5-year horizon against the 18.0% hurdle, and a Go/No-Go recommendation citing the specific footnote and mandate clause.
+
+Build the IRR on a standard project basis: full capex as a Year-0 outflow; apply the EBITDA margin, straight-line depreciation, tax on EBIT, and working-capital investment from the Assumptions tab; include the terminal value. Use ONLY the three provided files; no web search. All forward-looking figures MUST use CONTINUING OPERATIONS per Board Mandate 14-Mar-2026. Mandatory sections: Decision Headline, Base Revenue Reconciliation, Year-5 Revenue Build, IRR Calculation Summary, Governance Citation.</div></div><div class="tabpane" id="tab-sanity"><p class="kicker">Embedded cognitive trap · not shown to the model</p>
+      <div class="blockq">Lazy-AI failure mode
+Uses the headline Rs 3,240 Cr detergent revenue as the projection base. This inflates FY30 by ~Rs 890 Cr. The decision happens to remain GO, so the error surfaces only as a governance / numeric-integrity breach, not a flipped recommendation.
+
+Expert path
+Read Note 7, strip the Rs 620 Cr demerged Soda Ash unit to reach the Rs 2,620 Cr continuing base, project to Rs 3,761 Cr, size SAM Rs 23,040 Cr and premium Rs 3,226 Cr, and build the IRR correctly — full capex at Year-0, tax on EBIT (not EBITDA), working capital applied, terminal value on the correct Year-5 EBITDA — landing IRR ≈ 53.9% &gt; 18% → GO.</div></div><div class="tabpane" id="tab-traj"><p class="kicker">Golden trajectory · expert-authored deterministic reasoning path</p>
+      <p class="sub">5 subtasks. A closed-corpus financial-modelling chain: strip the demerged unit → project revenue → build the per-year FCF stream → discount against the Year-0 capex → issue the hurdle-aware Go/No-Go memo.</p>
+      <div class="st"><div class="st-h"><span class="st-n">ST1</span>
+          <span class="st-t">Base Reconciliation (Step 1)</span></div>
+          <div class="st-body"><p class="purpose">Strip the demerged Soda Ash unit to reach the true continuing-operations base.</p><div class="step"><span class="step-b">Step 1</span><div class="step-x">Rs 3,240 Cr headline − Rs 620 Cr Soda Ash demerger (Note 7, NCLT 31-Jan-2026) = Rs 2,620 Cr continuing-operations base. Board Mandate (14-Mar-2026): CONTINUING OPERATIONS ONLY.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Nirma_Internal_FinancialBrief_FY25.xlsx — Note 7 + Board Mandate</span></span><span><span class="lab">Feeds</span> <span class="val">V1, V2, V3, TRAP1</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST2</span>
+          <span class="st-t">FY30 Revenue Build (Steps 2–4)</span></div>
+          <div class="st-body"><p class="purpose">Project the continuing base forward and size the premium opportunity.</p><div class="step"><span class="step-b">Steps 2–4</span><div class="step-x">FY30 continuing = 2,620 × 1.075⁵ = Rs 3,761 Cr. SAM = 32,000 × 72% = Rs 23,040 Cr. Year-5 premium = 23,040 × 14% = Rs 3,226 Cr. Total = Rs 6,987 Cr.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Nirma_MarketResearch_Pack.pptx + Strategy Brief</span></span><span><span class="lab">Feeds</span> <span class="val">V4, V5, V6, V7</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST3</span>
+          <span class="st-t">Per-Year FCF Model (Steps 5–9)</span></div>
+          <div class="st-body"><p class="purpose">Build the five-year free-cash-flow stream from the revenue ramp.</p><div class="step"><span class="step-b">Steps 5–9</span><div class="step-x">Ramp 5/20/45/75/100 → Revenue 161/645/1,452/2,419/3,226. EBITDA @15.5% → 25/100/225/375/500. EBIT = EBITDA−45. Tax = 25.17%×EBIT. NOPAT = EBIT−Tax. WC = 12%×Δrevenue. FCF = NOPAT+45−WC = 5.6/28.1/82.9/175.8/288.7.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Assumptions tab (Nirma_Internal_FinancialBrief_FY25.xlsx)</span></span><span><span class="lab">Feeds</span> <span class="val">REV, EBITDA, EBIT, TAX, NOPAT, WC, FCF</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST4</span>
+          <span class="st-t">Capex, Terminal Value &amp; IRR (Steps 10–11)</span></div>
+          <div class="st-body"><p class="purpose">Discount the stream against the Rs 450 Cr Year-0 outflow.</p><div class="step"><span class="step-b">Steps 10–11</span><div class="step-x">Capex Rs 450 Cr as a single Year-0 outflow. TV = 6.0×500 = Rs 3,000 Cr. Stream −450/5.6/28.1/82.9/175.8/3,288.5 → IRR = 53.9%.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Assumptions tab + capex mandate</span></span><span><span class="lab">Feeds</span> <span class="val">CAPEX_T0, TV, IRR</span></span></div></div></div><div class="st"><div class="st-h"><span class="st-n">ST5</span>
+          <span class="st-t">Decision &amp; Deliverable (Step 12)</span></div>
+          <div class="st-body"><p class="purpose">Issue the hurdle-aware Go/No-Go memo.</p><div class="step"><span class="step-b">Step 12</span><div class="step-x">53.9% &gt; 18.0% hurdle → GO. One-page memo, 5 sections, citing Note 7 + Mandate. Closed corpus.</div></div><div class="srcrow"><span><span class="lab">Source</span> <span class="val">Synthesis of ST1–ST4</span></span><span><span class="lab">Feeds</span> <span class="val">V11, FD1, RF1</span></span></div></div></div>
+      <div class="note" style="margin-top:6px"><h4>Gold deliverable</h4><p>One-page memo. GO — IRR 53.9% clears the 18.0% hurdle on the Rs 2,620 Cr continuing base. Base Rs 2,620 Cr · FY30 Rs 3,761 Cr · SAM Rs 23,040 Cr · Premium Rs 3,226 Cr · Total Rs 6,987 Cr · FCF 5.6/28.1/82.9/175.8/288.7 · TV Rs 3,000 Cr.</p></div></div><div class="tabpane" id="tab-ver"><p class="kicker">Scored verifiers · grouped by subtask, ancestor-weighted DAG</p>
+      <div class="vg"><div class="vg-h"><span class="st-n">ST1</span>
+          <h4>ST1: Base Reconciliation &amp; the Rs 620 Cr Trap</h4><span class="agg">9.5% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-DI1">
+              <td class="vid">DI1</td>
+              <td class="crit">All three input files used (XLSX financials + mandate, PDF strategy, PPTX market data); Note 7 consulted</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.9%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V1">
+              <td class="vid">V1</td>
+              <td class="crit">Continuing-Ops base = Rs 2,620 Cr (NOT Rs 3,240 Cr headline)</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V2">
+              <td class="vid">V2</td>
+              <td class="crit">Rs 620 Cr Soda Ash exclusion identified, quantified, cited to Note 7</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V3">
+              <td class="vid">V3</td>
+              <td class="crit">Board Mandate “CONTINUING OPERATIONS ONLY” quoted, attributed 14-Mar-2026</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-TRAP1">
+              <td class="vid">TRAP1</td>
+              <td class="crit">Does NOT use headline Rs 3,240 Cr; reads Note 7 for the Rs 620 Cr demerger</td>
+              <td class="dep"><a href="#v-V1">V1</a><a href="#v-V2">V2</a></td>
+              <td class="dagcell">3.5%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST2</span>
+          <h4>ST2: FY30 Revenue Build</h4><span class="agg">15.6% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V4">
+              <td class="vid">V4</td>
+              <td class="crit">FY30 Continuing Revenue via 7.5% CAGR = Rs 3,740–3,785 Cr (golden 3,761)</td>
+              <td class="dep"><a href="#v-V1">V1</a><a href="#v-TRAP1">TRAP1</a></td>
+              <td class="dagcell">4.3%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V5">
+              <td class="vid">V5</td>
+              <td class="crit">Premium SAM FY30 = Rs 32,000 Cr × 72% = Rs 23,040 Cr</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V6">
+              <td class="vid">V6</td>
+              <td class="crit">Year-5 Premium Revenue = 14% SOM × SAM = Rs 3,220–3,230 Cr (golden 3,226)</td>
+              <td class="dep"><a href="#v-V5">V5</a></td>
+              <td class="dagcell">2.6%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-V7">
+              <td class="vid">V7</td>
+              <td class="crit">Year-5 Total Segment Revenue = Rs 6,960–7,015 Cr (golden 6,987)</td>
+              <td class="dep"><a href="#v-V4">V4</a><a href="#v-V6">V6</a></td>
+              <td class="dagcell">7.0%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST3</span>
+          <h4>ST3: Per-Year FCF Model</h4><span class="agg">40.8% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V9">
+              <td class="vid">V9</td>
+              <td class="crit">IRR hurdle rate of 18.0% used</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-REV">
+              <td class="vid">REV</td>
+              <td class="crit">Revenue row — S-curve ramp to Rs 3,226 Cr Y5 (own ramp; Y1&lt;Y5; monotonic)</td>
+              <td class="dep"><a href="#v-V6">V6</a></td>
+              <td class="dagcell">3.5%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-EBITDA">
+              <td class="vid">EBITDA</td>
+              <td class="crit">EBITDA row = 15.5% × revenue each year (golden 25/100/225/375/500)</td>
+              <td class="dep"><a href="#v-REV">REV</a></td>
+              <td class="dagcell">4.3%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-EBIT">
+              <td class="vid">EBIT</td>
+              <td class="crit">EBIT row = EBITDA − Rs 45 Cr depreciation each year (golden −20/55/180/330/455)</td>
+              <td class="dep"><a href="#v-EBITDA">EBITDA</a></td>
+              <td class="dagcell">5.2%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-TAX">
+              <td class="vid">TAX</td>
+              <td class="crit">Tax row = 25.17% × max(0,EBIT) — on EBIT not EBITDA (golden 0/13.8/45.3/83.1/114.5)</td>
+              <td class="dep"><a href="#v-EBIT">EBIT</a></td>
+              <td class="dagcell">6.1%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-NOPAT">
+              <td class="vid">NOPAT</td>
+              <td class="crit">NOPAT row = EBIT − Tax (golden −20/41.2/134.7/246.9/340.5)</td>
+              <td class="dep"><a href="#v-EBIT">EBIT</a><a href="#v-TAX">TAX</a></td>
+              <td class="dagcell">7.0%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-WC">
+              <td class="vid">WC</td>
+              <td class="crit">Working-capital row = 12% × incremental revenue, subtracted in FCF (golden 19.4/58.1/96.8/116.1/96.8)</td>
+              <td class="dep"><a href="#v-REV">REV</a></td>
+              <td class="dagcell">4.3%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-FCF">
+              <td class="vid">FCF</td>
+              <td class="crit">FCF row = NOPAT + Rs 45 dep − WC (golden 5.6/28.1/82.9/175.8/288.7)</td>
+              <td class="dep"><a href="#v-NOPAT">NOPAT</a><a href="#v-WC">WC</a></td>
+              <td class="dagcell">8.7%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST4</span>
+          <h4>ST4: Capex, Terminal Value &amp; IRR</h4><span class="agg">19.1% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-CAPEX_T0">
+              <td class="vid">CAPEX_T0</td>
+              <td class="crit">Full Rs 450 Cr capex as a single Year-0 outflow; not phased into operating years</td>
+              <td class="dep"><a href="#v-DI1">DI1</a></td>
+              <td class="dagcell">1.7%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-TV">
+              <td class="vid">TV</td>
+              <td class="crit">Terminal Value = 6.0× Year-5 EBITDA = Rs 3,000 Cr (±5); fails on wrong Y5 EBITDA</td>
+              <td class="dep"><a href="#v-EBITDA">EBITDA</a></td>
+              <td class="dagcell">5.2%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr><tr id="v-IRR">
+              <td class="vid">IRR</td>
+              <td class="crit">Project IRR from the FCF stream in 50%–58% (golden 53.9%)</td>
+              <td class="dep"><a href="#v-FCF">FCF</a><a href="#v-CAPEX_T0">CAPEX_T0</a><a href="#v-TV">TV</a><a href="#v-V9">V9</a></td>
+              <td class="dagcell">12.2%</td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td><td class="rcell"><span class="dotp p0">✗</span></td></tr></tbody></table></div><div class="vg"><div class="vg-h"><span class="st-n">ST5</span>
+          <h4>ST5: Decision &amp; Deliverable</h4><span class="agg">14.8% of task</span></div>
+          <table class="vtab"><thead><tr><th>ID</th><th>Criterion</th><th>Depends on</th>
+          <th class="dagcell">DAG</th><th class="rcell">R1</th><th class="rcell">R2</th><th class="rcell">R3</th></tr></thead>
+          <tbody><tr id="v-V11">
+              <td class="vid">V11</td>
+              <td class="crit">Decision = GO citing Note 7 + Mandate; supported by IRR &gt; 18% (hurdle-aware)</td>
+              <td class="dep"><a href="#v-IRR">IRR</a></td>
+              <td class="dagcell">13.0%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-FD1">
+              <td class="vid">FD1</td>
+              <td class="crit">One-page memo, 5 sections in order: Headline, Base Recon, Year-5 Build, IRR Summary, Governance</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.9%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr><tr id="v-RF1">
+              <td class="vid">RF1</td>
+              <td class="crit">Closed corpus — no web search; figures only from the three files</td>
+              <td class="dep"><span class="root">root</span></td>
+              <td class="dagcell">0.9%</td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td><td class="rcell"><span class="dotp p1">✓</span></td></tr></tbody></table></div></div><div class="tabpane" id="tab-graph"><p class="kicker">Verifier dependency graph · DAG weights shown on each node</p>
+      <p class="sub">Edges run parent → child. The IRR node converges the full FCF chain plus capex timing and terminal value — the deepest, heaviest node, and the one all three runs miss.</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk7726785796.svg" alt="Verifier dependency graph for tsk_7726785796" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div></div><div class="tabpane" id="tab-files"><p class="kicker">Files</p>
+      <div class="frow" style="margin-bottom:12px"><div class="rl">Input files · shown to the model</div>
+        <a class="flink" href="https://drive.google.com/drive/folders/17OxBt2d82Tzr0INOy09y0lWmLNLm9pS1?usp=drive_link" target="_blank" rel="noopener">📁 Input files (Google Drive) ↗</a></div>
+      <p class="kicker" style="margin-top:18px">Model output — one folder per run</p>
+      <div class="filegrid"><div class="frow"><div class="rl">Run 1 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1QgXmQwpdroPNgaTMTG02RhDfRuiHvm5J?usp=drive_link" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 2 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1oCLa4nApFPhzOHeMPaWnlklUUKRdsNTd?usp=drive_link" target="_blank" rel="noopener">📄 Output files ↗</a></div><div class="frow"><div class="rl">Run 3 · output</div><a class="flink" href="https://drive.google.com/drive/folders/1mRuIRpBgpQNkFLUwgJP97A_1m-tbLN1w?usp=drive_link" target="_blank" rel="noopener">📄 Output files ↗</a></div></div></div>
+    </div>
+    <div class="modal" id="gmodal" onclick="closeModal(event)"><div class="modal-card">
+      <button class="modal-x" onclick="closeModal(event)">×</button>
+      <h3>Verifier dependency graph</h3>
+      <p class="sub" style="margin-bottom:12px">tsk_7726785796 · 23 verifiers</p>
+      <div class="dagwrap"><img class="dagimg" src="assets/dag_tsk7726785796.svg" alt="Verifier dependency graph for tsk_7726785796" loading="lazy"></div><div class="legend"><span><i style="background:#e3e5e9;border:1.5px solid #9aa0a6"></i>Root</span><span><i style="background:#e6e0f8;border:1.5px solid #7c6bd6"></i>Calculation</span><span><i style="background:#d3f1e9;border:1.5px solid #1aa39a"></i>Trap</span><span><i style="background:#f8d9d6;border:1.5px solid #e0625b"></i>High-weight</span><span><i style="background:#f9e9c9;border:1.5px solid #d99a16"></i>Recommendation</span><span><i style="background:#d9e7fc;border:1.5px solid #3d7bd6"></i>Final Deliverable</span></div>
+    </div></div>
+    
+<footer class="foot"><div class="wrap">
+  Open-weight evaluation · Qwen 3.6 27B · 6 golden-sample tasks × 3 runs · DAG-weighted verifier scoring.
+  Built for the GDPVal golden-sample methodology.
+</div></footer>
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='tab-graph'){location.hash='graph';}
+}
+function openModal(){document.getElementById('gmodal').classList.add('open');}
+function closeModal(e){if(!e||e.target.id==='gmodal'||e.target.classList.contains('modal-x'))
+  document.getElementById('gmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+    if(location.hash==='#graph'){var b=[...document.querySelectorAll('.tabbtn')].find(x=>x.textContent.includes('Dependency'));if(b)b.click();}
+    </script></body></html>
